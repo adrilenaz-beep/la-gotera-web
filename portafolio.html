@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Portafolio de Adriano Lenaz Zenteno — ADRIP Disruptive Media">
+<title>ADRIANO LENAZ — PORTAFOLIO</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0e0e0c;
+  --paper: #141412;
+  --surface: #1c1c19;
+  --border: #2e2e28;
+  --border-bright: #4a4a42;
+  --ink: #e8e6de;
+  --ink-mid: #9a9890;
+  --ink-dim: #52524c;
+  --accent: #48bed3;
+  --accent2: #f06040;
+  --tag-bg: #1e1e1a;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'IBM Plex Mono', monospace;
+  min-height: 100vh;
+  cursor: crosshair;
+}
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 1000; opacity: 0.4;
+}
+body::after {
+  content: '';
+  position: fixed; inset: 0;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.3; pointer-events: none; z-index: 0;
+}
+.wrap {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 24px 80px;
+  position: relative; z-index: 1;
+}
+
+/* TOPBAR */
+.topbar {
+  border-bottom: 1px solid var(--border);
+  padding: 14px 0;
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 10px; letter-spacing: 0.2em; color: var(--ink-dim);
+  text-transform: uppercase;
+  position: sticky; top: 0; background: var(--bg); z-index: 100;
+}
+.topbar a { color: var(--ink-dim); text-decoration: none; transition: color 0.15s; }
+.topbar a:hover { color: var(--accent); }
+
+/* DOC HEADER */
+.doc-header {
+  border: 1px solid var(--border); border-top: none;
+  padding: 48px 40px 40px;
+  position: relative; overflow: hidden;
+}
+.doc-header::before {
+  content: 'PORT';
+  position: absolute; right: -20px; top: 50%;
+  transform: translateY(-50%) rotate(90deg);
+  font-size: 120px; font-weight: 700; color: var(--border);
+  letter-spacing: -0.05em; pointer-events: none; line-height: 1;
+}
+.doc-label {
+  font-size: 9px; letter-spacing: 0.35em; color: var(--ink-dim);
+  text-transform: uppercase; margin-bottom: 20px;
+  display: flex; align-items: center; gap: 12px;
+}
+.doc-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+.doc-number { color: var(--accent); font-size: 10px; letter-spacing: 0.2em; }
+.hero-name {
+  font-size: clamp(32px, 6vw, 56px); font-weight: 700;
+  letter-spacing: -0.03em; line-height: 0.95; margin-bottom: 6px;
+}
+.hero-name span { color: var(--accent); }
+.hero-title {
+  font-size: 13px; color: var(--ink-mid); letter-spacing: 0.12em;
+  text-transform: uppercase; font-style: italic;
+}
+
+/* MAIN TABS */
+.cat-tabs {
+  display: flex;
+  border: 1px solid var(--border); border-top: none; border-bottom: none;
+  flex-wrap: wrap;
+}
+.cat-tab {
+  flex: 1; padding: 14px 12px;
+  font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--ink-dim); cursor: pointer;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  border-top: none; border-left: none;
+  background: transparent; font-family: 'IBM Plex Mono', monospace;
+  transition: all 0.15s; white-space: nowrap; min-width: 100px;
+}
+.cat-tab:last-child { border-right: none; }
+.cat-tab:hover { background: var(--surface); color: var(--ink); }
+.cat-tab.active { background: var(--surface); color: var(--accent); border-bottom-color: var(--surface); }
+
+/* CAT SECTIONS */
+.cat-section { display: none; border: 1px solid var(--border); border-top: none; }
+.cat-section.active { display: block; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from{opacity:0;transform:translateY(4px)} to{opacity:1;transform:translateY(0)} }
+
+.sec-header {
+  padding: 20px 40px;
+  border-bottom: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.sec-title { font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--ink-dim); }
+.sec-count { font-size: 10px; color: var(--accent); letter-spacing: 0.1em; }
+
+/* SUBGROUP */
+.subgroup { border-bottom: 1px solid var(--border); }
+.subgroup:last-child { border-bottom: none; }
+.subgroup-header {
+  padding: 16px 40px;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 16px;
+  background: var(--surface);
+}
+.subgroup-title { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--ink-mid); }
+.subgroup-count { font-size: 9px; color: var(--ink-dim); letter-spacing: 0.1em; }
+.subgroup-line { flex: 1; height: 1px; background: var(--border); }
+
+/* WORK ENTRY */
+.work-entry {
+  padding: 28px 40px;
+  border-bottom: 1px solid var(--border);
+}
+.work-entry:last-child { border-bottom: none; }
+.work-meta {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  margin-bottom: 14px; gap: 16px;
+}
+.work-title { font-size: 13px; font-weight: 500; letter-spacing: -0.01em; line-height: 1.3; }
+.work-date { font-size: 9px; color: var(--ink-dim); letter-spacing: 0.15em; white-space: nowrap; padding-top: 2px; }
+
+/* ══════════════════════════════════════
+   IMAGE LAYOUTS — controla con data-layout
+   "single"  → 1 imagen grande
+   "2col"    → 2 columnas
+   "3col"    → 3 columnas (verticales)
+   "4col"    → 4 columnas
+   "strip"   → fila horizontal scrolleable (carrusel)
+   ══════════════════════════════════════ */
+.work-gallery { margin-bottom: 16px; }
+
+.work-gallery[data-layout="single"] { display: block; }
+.work-gallery[data-layout="single"] .gimg { max-height: 520px; width: auto; max-width: 100%; aspect-ratio: unset; object-fit: unset; }
+
+.work-gallery[data-layout="2col"] { display: grid; grid-template-columns: repeat(2,1fr); gap: 8px; }
+.work-gallery[data-layout="3col"] { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; }
+.work-gallery[data-layout="4col"] { display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; }
+
+.work-gallery[data-layout="strip"] {
+  display: flex; gap: 8px;
+  overflow-x: auto; padding-bottom: 8px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+.work-gallery[data-layout="strip"]::-webkit-scrollbar { height: 3px; }
+.work-gallery[data-layout="strip"]::-webkit-scrollbar-track { background: var(--surface); }
+.work-gallery[data-layout="strip"]::-webkit-scrollbar-thumb { background: var(--border-bright); }
+.work-gallery[data-layout="strip"] .gimg {
+  flex-shrink: 0; width: auto; max-height: 360px;
+  aspect-ratio: unset; object-fit: unset; scroll-snap-align: start;
+}
+
+/* Base image */
+.gimg {
+  display: block; width: 100%; height: auto;
+  border: 1px solid var(--border); background: var(--surface);
+  cursor: zoom-in;
+  transition: opacity 0.2s, border-color 0.2s;
+  object-fit: cover;
+}
+.gimg:hover { opacity: 0.85; border-color: var(--border-bright); }
+
+/* Grid images: uniform aspect ratio */
+.work-gallery[data-layout="2col"] .gimg,
+.work-gallery[data-layout="3col"] .gimg,
+.work-gallery[data-layout="4col"] .gimg {
+  aspect-ratio: 3/4; object-fit: cover; width: 100%; height: auto;
+}
+
+/* Placeholder */
+.gimg-placeholder {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 6px;
+  border: 1px dashed var(--border-bright); background: var(--surface);
+  color: var(--ink-dim); font-size: 8px; letter-spacing: 0.2em;
+  text-transform: uppercase; aspect-ratio: 3/4; cursor: default;
+}
+.gimg-placeholder::before { content: '+'; font-size: 20px; color: var(--border-bright); }
+
+.gimg-placeholder-strip {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 6px;
+  border: 1px dashed var(--border-bright); background: var(--surface);
+  color: var(--ink-dim); font-size: 8px; letter-spacing: 0.2em;
+  text-transform: uppercase; width: 200px; height: 360px; flex-shrink: 0; cursor: default;
+}
+.gimg-placeholder-strip::before { content: '+'; font-size: 20px; color: var(--border-bright); }
+
+/* Tags */
+.tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag { font-size: 8px; letter-spacing: 0.18em; text-transform: uppercase; padding: 3px 9px; background: var(--tag-bg); border: 1px solid var(--border); color: var(--ink-dim); }
+
+/* ══════════════════════════════════════
+   LIGHTBOX
+   ══════════════════════════════════════ */
+.lightbox {
+  display: none; position: fixed; inset: 0; z-index: 9999;
+  background: rgba(10,10,8,0.97);
+  align-items: center; justify-content: center;
+}
+.lightbox.open { display: flex; }
+.lb-inner {
+  position: relative; max-width: 92vw; max-height: 92vh;
+  display: flex; align-items: center; gap: 14px;
+}
+.lb-img { max-width: 78vw; max-height: 86vh; object-fit: contain; border: 1px solid var(--border-bright); display: block; }
+.lb-btn {
+  background: var(--surface); border: 1px solid var(--border-bright);
+  color: var(--ink); font-size: 20px; width: 44px; height: 44px;
+  cursor: pointer; font-family: 'IBM Plex Mono', monospace;
+  flex-shrink: 0; transition: background 0.15s, color 0.15s;
+  display: flex; align-items: center; justify-content: center;
+}
+.lb-btn:hover { background: var(--border-bright); color: var(--accent); }
+.lb-btn:disabled { opacity: 0.15; cursor: default; }
+.lb-top {
+  position: absolute; top: -40px; right: 0;
+  display: flex; gap: 12px; align-items: center;
+}
+.lb-close {
+  background: transparent; border: 1px solid var(--border-bright);
+  color: var(--ink-mid); padding: 5px 14px; cursor: pointer;
+  font-family: 'IBM Plex Mono', monospace; font-size: 9px;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  transition: color 0.15s, border-color 0.15s;
+}
+.lb-close:hover { color: var(--accent2); border-color: var(--accent2); }
+.lb-counter { font-size: 9px; color: var(--ink-dim); letter-spacing: 0.2em; }
+.lb-caption {
+  position: absolute; bottom: -28px; left: 0; right: 0;
+  font-size: 9px; color: var(--ink-dim); text-align: center;
+  font-family: 'IBM Plex Sans', sans-serif; letter-spacing: 0.05em;
+}
+
+/* FOOTER */
+.doc-footer {
+  border: 1px solid var(--border); border-top: none;
+  padding: 20px 40px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.footer-sig { font-size: 10px; color: var(--ink-dim); letter-spacing: 0.1em; }
+.footer-cc { font-size: 9px; color: var(--ink-dim); letter-spacing: 0.08em; }
+
+/* RESPONSIVE */
+@media (max-width: 620px) {
+  .doc-header { padding: 32px 24px 28px; }
+  .work-entry, .subgroup-header, .sec-header, .doc-footer { padding-left: 24px; padding-right: 24px; }
+  .work-gallery[data-layout="3col"], .work-gallery[data-layout="4col"] { grid-template-columns: repeat(2,1fr); }
+  .cat-tab { font-size: 7px; padding: 10px 5px; min-width: 70px; }
+  .lb-img { max-width: 94vw; max-height: 78vh; }
+  .lb-inner { gap: 6px; }
+  .lb-btn { width: 34px; height: 34px; font-size: 16px; }
+}
+</style>
+</head>
+<body>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <div class="lb-inner">
+    <button class="lb-btn" id="lb-prev">←</button>
+    <div style="position:relative">
+      <div class="lb-top">
+        <span class="lb-counter" id="lb-counter"></span>
+        <button class="lb-close" id="lb-close">✕ cerrar</button>
+      </div>
+      <img class="lb-img" id="lb-img" src="" alt="">
+      <div class="lb-caption" id="lb-caption"></div>
+    </div>
+    <button class="lb-btn" id="lb-next">→</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="topbar">
+    <a href="index.html">← VOLVER / DOC-001</a>
+    <span>DOC-PORT · ADRIP</span>
+  </div>
+
+  <div class="doc-header">
+    <div class="doc-label">
+      Portafolio · Trabajo visual
+      <span class="doc-number">REF: ALZ-PORT-001</span>
+    </div>
+    <div class="hero-name">PORTAFOLIO<br><span>ADRIP</span></div>
+    <div class="hero-title">Selección de proyectos · Adriano Lenaz Zenteno</div>
+  </div>
+
+  <div class="cat-tabs">
+    <button class="cat-tab active" onclick="switchCat('periodismo', this)">01 · Periodismo Gráfico</button>
+    <button class="cat-tab" onclick="switchCat('branding', this)">02 · Branding</button>
+    <button class="cat-tab" onclick="switchCat('editorial', this)">03 · Editorial</button>
+    <button class="cat-tab" onclick="switchCat('instalacion', this)">04 · Instalación</button>
+    <button class="cat-tab" onclick="switchCat('posters', this)">05 · Posters</button>
+  </div>
+
+  <!-- ════════════════════════════════════════════
+       01 · PERIODISMO GRÁFICO — OPINIÓN
+       ════════════════════════════════════════════ -->
+  <div class="cat-section active" id="cat-periodismo">
+    <div class="sec-header">
+      <span class="sec-title">Periodismo Gráfico · Opinión</span>
+      <span class="sec-count">28+ piezas</span>
+    </div>
+
+    <!-- ────────────────────────────────
+    HOW TO ADD YOUR IMAGES:
+    1. Copy URL from Cloudinary (Media Library → image → Copy URL)
+    2. Paste it into src="" of the <img> tag
+    3. Change alt="" to describe the piece
+    4. Choose your layout with data-layout:
+       "single" → 1 image alone
+       "2col"   → 2 columns side by side
+       "3col"   → 3 columns grid (vertical images)
+       "4col"   → 4 columns grid
+       "strip"  → horizontal scrollable row (carousel)
+    5. Add or remove <img> tags as needed
+    6. Update subgroup-count with the real number
+    ──────────────────────────────────── -->
+
+    <!-- ── SUBGRUPO: AMBIENTAL ── -->
+    <div class="subgroup">
+      <div class="subgroup-header">
+        <span class="subgroup-title">Ambiental</span>
+        <span class="subgroup-count">— 0 registros</span>
+        <span class="subgroup-line"></span>
+      </div>
+
+      <!-- Trabajo individual (1 imagen) -->
+      <div class="work-entry">
+        <div class="work-meta">
+          <div class="work-title">Título del trabajo</div>
+          <div class="work-date">2024</div>
+        </div>
+        <div class="work-gallery" data-layout="single">
+          <img class="gimg" src="" alt="Descripción" loading="lazy">
+        </div>
+        <div class="tags"><span class="tag">Ambiental</span></div>
+      </div>
+
+      <!-- Trabajo en grilla vertical (ej. 3 imágenes) -->
+      <div class="work-entry">
+        <div class="work-meta">
+          <div class="work-title">Título del trabajo</div>
+          <div class="work-date">2024</div>
+        </div>
+        <div class="work-gallery" data-layout="3col">
+          <img class="gimg" src="" alt="Parte 1" loading="lazy">
+          <img class="gimg" src="" alt="Parte 2" loading="lazy">
+          <img class="gimg" src="" alt="Parte 3" loading="lazy">
+        </div>
+        <div class="tags"><span class="tag">Ambiental</span><span class="tag">Serie</span></div>
+      </div>
+
+      <!-- Carrusel: varias imágenes que forman una imagen más ancha -->
+      <div class="work-entry">
+        <div class="work-meta">
+          <div class="work-title">Título del carrusel</div>
+          <div class="work-date">2024</div>
+        </div>
+        <div class="work-gallery" data-layout="strip">
+          <img class="gimg" src="" alt="Imagen 1 de 3" loading="lazy">
+          <img class="gimg" src="" alt="Imagen 2 de 3" loading="lazy">
+          <img class="gimg" src="" alt="Imagen 3 de 3" loading="lazy">
+        </div>
+        <div class="tags"><span class="tag">Ambiental</span><span class="tag">Carrusel</span></div>
+      </div>
+
+    </div>
+
+    <!-- ── SUBGRUPO: LOCAL ── -->
+    <div class="subgroup">
+      <div class="subgroup-header">
+        <span class="subgroup-title">Local</span>
+        <span class="subgroup-count">— 0 registros</span>
+        <span class="subgroup-line"></span>
+      </div>
+
+      <div class="work-entry">
+        <div class="work-meta">
+          <div class="work-title">Título del trabajo</div>
+          <div class="work-date">2024</div>
+        </div>
+        <div class="work-gallery" data-layout="3col">
+          <img class="gimg" src="" alt="Pieza 1" loading="lazy">
+          <img class="gimg" src="" alt="Pieza 2" loading="lazy">
+          <img class="gimg" src="" alt="Pieza 3" loading="lazy">
+        </div>
+        <div class="tags"><span class="tag">Local</span></div>
+      </div>
+
+    </div>
+
+    <!-- ── SUBGRUPO: CULTURAL ── -->
+    <div class="subgroup">
+      <div class="subgroup-header">
+        <span class="subgroup-title">Cultural</span>
+        <span class="subgroup-count">— 0 registros</span>
+        <span class="subgroup-line"></span>
+      </div>
+
+      <div class="work-entry">
+        <div class="work-meta">
+          <div class="work-title">Título del trabajo</div>
+          <div class="work-date">2024</div>
+        </div>
+        <div class="work-gallery" data-layout="strip">
+          <img class="gimg" src="" alt="Imagen 1" loading="lazy">
+          <img class="gimg" src="" alt="Imagen 2" loading="lazy">
+        </div>
+        <div class="tags"><span class="tag">Cultural</span><span class="tag">Carrusel</span></div>
+      </div>
+
+    </div>
+
+    <!-- ── SUBGRUPO: DEPORTE ── -->
+    <div class="subgroup">
+      <div class="subgroup-header">
+        <span class="subgroup-title">Deporte</span>
+        <span class="subgroup-count">— 0 registros</span>
+        <span class="subgroup-line"></span>
+      </div>
+
+      <div class="work-entry">
+        <div class="work-meta">
+          <div class="work-title">Título del trabajo</div>
+          <div class="work-date">2024</div>
+        </div>
+        <div class="work-gallery" data-layout="2col">
+          <img class="gimg" src="" alt="Pieza 1" loading="lazy">
+          <img class="gimg" src="" alt="Pieza 2" loading="lazy">
+        </div>
+        <div class="tags"><span class="tag">Deporte</span></div>
+      </div>
+
+    </div>
+
+    <!-- ── SUBGRUPO: OTROS ── -->
+    <div class="subgroup">
+      <div class="subgroup-header">
+        <span class="subgroup-title">Otros</span>
+        <span class="subgroup-count">— 0 registros</span>
+        <span class="subgroup-line"></span>
+      </div>
+
+      <div class="work-entry">
+        <div class="work-meta">
+          <div class="work-title">Título del trabajo</div>
+          <div class="work-date">2024</div>
+        </div>
+        <div class="work-gallery" data-layout="3col">
+          <img class="gimg" src="" alt="Pieza 1" loading="lazy">
+          <img class="gimg" src="" alt="Pieza 2" loading="lazy">
+          <img class="gimg" src="" alt="Pieza 3" loading="lazy">
+        </div>
+        <div class="tags"><span class="tag">Otros</span></div>
+      </div>
+
+    </div>
+
+  </div><!-- /cat-periodismo -->
+
+  <!-- ════════════════════════════════════════════
+       02 · BRANDING
+       ════════════════════════════════════════════ -->
+  <div class="cat-section" id="cat-branding">
+    <div class="sec-header">
+      <span class="sec-title">Identidad · Branding</span>
+      <span class="sec-count">1 proyecto</span>
+    </div>
+    <div class="work-entry">
+      <div class="work-meta">
+        <div class="work-title">Marca 41 Aniversario — Periódico Opinión</div>
+        <div class="work-date">2024</div>
+      </div>
+      <div class="work-gallery" data-layout="3col">
+        <img class="gimg" src="" alt="Marca Opinión - versión principal" loading="lazy">
+        <img class="gimg" src="" alt="Marca Opinión - aplicación digital" loading="lazy">
+        <img class="gimg" src="" alt="Marca Opinión - aplicación impresa" loading="lazy">
+      </div>
+      <div class="tags"><span class="tag">Identidad</span><span class="tag">Branding</span><span class="tag">Ceremonial</span></div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════
+       03 · EDITORIAL
+       ════════════════════════════════════════════ -->
+  <div class="cat-section" id="cat-editorial">
+    <div class="sec-header">
+      <span class="sec-title">Editorial · Publicación</span>
+      <span class="sec-count">1 proyecto</span>
+    </div>
+    <div class="work-entry">
+      <div class="work-meta">
+        <div class="work-title">Calendario Empleados Opinión 2026</div>
+        <div class="work-date">2025</div>
+      </div>
+      <div class="work-gallery" data-layout="strip">
+        <img class="gimg" src="" alt="Calendario - portada" loading="lazy">
+        <img class="gimg" src="" alt="Calendario - interior" loading="lazy">
+        <img class="gimg" src="" alt="Calendario - detalle" loading="lazy">
+      </div>
+      <div class="tags"><span class="tag">Editorial</span><span class="tag">Calendario</span><span class="tag">Opinión</span></div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════
+       04 · INSTALACIÓN
+       ════════════════════════════════════════════ -->
+  <div class="cat-section" id="cat-instalacion">
+    <div class="sec-header">
+      <span class="sec-title">Instalación · Arte</span>
+      <span class="sec-count">1 proyecto</span>
+    </div>
+    <div class="work-entry">
+      <div class="work-meta">
+        <div class="work-title">"Imposible" (ft. 300)</div>
+        <div class="work-date">2025</div>
+      </div>
+      <div class="work-gallery" data-layout="2col" style="margin-bottom:8px">
+        <img class="gimg" src="" alt="Imposible - vista general" loading="lazy">
+        <img class="gimg" src="" alt="Imposible - CANSADO" loading="lazy">
+      </div>
+      <div class="work-gallery" data-layout="3col">
+        <img class="gimg" src="" alt="Imposible - detalle 1" loading="lazy">
+        <img class="gimg" src="" alt="Imposible - detalle 2" loading="lazy">
+        <img class="gimg" src="" alt="Imposible - detalle 3" loading="lazy">
+      </div>
+      <div class="tags" style="margin-top:16px"><span class="tag">Instalación</span><span class="tag">Arte</span><span class="tag">Colaboración</span></div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════
+       05 · POSTERS
+       ════════════════════════════════════════════ -->
+  <div class="cat-section" id="cat-posters">
+    <div class="sec-header">
+      <span class="sec-title">Posters · Diseño</span>
+      <span class="sec-count">1 serie</span>
+    </div>
+    <div class="work-entry">
+      <div class="work-meta">
+        <div class="work-title">Serie de Posters ADRIP</div>
+        <div class="work-date">2022 → Presente</div>
+      </div>
+      <div class="work-gallery" data-layout="4col">
+        <img class="gimg" src="" alt="Poster 01" loading="lazy">
+        <img class="gimg" src="" alt="Poster 02" loading="lazy">
+        <img class="gimg" src="" alt="Poster 03" loading="lazy">
+        <img class="gimg" src="" alt="Poster 04" loading="lazy">
+        <img class="gimg" src="" alt="Poster 05" loading="lazy">
+        <img class="gimg" src="" alt="Poster 06" loading="lazy">
+        <img class="gimg" src="" alt="Poster 07" loading="lazy">
+        <img class="gimg" src="" alt="Poster 08" loading="lazy">
+      </div>
+      <div class="tags" style="margin-top:16px"><span class="tag">Poster</span><span class="tag">Diseño</span><span class="tag">Experimental</span></div>
+    </div>
+  </div>
+
+  <div class="doc-footer">
+    <div class="footer-sig">© 2024 ADRIANO LENAZ ZENTENO · ADRIP DISRUPTIVE MEDIA</div>
+    <div class="footer-cc">DOC-PORT · COCHABAMBA, BOLIVIA</div>
+  </div>
+
+</div>
+
+<script>
+// TAB SWITCHING
+function switchCat(id, btn) {
+  document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.cat-section').forEach(s => s.classList.remove('active'));
+  document.getElementById('cat-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// LIGHTBOX
+const lb        = document.getElementById('lightbox');
+const lbImg     = document.getElementById('lb-img');
+const lbCounter = document.getElementById('lb-counter');
+const lbCaption = document.getElementById('lb-caption');
+const lbPrev    = document.getElementById('lb-prev');
+const lbNext    = document.getElementById('lb-next');
+const lbClose   = document.getElementById('lb-close');
+
+let currentGroup = [];
+let currentIndex = 0;
+
+function openLightbox(imgs, index) {
+  currentGroup = imgs;
+  currentIndex = index;
+  updateLightbox();
+  lb.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function updateLightbox() {
+  const img = currentGroup[currentIndex];
+  lbImg.src = img.src;
+  lbImg.alt = img.alt;
+  lbCaption.textContent = img.alt || '';
+  lbCounter.textContent = currentGroup.length > 1
+    ? (currentIndex + 1) + ' / ' + currentGroup.length : '';
+  lbPrev.disabled = currentIndex === 0;
+  lbNext.disabled = currentIndex === currentGroup.length - 1;
+}
+
+function closeLightbox() {
+  lb.classList.remove('open');
+  document.body.style.overflow = '';
+  setTimeout(() => { lbImg.src = ''; }, 200);
+}
+
+lbClose.addEventListener('click', closeLightbox);
+lb.addEventListener('click', e => { if (e.target === lb) closeLightbox(); });
+lbPrev.addEventListener('click', () => { if (currentIndex > 0) { currentIndex--; updateLightbox(); } });
+lbNext.addEventListener('click', () => { if (currentIndex < currentGroup.length - 1) { currentIndex++; updateLightbox(); } });
+
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'ArrowLeft'  && currentIndex > 0) { currentIndex--; updateLightbox(); }
+  if (e.key === 'ArrowRight' && currentIndex < currentGroup.length - 1) { currentIndex++; updateLightbox(); }
+  if (e.key === 'Escape') closeLightbox();
+});
+
+// INIT: attach lightbox to real images, replace empty src with placeholder
+function init() {
+  document.querySelectorAll('.work-gallery').forEach(gallery => {
+    const layout = gallery.getAttribute('data-layout');
+    const allImgs = Array.from(gallery.querySelectorAll('.gimg'));
+
+    // Separate real images (with src) from empty ones
+    const realImgs = allImgs.filter(img => img.getAttribute('src') && img.getAttribute('src') !== '');
+
+    // Replace empty images with placeholders
+    allImgs.forEach(img => {
+      const src = img.getAttribute('src');
+      if (!src || src === '') {
+        const ph = document.createElement('div');
+        ph.className = layout === 'strip' ? 'gimg-placeholder-strip' : 'gimg-placeholder';
+        ph.innerHTML = '<span>sin imagen</span>';
+        img.replaceWith(ph);
+      }
+    });
+
+    // Attach lightbox click to real images (grouped per gallery)
+    realImgs.forEach((img, i) => {
+      img.style.cursor = 'zoom-in';
+      img.addEventListener('click', () => openLightbox(realImgs, i));
+    });
+  });
+}
+
+init();
+</script>
+</body>
+</html>
