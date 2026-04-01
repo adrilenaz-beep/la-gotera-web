@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ADRIANO LENAZ — DOC-001</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0e0e0c;
+  --paper: #141412;
+  --surface: #1c1c19;
+  --border: #2e2e28;
+  --border-bright: #4a4a42;
+  --ink: #e8e6de;
+  --ink-mid: #9a9890;
+  --ink-dim: #52524c;
+  --accent: #48bed3;
+  --accent2: #f06040;
+  --tag-bg: #1e1e1a;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'IBM Plex Mono', monospace;
+  min-height: 100vh;
+  cursor: crosshair;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1000;
+  opacity: 0.4;
+}
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: 0;
+}
+.wrap {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 24px 80px;
+  position: relative;
+  z-index: 1;
+}
+.topbar {
+  border-bottom: 1px solid var(--border);
+  padding: 14px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--ink-dim);
+  text-transform: uppercase;
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  z-index: 100;
+}
+.topbar-left { display: flex; gap: 24px; }
+.topbar a { color: var(--ink-dim); text-decoration: none; transition: color 0.15s; }
+.topbar a:hover { color: var(--accent); }
+.status-dot {
+  display: inline-block;
+  width: 6px; height: 6px;
+  background: var(--accent);
+  border-radius: 50%;
+  margin-right: 6px;
+  animation: blink 2.5s ease infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+
+.doc-header {
+  border: 1px solid var(--border);
+  border-top: none;
+  padding: 48px 40px 40px;
+  position: relative;
+  overflow: hidden;
+}
+.doc-header::before {
+  content: 'ADRIP';
+  position: absolute;
+  right: -20px;
+  top: 50%;
+  transform: translateY(-50%) rotate(90deg);
+  font-size: 120px;
+  font-weight: 700;
+  color: var(--border);
+  letter-spacing: -0.05em;
+  pointer-events: none;
+  line-height: 1;
+}
+.doc-label {
+  font-size: 9px;
+  letter-spacing: 0.35em;
+  color: var(--ink-dim);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.doc-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+.doc-number { color: var(--accent); font-size: 10px; letter-spacing: 0.2em; }
+.hero-name {
+  font-size: clamp(36px, 7vw, 64px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+  margin-bottom: 6px;
+}
+.hero-name span { color: var(--accent); }
+.hero-title {
+  font-size: 13px;
+  color: var(--ink-mid);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 32px;
+  font-style: italic;
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  border-top: 1px solid var(--border);
+  margin-top: 32px;
+}
+.hero-cell {
+  padding: 20px 24px 0 0;
+  border-right: 1px solid var(--border);
+  margin-right: 24px;
+}
+.hero-cell:last-child { border-right: none; margin-right: 0; padding-right: 0; }
+.cell-label { font-size: 8px; letter-spacing: 0.3em; color: var(--ink-dim); text-transform: uppercase; margin-bottom: 6px; }
+.cell-value { font-size: 11px; color: var(--ink-mid); line-height: 1.7; }
+.cell-value a { color: var(--ink-mid); text-decoration: none; }
+.cell-value a:hover { color: var(--accent); }
+
+.nav-tabs {
+  display: flex;
+  border: 1px solid var(--border);
+  border-top: none;
+  border-bottom: none;
+  flex-wrap: wrap;
+}
+.nav-tab {
+  flex: 1;
+  padding: 16px 12px;
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  cursor: pointer;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  transition: all 0.15s;
+  text-align: center;
+  background: transparent;
+  border-top: none;
+  border-left: none;
+  font-family: 'IBM Plex Mono', monospace;
+  min-width: 140px;
+}
+.nav-tab:last-child { border-right: none; }
+.nav-tab:hover { background: var(--surface); color: var(--ink); }
+.nav-tab.active { background: var(--surface); color: var(--accent); border-bottom-color: var(--surface); }
+
+.section { display: none; border: 1px solid var(--border); border-top: none; animation: fadeIn 0.3s ease; }
+.section.active { display: block; }
+@keyframes fadeIn { from{opacity:0;transform:translateY(4px)} to{opacity:1;transform:translateY(0)} }
+
+.sec-header {
+  padding: 20px 40px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.sec-title { font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--ink-dim); }
+.sec-count { font-size: 10px; color: var(--accent); letter-spacing: 0.1em; }
+
+/* ESPECIALIZACIÓN */
+.spec-list {
+  padding: 32px 40px;
+  border-bottom: 1px solid var(--border);
+}
+.spec-list:last-child { border-bottom: none; }
+.spec-category {
+  margin-bottom: 24px;
+}
+.spec-category:last-child { margin-bottom: 0; }
+.spec-title { font-size: 12px; font-weight: 600; color: var(--ink); margin-bottom: 8px; letter-spacing: -0.01em; }
+.spec-item { font-size: 11px; color: var(--ink-mid); margin-bottom: 4px; line-height: 1.6; font-family: 'IBM Plex Sans', sans-serif; font-weight: 300; }
+
+.exp-item {
+  padding: 32px 40px;
+  border-bottom: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 32px;
+  transition: background 0.15s;
+}
+.exp-item:hover { background: var(--surface); }
+.exp-item:last-child { border-bottom: none; }
+.exp-period { font-size: 10px; color: var(--accent); letter-spacing: 0.08em; margin-bottom: 4px; }
+.exp-company { font-size: 11px; color: var(--ink-mid); line-height: 1.5; }
+.exp-type {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border: 1px solid var(--border-bright);
+  color: var(--ink-dim);
+}
+.exp-role { font-size: 15px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 10px; line-height: 1.2; }
+.exp-role .highlight { color: var(--accent); font-style: italic; }
+.exp-desc { font-size: 11px; color: var(--ink-mid); line-height: 1.8; font-family: 'IBM Plex Sans', sans-serif; font-weight: 300; margin-bottom: 14px; }
+.exp-list {
+  font-size: 11px; 
+  color: var(--ink-mid); 
+  line-height: 1.8; 
+  font-family: 'IBM Plex Sans', sans-serif; 
+  font-weight: 300; 
+  margin-bottom: 14px;
+}
+.exp-list li { margin-left: 20px; margin-bottom: 6px; }
+.exp-images {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+  margin-bottom: 14px;
+}
+.exp-image { 
+  width: 100%; 
+  height: auto; 
+  border: 1px solid var(--border); 
+  display: block;
+  background: var(--surface);
+}
+.tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag { font-size: 8px; letter-spacing: 0.18em; text-transform: uppercase; padding: 3px 9px; background: var(--tag-bg); border: 1px solid var(--border); color: var(--ink-dim); }
+
+.inv-item {
+  padding: 28px 40px;
+  border-bottom: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: 60px 1fr auto;
+  gap: 24px;
+  align-items: start;
+  transition: background 0.15s;
+}
+.inv-item:hover { background: var(--surface); }
+.inv-item:last-child { border-bottom: none; }
+.inv-num { font-size: 28px; font-weight: 700; color: var(--border-bright); line-height: 1; padding-top: 2px; }
+.inv-title { font-size: 14px; font-weight: 500; margin-bottom: 8px; line-height: 1.3; }
+.inv-abstract { font-size: 11px; color: var(--ink-mid); line-height: 1.8; font-family: 'IBM Plex Sans', sans-serif; font-weight: 300; margin-bottom: 12px; }
+.inv-status { font-size: 8px; letter-spacing: 0.25em; text-transform: uppercase; padding: 4px 10px; border: 1px solid; white-space: nowrap; }
+.inv-status.pub { border-color: var(--accent); color: var(--accent); }
+.inv-status.wip { border-color: var(--accent2); color: var(--accent2); }
+.inv-status.draft { border-color: var(--border-bright); color: var(--ink-dim); }
+
+.proj-grid { display: grid; grid-template-columns: 1fr 1fr; }
+.proj-item {
+  padding: 32px 36px;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  transition: background 0.15s;
+  position: relative;
+  overflow: hidden;
+}
+.proj-item::after {
+  content: attr(data-index);
+  position: absolute;
+  bottom: -10px; right: 10px;
+  font-size: 80px; font-weight: 700;
+  color: var(--border); line-height: 1;
+  pointer-events: none;
+}
+.proj-item:hover { background: var(--surface); }
+.proj-item:nth-child(even) { border-right: none; }
+.proj-item:nth-last-child(-n+2) { border-bottom: none; }
+.proj-cat { font-size: 8px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+.proj-name { font-size: 16px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 10px; }
+.proj-desc { font-size: 11px; color: var(--ink-mid); line-height: 1.7; font-family: 'IBM Plex Sans', sans-serif; font-weight: 300; margin-bottom: 16px; }
+.proj-link { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-dim); text-decoration: none; border-bottom: 1px solid var(--border); padding-bottom: 2px; transition: color 0.15s, border-color 0.15s; }
+.proj-link:hover { color: var(--accent); border-color: var(--accent); }
+
+.extra-item {
+  padding: 24px 40px;
+  border-bottom: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: 120px 1fr auto;
+  gap: 28px;
+  align-items: center;
+  transition: background 0.15s;
+}
+.extra-item:hover { background: var(--surface); }
+.extra-item:last-child { border-bottom: none; }
+.extra-year { font-size: 11px; color: var(--ink-dim); letter-spacing: 0.08em; }
+.extra-name { font-size: 13px; font-weight: 500; }
+.extra-sub { font-size: 10px; color: var(--ink-mid); margin-top: 3px; font-family: 'IBM Plex Sans', sans-serif; }
+.extra-badge { font-size: 8px; letter-spacing: 0.2em; text-transform: uppercase; padding: 3px 10px; border: 1px solid var(--border-bright); color: var(--ink-dim); white-space: nowrap; }
+
+.doc-footer {
+  border: 1px solid var(--border);
+  border-top: none;
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer-sig { font-size: 10px; color: var(--ink-dim); letter-spacing: 0.1em; }
+.footer-cc { font-size: 9px; color: var(--ink-dim); letter-spacing: 0.08em; }
+
+@media (max-width: 620px) {
+  .doc-header { padding: 32px 24px 28px; }
+  .hero-grid { grid-template-columns: 1fr; gap: 0; }
+  .hero-cell { border-right: none; padding-right: 0; margin-right: 0; border-bottom: 1px solid var(--border); padding-bottom: 16px; margin-bottom: 16px; }
+  .hero-cell:last-child { border-bottom: none; }
+  .exp-item { grid-template-columns: 1fr; gap: 12px; padding: 24px; }
+  .inv-item { grid-template-columns: 40px 1fr; gap: 16px; padding: 24px; }
+  .inv-status { display: none; }
+  .proj-grid { grid-template-columns: 1fr; }
+  .proj-item:nth-child(even) { border-right: 1px solid var(--border); }
+  .proj-item:nth-last-child(-n+2) { border-bottom: 1px solid var(--border); }
+  .proj-item:last-child { border-bottom: none; }
+  .extra-item { grid-template-columns: 80px 1fr; padding: 20px 24px; }
+  .extra-badge { display: none; }
+  .sec-header, .doc-footer { padding: 16px 24px; }
+  .nav-tab { font-size: 7px; letter-spacing: 0.08em; padding: 12px 4px; }
+  .nav-tabs { flex-direction: column; }
+  .nav-tab { min-width: auto; border-bottom: 1px solid var(--border); }
+  .spec-list { padding: 24px; }
+  .exp-images { grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); }
+}
+
+/* SECCIÓN ACCESO RÁPIDO */
+.access-section {
+  border: 1px solid var(--border);
+  border-top: none;
+  padding: 40px 40px 48px;
+}
+.access-label {
+  font-size: 9px;
+  letter-spacing: 0.35em;
+  color: var(--ink-dim);
+  text-transform: uppercase;
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.access-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+.access-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.access-card {
+  display: block;
+  border: 1px solid var(--border);
+  padding: 32px 28px;
+  text-decoration: none;
+  color: var(--ink);
+  transition: background 0.2s, border-color 0.2s;
+  position: relative;
+}
+.access-card:hover { background: var(--surface); border-color: var(--border-bright); }
+.access-card--accent { border-color: var(--accent); }
+.access-card--accent:hover { background: rgba(72,190,211,0.05); }
+.access-icon { font-size: 28px; color: var(--accent); margin-bottom: 16px; line-height: 1; }
+.access-card-title { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 6px; }
+.access-card-sub { font-size: 11px; color: var(--ink-mid); font-family: "IBM Plex Sans", sans-serif; font-weight: 300; margin-bottom: 24px; line-height: 1.6; }
+.access-card-ref { font-size: 8px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--ink-dim); border-top: 1px solid var(--border); padding-top: 12px; }
+@media (max-width: 620px) {
+  .access-grid { grid-template-columns: 1fr; }
+  .access-section { padding: 28px 24px; }
+}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <span><span class="status-dot"></span>DISPONIBLE</span>
+      <span>DOC-001 / REV.2024</span>
+    </div>
+    <a href="/cdn-cgi/l/email-protection#b3d2d7c1dac39dd7dac0c1c6c3c7dac5d6ded6d7dad2f3d4ded2dadf9dd0dcde"><span class="__cf_email__" data-cfemail="177673657e6739737e64656267637e61727a72737e7657707a767e7b3974787a">[email&#160;protected]</span></a>
+  </div>
+
+  <div class="doc-header">
+    <div class="doc-label">
+      Perfil profesional · Diseñador
+      <span class="doc-number">REF: ALZ-CBB-001</span>
+    </div>
+    <div class="hero-name">ADRIANO<br>LENAZ <span>ZENTENO</span></div>
+    <div class="hero-title">Diseñador · Investigador</div>
+    <div class="hero-grid">
+      <div class="hero-cell">
+        <div class="cell-label">Contacto</div>
+        <div class="cell-value">
+          <a href="/cdn-cgi/l/email-protection#48292c3a2138662c213b3a3d383c213e2d252d2c2129082f25292124662b2725">adrip.disruptivemedia<br>@gmail.com</a>
+        </div>
+      </div>
+      <div class="hero-cell">
+        <div class="cell-label">Ubicación</div>
+        <div class="cell-value">C. Santiaguilla<br>Cochabamba, Bolivia</div>
+      </div>
+      <div class="hero-cell">
+        <div class="cell-label">Identificación</div>
+        <div class="cell-value">NIT: xxxxx<br>ADRIP</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="switchTab('spec')">01 · Especialización</button>
+    <button class="nav-tab" onclick="switchTab('exp')">02 · Experiencia</button>
+    <button class="nav-tab" onclick="switchTab('inv')">03 · Investigación</button>
+    <button class="nav-tab" onclick="switchTab('proj')">04 · Proyectos</button>
+    <button class="nav-tab" onclick="switchTab('ext')">05 · Proyectos Extra</button>
+  </div>
+
+  <!-- ESPECIALIZACIÓN -->
+  <div class="section active" id="sec-spec">
+    <div class="sec-header">
+      <span class="sec-title">Habilidades</span>
+      <span class="sec-count">4 líneas</span>
+    </div>
+    <div class="spec-list">
+      <div class="spec-category">
+        <div class="spec-title">Diseño Gráfico</div>
+        <div class="spec-item">Diseño editorial impreso y digital, maquetación, sistemas tipográficos y conceptualización visual</div>
+      </div>
+      <div class="spec-category">
+        <div class="spec-title">Periodismo Gráfico</div>
+        <div class="spec-item">Desarrollo de narrativas visuales para reportajes e investigaciones, infografía periodística</div>
+      </div>
+      <div class="spec-category">
+        <div class="spec-title">Investigación en Diseño</div>
+        <div class="spec-item">Ilustración vectorial, producción multimedia, animación y contenido audiovisual</div>
+      </div>
+      <div class="spec-category">
+        <div class="spec-title">Análisis Crítico del Diseño y Cultura Visual</div>
+        <div class="spec-item">Crítica visual, semiótica aplicada al diseño, investigación cultural y documentación</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EXPERIENCIA -->
+  <div class="section" id="sec-exp">
+    <div class="sec-header">
+      <span class="sec-title">Historial · Experiencia laboral</span>
+      <span class="sec-count">2 registros</span>
+    </div>
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-period">Jun 2023 → Jul 2025</div>
+        <div class="exp-company">Periódico Opinión<br>Cochabamba, BO</div>
+        <span class="exp-type">Dependencia</span>
+      </div>
+      <div class="exp-body">
+        <div class="exp-role">Diseñador Gráfico — <span class="highlight">Periodismo Gráfico</span></div>
+        <div class="exp-desc">Producción integral de contenido visual y narrativas gráficas para prensa, web y medios digitales. Especializado en periodismo gráfico e investigativo con enfoque en comunicación visual de alta complejidad.</div>
+        <ul class="exp-list">
+          <li><strong>Producción de contenido visual</strong> para prensa, web y redes sociales</li>
+          <li><strong>Diseño editorial</strong> de suplementos, reportajes y ediciones centrales</li>
+          <li><strong>Narrativa visual</strong> para reportajes de investigación periodística</li>
+          <li><strong>Producción multimedia</strong> (video, animación, gráficos dinámicos)</li>
+          <li><strong>Conceptualización de identidad visual</strong> institucional y de proyectos especiales</li>
+          <li><strong>Coordinación de contenidos</strong> en entorno de alta exigencia editorial</li>
+          <li><strong>Investigación visual</strong> y documentación gráfica de temas complejos</li>
+        </ul>
+        <div class="tags">
+          <span class="tag">Periodismo Gráfico</span><span class="tag">Editorial</span><span class="tag">Narrativa Visual</span><span class="tag">Investigación</span><span class="tag">Multimedia</span>
+        </div>
+        <!-- Sección de imágenes (descomentar y agregar rutas según sea necesario) -->
+        <!-- <div class="exp-images">
+          <img src="ruta/imagen1.jpg" alt="Ejemplo 1" class="exp-image">
+          <img src="ruta/imagen2.jpg" alt="Ejemplo 2" class="exp-image">
+          <img src="ruta/imagen3.jpg" alt="Ejemplo 3" class="exp-image">
+        </div> -->
+      </div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-period">2022 → Presente</div>
+        <div class="exp-company">ADRIP — Marca Creativa<br>Cochabamba, BO</div>
+        <span class="exp-type">Dirección Creativa</span>
+      </div>
+      <div class="exp-body">
+        <div class="exp-role">Director Creativo de la marca ADRIP</div>
+        <div class="exp-desc">Dirección creativa integral de la marca ADRIP, orientada a la producción de diseño disruptivo y vanguardista. Liderazgo en fotografía, montaje, producción, diseño, comunicación visual y branding. ADRIP se caracteriza por desafiar tendencias y proponer soluciones visuales originales, experimentales y críticas, alejadas de lo convencional.</div>
+        <ul class="exp-list">
+          <li>Dirección de arte y conceptualización visual de la marca</li>
+          <li>Producción fotográfica y montaje creativo</li>
+          <li>Diseño y desarrollo de branding propio</li>
+          <li>Comunicación visual estratégica y disruptiva</li>
+          <li>Gestión de proyectos de diseño no convencionales</li>
+        </ul>
+        <div class="tags">
+          <span class="tag">Dirección Creativa</span><span class="tag">Fotografía</span><span class="tag">Branding</span><span class="tag">Montaje</span><span class="tag">Vanguardia</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INVESTIGACIÓN Y PRODUCCIÓN ACADÉMICA -->
+  <div class="section" id="sec-inv">
+    <div class="sec-header">
+      <span class="sec-title">Producción académica · Investigación</span>
+      <span class="sec-count">1 registro</span>
+    </div>
+    <div class="inv-item">
+      <div class="inv-num">01</div>
+      <div>
+        <div class="inv-title">Signos gráficos coloniales y descolonización visual en Bolivia</div>
+        <div class="inv-abstract">
+          <strong>Autores:</strong> Adriano Lenaz Zenteno y Laura Elena Bustos Quitón<br>
+          <strong>DOI:</strong> <a href="https://doi.org/10.23881/idupbo.025.2-11e" target="_blank">https://doi.org/10.23881/idupbo.025.2-11e</a><br>
+          <strong>Palabras clave:</strong> Diseño gráfico, Semiología, Cultura, Descolonización<br>
+          <strong>Resumen:</strong> Este estudio aplica un enfoque cualitativo, descriptivo e interpretativo, utilizando el método semiótico propuesto por Umberto Eco y Roland Barthes para desentrañar los discursos ideológicos en la producción visual colonial. A través de una perspectiva descolonial, basada en Silvia Rivera Cusicanqui y Walter Mignolo. La investigación cuestiona las estructuras de poder coloniales inscritas en las obras pictóricas virreinales y su influencia en la construcción de la identidad boliviana contemporánea. El análisis revela que los signos gráficos coloniales funcionaban no solo como instrumentos de dominación cultural, sino también como espacios de resignificación y resistencia. Además, el estudio postula la reapropiación de estos signos para el diseño gráfico actual como un ejercicio de recuperación cultural y construcción de identidad. La investigación contribuye al debate sobre la descolonización del arte y propone una lectura crítica que vincula la historia, la estética y la comunicación visual en el contexto boliviano.<br>
+          <strong>Publicado:</strong> 02-03-2026 · Vol. 25 Núm. 2 (2025)
+        </div>
+        <div class="tags"><span class="tag">Publicado</span><span class="tag">DOI</span><span class="tag">Descolonización</span><span class="tag">Semiología</span></div>
+      </div>
+      <span class="inv-status pub">Publicado</span>
+    </div>
+  </div>
+
+  <!-- PROYECTOS EXTRA -->
+  <div class="section" id="sec-ext">
+    <div class="sec-header">
+      <span class="sec-title">Actividades · Proyectos extra y experiencias</span>
+      <span class="sec-count">6 registros</span>
+    </div>
+    <div class="extra-item">
+      <div class="extra-year">2024 abril</div>
+      <div>
+        <div class="extra-name">Fundación Club De Diseño, Cbba</div>
+        <div class="extra-sub">Fundador y coordinador de sociedad estudiantil enfocada en pensamiento creativo y divergente a través del diseño.</div>
+      </div>
+      <span class="extra-badge">Fundador</span>
+    </div>
+    <div class="extra-item">
+      <div class="extra-year">2024 octubre</div>
+      <div>
+        <div class="extra-name">Primer intercambio interdepartamental de Stickers</div>
+        <div class="extra-sub">Coordinación entre Club de Diseño CBBA y la sociedad estudiantil de la Universidad Privada Boliviana (La Paz). Actividad de intercambio creativo entre La Paz y Cochabamba.</div>
+      </div>
+      <span class="extra-badge">Intercambio</span>
+    </div>
+    <div class="extra-item">
+      <div class="extra-year">2024 octubre</div>
+      <div>
+        <div class="extra-name">Voluntario Mediador Cultural Museo Nacional de Arte (MNA)</div>
+        <div class="extra-sub">Participación como mediador cultural durante la 17ª Feria Internacional del Libro de Cochabamba, representando al MNA. Interacción y explicación de contenidos artísticos y culturales al público.</div>
+      </div>
+      <span class="extra-badge">Mediación</span>
+    </div>
+    <div class="extra-item">
+      <div class="extra-year">2025 abril</div>
+      <div>
+        <div class="extra-name">La Sticker Masterclass</div>
+        <div class="extra-sub">Dictado presencial en la Universidad Privada Boliviana sobre la historia y evolución gráfica/material de los stickers. Evento transmitido en vivo para La Paz.</div>
+      </div>
+      <span class="extra-badge">Masterclass</span>
+    </div>
+    <div class="extra-item">
+      <div class="extra-year">2025 junio</div>
+      <div>
+        <div class="extra-name">Intervención CANSADO</div>
+        <div class="extra-sub">Intervención gráfica de poster de 2.5m x 1.8m. Diseño, fotomontaje e instalación crítica.</div>
+      </div>
+      <span class="extra-badge">Intervención</span>
+    </div>
+    <div class="extra-item">
+      <div class="extra-year">2025 julio</div>
+      <div>
+        <div class="extra-name">Ponente XV Congreso de Enseñanza del Diseño, Universidad de Palermo</div>
+        <div class="extra-sub">Presentación de investigación sobre deconstrucción de símbolos gráficos coloniales en Bolivia desde perspectiva decolonial y semiótica. Análisis crítico de elementos visuales y estructuras de poder.</div>
+      </div>
+      <span class="extra-badge">Ponente</span>
+    </div>
+  </div>
+
+  <div class="  <!-- SECCIÓN ACCESO RÁPIDO -->
+  <div class="access-section">
+    <div class="access-label">ACCESO · DOCUMENTOS</div>
+    <div class="access-grid">
+      <a href="cv.pdf" target="_blank" class="access-card">
+        <div class="access-icon">↓</div>
+        <div class="access-card-title">Curriculum Vitae</div>
+        <div class="access-card-sub">Descargar documento PDF</div>
+        <div class="access-card-ref">DOC-CV · ALZ-001</div>
+      </a>
+      <a href="portafolio.html" class="access-card access-card--accent">
+        <div class="access-icon">→</div>
+        <div class="access-card-title">Portafolio</div>
+        <div class="access-card-sub">Ver proyectos y trabajo visual</div>
+        <div class="access-card-ref">DOC-PORT · ADRIP</div>
+      </a>
+    </div>
+  </div>
+
+  <div class="doc-footer">
+    <div class="footer-sig">© 2024 ADRIANO LENAZ ZENTENO · ADRIP DISRUPTIVE MEDIA</div>
+    <div class="footer-cc">DOC-001 · COCHABAMBA, BOLIVIA · NIT: XXXXX</div>
+  </div>
+
+</div>
+<script>
+function switchTab(id) {
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById('sec-' + id).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
+</body>
+</html>
