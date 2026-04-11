@@ -277,12 +277,15 @@ body::after {
 /* RESPONSIVE */
 @media (max-width: 620px) {
   .doc-header { padding: 32px 24px 28px; }
-  .work-entry, .subgroup-header, .sec-header, .doc-footer { padding-left: 24px; padding-right: 24px; }
+  .work-entry, .subgroup-header, .sec-header { padding-left: 24px; padding-right: 24px; }
+  .doc-footer { padding: 16px 24px; flex-direction: column; gap: 4px; }
   .work-gallery[data-layout="3col"], .work-gallery[data-layout="4col"] { grid-template-columns: repeat(2,1fr); }
-  .cat-tab { font-size: 7px; padding: 10px 5px; min-width: 70px; }
+  .cat-tab { font-size: 7px; padding: 12px 8px; min-width: 0; flex: 1 1 auto; }
+  .work-meta { flex-direction: column; gap: 4px; }
+  .work-date { padding-top: 0; }
   .lb-img { max-width: 94vw; max-height: 78vh; }
   .lb-inner { gap: 6px; }
-  .lb-btn { width: 34px; height: 34px; font-size: 16px; }
+  .lb-btn { width: 44px; height: 44px; font-size: 18px; }
 }
 </style>
 </head>
@@ -918,6 +921,17 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight' && currentIndex < currentGroup.length - 1) { currentIndex++; updateLightbox(); }
   if (e.key === 'Escape') closeLightbox();
 });
+
+// Touch swipe for mobile lightbox navigation
+let _touchStartX = 0;
+lb.addEventListener('touchstart', e => { _touchStartX = e.touches[0].clientX; }, { passive: true });
+lb.addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - _touchStartX;
+  if (Math.abs(dx) > 50) {
+    if (dx < 0 && currentIndex < currentGroup.length - 1) { currentIndex++; updateLightbox(); }
+    if (dx > 0 && currentIndex > 0) { currentIndex--; updateLightbox(); }
+  }
+}, { passive: true });
 
 // INIT: attach lightbox to real images, replace empty src with placeholder
 function init() {
