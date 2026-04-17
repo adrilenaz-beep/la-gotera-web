@@ -27,10 +27,10 @@ body {
   color: var(--ink);
   font-family: 'IBM Plex Mono', monospace;
   min-height: 100vh;
+  cursor: crosshair;
 }
 img { max-width: 100%; height: auto; display: block; }
 
-/* ── LAYOUT ── */
 .wrap {
   max-width: 860px;
   margin: 0 auto;
@@ -71,13 +71,11 @@ img { max-width: 100%; height: auto; display: block; }
   text-transform: uppercase; font-style: italic;
 }
 
-/* ── NAVIGATION TABS (desktop) ── */
+/* ── CATEGORY TABS ── */
 .cat-tabs {
   display: flex;
   border: 1px solid var(--border); border-top: none; border-bottom: none;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
+  overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none;
 }
 .cat-tabs::-webkit-scrollbar { display: none; }
 .cat-tab {
@@ -103,27 +101,20 @@ img { max-width: 100%; height: auto; display: block; }
   height: 2px; background: var(--accent);
 }
 
-/* Mobile: pill navigation below header */
+/* Mobile pills */
 .nav-pills {
-  display: none;
-  gap: 8px;
-  padding: 16px 0;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-  border-bottom: 1px solid var(--border);
+  display: none; gap: 8px; padding: 16px 0;
+  overflow-x: auto; -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; border-bottom: 1px solid var(--border);
 }
 .nav-pills::-webkit-scrollbar { display: none; }
 .nav-pill {
-  flex-shrink: 0;
-  padding: 8px 16px;
+  flex-shrink: 0; padding: 8px 16px;
   font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
   color: var(--ink-dim); cursor: pointer;
   border: 1px solid var(--border);
   background: transparent; font-family: 'IBM Plex Mono', monospace;
-  border-radius: 2px;
-  transition: all 0.15s;
-  white-space: nowrap;
+  border-radius: 2px; transition: all 0.15s; white-space: nowrap;
 }
 .nav-pill:hover { background: var(--surface); color: var(--ink); border-color: var(--border-bright); }
 .nav-pill.active { background: var(--surface); color: var(--accent); border-color: var(--accent); }
@@ -134,7 +125,7 @@ img { max-width: 100%; height: auto; display: block; }
 @keyframes fadeIn { from{opacity:0;transform:translateY(3px)} to{opacity:1;transform:translateY(0)} }
 
 .sec-header {
-  padding: 18px 32px;
+  padding: 16px 32px;
   border-bottom: 1px solid var(--border);
   display: flex; justify-content: space-between; align-items: center;
 }
@@ -145,36 +136,50 @@ img { max-width: 100%; height: auto; display: block; }
 .subgroup { border-bottom: 1px solid var(--border); }
 .subgroup:last-child { border-bottom: none; }
 .subgroup-header {
-  padding: 14px 32px;
-  border-bottom: 1px solid var(--border);
+  padding: 12px 32px;
   display: flex; align-items: center; gap: 14px;
   background: var(--surface);
 }
-.subgroup-title { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-mid); }
+.subgroup-title { font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-dim); }
 .subgroup-count { font-size: 9px; color: var(--ink-dim); }
 .subgroup-line { flex: 1; height: 1px; background: var(--border); }
 
-/* ── WORK ENTRY ── */
-.work-entry {
-  padding: 24px 32px;
-  border-bottom: 1px solid var(--border);
-}
+/* ── WORK ENTRY — collapsed log-line ── */
+.work-entry { border-bottom: 1px solid var(--border); }
 .work-entry:last-child { border-bottom: none; }
-.work-meta {
-  display: flex; justify-content: space-between; align-items: flex-start;
-  margin-bottom: 14px; gap: 16px;
+
+.work-trigger {
+  width: 100%; display: flex; align-items: center; gap: 10px;
+  padding: 13px 32px;
+  background: transparent; border: none; color: var(--ink);
+  font-family: 'IBM Plex Mono', monospace; font-size: 10px;
+  cursor: pointer; text-align: left; transition: background 0.15s;
 }
-.work-title { font-size: 13px; font-weight: 500; letter-spacing: -0.01em; line-height: 1.35; }
-.work-date { font-size: 9px; color: var(--ink-dim); letter-spacing: 0.12em; white-space: nowrap; padding-top: 2px; flex-shrink: 0; }
+.work-trigger:hover { background: var(--surface); }
+
+.work-marker { color: var(--ink-dim); flex-shrink: 0; }
+.work-date-inline { font-size: 9px; color: var(--accent); letter-spacing: 0.08em; flex-shrink: 0; }
+.work-sep { font-size: 9px; color: var(--ink-dim); flex-shrink: 0; }
+.work-title-inline { color: var(--ink-mid); flex-shrink: 0; letter-spacing: 0.02em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 360px; }
+.work-fill { flex: 1; height: 1px; background: var(--border); opacity: 0.5; margin: 0 6px; }
+.work-btn { font-size: 10px; color: var(--accent); flex-shrink: 0; min-width: 24px; text-align: right; }
+
+.work-body { display: none; padding: 24px 32px; border-top: 1px solid var(--border); }
+.work-body.open { display: block; animation: fadeIn 0.2s ease; }
+
+.work-meta-full {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  margin-bottom: 16px; gap: 16px;
+}
+.work-title-full { font-size: 13px; font-weight: 500; letter-spacing: -0.01em; line-height: 1.35; }
+.work-date-full { font-size: 9px; color: var(--ink-dim); letter-spacing: 0.12em; white-space: nowrap; padding-top: 2px; flex-shrink: 0; }
 
 /* ── GALLERY LAYOUTS ── */
 .work-gallery { margin-bottom: 14px; }
 
 .work-gallery[data-layout="single"] .gimg {
   max-height: 500px; width: auto; max-width: 100%;
-  aspect-ratio: unset; object-fit: unset;
 }
-
 .work-gallery[data-layout="2col"] { display: grid; grid-template-columns: repeat(2,1fr); gap: 6px; }
 .work-gallery[data-layout="3col"] { display: grid; grid-template-columns: repeat(3,1fr); gap: 6px; }
 .work-gallery[data-layout="4col"] { display: grid; grid-template-columns: repeat(4,1fr); gap: 6px; }
@@ -184,7 +189,6 @@ img { max-width: 100%; height: auto; display: block; }
 .work-gallery[data-layout="4col"] .gimg {
   aspect-ratio: 3/4; object-fit: cover; width: 100%; height: auto;
 }
-
 .work-gallery[data-layout="strip"] {
   display: flex; gap: 6px;
   overflow-x: auto; padding-bottom: 8px;
@@ -196,19 +200,16 @@ img { max-width: 100%; height: auto; display: block; }
 .work-gallery[data-layout="strip"]::-webkit-scrollbar-thumb { background: var(--border-bright); }
 .work-gallery[data-layout="strip"] .gimg {
   flex-shrink: 0; width: auto; max-height: 340px;
-  aspect-ratio: unset; object-fit: unset; scroll-snap-align: start;
+  scroll-snap-align: start;
 }
 
 .gimg {
   display: block; width: 100%; height: auto;
   border: 1px solid var(--border); background: var(--surface);
-  cursor: zoom-in;
-  transition: opacity 0.2s, border-color 0.2s;
-  object-fit: cover;
+  cursor: zoom-in; transition: opacity 0.2s, border-color 0.2s; object-fit: cover;
 }
 .gimg:hover { opacity: 0.88; border-color: var(--border-bright); }
 
-/* Placeholder */
 .gimg-placeholder {
   display: flex; flex-direction: column;
   align-items: center; justify-content: center; gap: 6px;
@@ -287,34 +288,19 @@ img { max-width: 100%; height: auto; display: block; }
 /* ── RESPONSIVE ── */
 @media (max-width: 640px) {
   .wrap { padding: 0 14px 60px; }
-
-  /* Hide tab bar, show pills */
   .cat-tabs { display: none; }
   .nav-pills { display: flex; }
-
   .doc-header { padding: 28px 20px 24px; }
-  .sec-header,
-  .work-entry,
-  .subgroup-header { padding-left: 20px; padding-right: 20px; }
+  .sec-header, .subgroup-header { padding-left: 20px; padding-right: 20px; }
+  .work-trigger { padding: 12px 20px; }
+  .work-title-inline { max-width: 180px; }
+  .work-body { padding: 20px 20px; }
   .doc-footer { padding: 14px 20px; }
-
-  /* Stack work meta */
-  .work-meta { flex-direction: column; gap: 3px; }
-  .work-date { padding-top: 0; }
-
-  /* Simpler grids on mobile */
+  .work-meta-full { flex-direction: column; gap: 3px; }
   .work-gallery[data-layout="3col"],
-  .work-gallery[data-layout="4col"] {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  /* Strip images slightly smaller */
+  .work-gallery[data-layout="4col"] { grid-template-columns: repeat(2, 1fr); }
   .work-gallery[data-layout="strip"] .gimg { max-height: 260px; }
-
-  /* Single images full-width on mobile */
   .work-gallery[data-layout="single"] .gimg { max-height: 400px; width: 100%; }
-
-  /* Lightbox adjustments */
   .lb-img { max-width: 94vw; max-height: 76vh; }
   .lb-inner { gap: 4px; }
   .lb-btn { width: 38px; height: 38px; font-size: 16px; }
@@ -382,7 +368,6 @@ img { max-width: 100%; height: auto; display: block; }
       <span class="sec-count">28+ piezas</span>
     </div>
 
-    <!-- ── SUBGRUPO: NOTICIAS ── -->
     <div class="subgroup">
       <div class="subgroup-header">
         <span class="subgroup-title">Noticias</span>
@@ -391,371 +376,680 @@ img { max-width: 100%; height: auto; display: block; }
       </div>
     </div>
 
-    <!-- Trabajos sin subgrupo -->
     <div class="work-entry">
-      <div class="work-meta">
-        <div class="work-title">Vaticano y P++++++</div>
-        <div class="work-date">24/07/2024</div>
+      <button class="work-trigger" onclick="toggleWork(this)">
+        <span class="work-marker">›</span>
+        <span class="work-date-inline">24/07/2024</span>
+        <span class="work-sep">·</span>
+        <span class="work-title-inline">Vaticano y P++++++</span>
+        <span class="work-fill"></span>
+        <span class="work-btn">[+]</span>
+      </button>
+      <div class="work-body">
+        <div class="work-meta-full">
+          <div class="work-title-full">Vaticano y P++++++</div>
+          <div class="work-date-full">24/07/2024</div>
+        </div>
+        <div class="work-gallery" data-layout="single">
+          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774906357/Vaticano_iqc3t6.jpg" alt="Vaticano" loading="lazy">
+        </div>
+        <div class="tags"><span class="tag">Noticias</span></div>
       </div>
-      <div class="work-gallery" data-layout="single">
-        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774906357/Vaticano_iqc3t6.jpg" alt="Vaticano" loading="lazy">
-      </div>
-      <div class="tags"><span class="tag">Noticias</span></div>
     </div>
 
     <div class="work-entry">
-      <div class="work-meta">
-        <div class="work-title">CRISIS DE COMBUSTIBLE, COCHABAMBA BLOQUEADA</div>
-        <div class="work-date">31/07/2024</div>
+      <button class="work-trigger" onclick="toggleWork(this)">
+        <span class="work-marker">›</span>
+        <span class="work-date-inline">31/07/2024</span>
+        <span class="work-sep">·</span>
+        <span class="work-title-inline">Crisis de combustible, Cochabamba bloqueada</span>
+        <span class="work-fill"></span>
+        <span class="work-btn">[+]</span>
+      </button>
+      <div class="work-body">
+        <div class="work-meta-full">
+          <div class="work-title-full">CRISIS DE COMBUSTIBLE, COCHABAMBA BLOQUEADA</div>
+          <div class="work-date-full">31/07/2024</div>
+        </div>
+        <div class="work-gallery" data-layout="single">
+          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774906356/Llajta_Bloqueada_tkdgyb.jpg" alt="Cochabamba bloqueada" loading="lazy">
+        </div>
+        <div class="tags"><span class="tag">Noticias</span></div>
       </div>
-      <div class="work-gallery" data-layout="single">
-        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774906356/Llajta_Bloqueada_tkdgyb.jpg" alt="Cochabamba bloqueada" loading="lazy">
-      </div>
-      <div class="tags"><span class="tag">Noticias</span></div>
     </div>
 
     <div class="work-entry">
-      <div class="work-meta">
-        <div class="work-title">ESTRENO, ALIEN ROMULUS</div>
-        <div class="work-date">15/08/2024</div>
+      <button class="work-trigger" onclick="toggleWork(this)">
+        <span class="work-marker">›</span>
+        <span class="work-date-inline">15/08/2024</span>
+        <span class="work-sep">·</span>
+        <span class="work-title-inline">Estreno, Alien Romulus</span>
+        <span class="work-fill"></span>
+        <span class="work-btn">[+]</span>
+      </button>
+      <div class="work-body">
+        <div class="work-meta-full">
+          <div class="work-title-full">ESTRENO, ALIEN ROMULUS</div>
+          <div class="work-date-full">15/08/2024</div>
+        </div>
+        <div class="work-gallery" data-layout="single">
+          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774916612/Alien02_qg9yib.jpg" alt="Alien Romulus" loading="lazy">
+        </div>
+        <div class="tags"><span class="tag">Noticias</span></div>
       </div>
-      <div class="work-gallery" data-layout="single">
-        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774916612/Alien02_qg9yib.jpg" alt="Alien Romulus" loading="lazy">
-      </div>
-      <div class="tags"><span class="tag">Noticias</span></div>
     </div>
 
     <div class="work-entry">
-      <div class="work-meta">
-        <div class="work-title">AMOR POR INTERNET</div>
-        <div class="work-date">19/08/2024</div>
+      <button class="work-trigger" onclick="toggleWork(this)">
+        <span class="work-marker">›</span>
+        <span class="work-date-inline">19/08/2024</span>
+        <span class="work-sep">·</span>
+        <span class="work-title-inline">Amor por internet</span>
+        <span class="work-fill"></span>
+        <span class="work-btn">[+]</span>
+      </button>
+      <div class="work-body">
+        <div class="work-meta-full">
+          <div class="work-title-full">AMOR POR INTERNET</div>
+          <div class="work-date-full">19/08/2024</div>
+        </div>
+        <div class="work-gallery" data-layout="single">
+          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774964410/internet02_w9rkx7.jpg" alt="Amor por internet" loading="lazy">
+        </div>
+        <div class="tags"><span class="tag">Noticias</span></div>
       </div>
-      <div class="work-gallery" data-layout="single">
-        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774964410/internet02_w9rkx7.jpg" alt="Amor por internet" loading="lazy">
-      </div>
-      <div class="tags"><span class="tag">Noticias</span></div>
     </div>
 
     <div class="work-entry">
-      <div class="work-meta">
-        <div class="work-title">SE DEBATE EL PRECIO DEL PASAJE</div>
-        <div class="work-date">22/08/2024</div>
+      <button class="work-trigger" onclick="toggleWork(this)">
+        <span class="work-marker">›</span>
+        <span class="work-date-inline">22/08/2024</span>
+        <span class="work-sep">·</span>
+        <span class="work-title-inline">Se debate el precio del pasaje</span>
+        <span class="work-fill"></span>
+        <span class="work-btn">[+]</span>
+      </button>
+      <div class="work-body">
+        <div class="work-meta-full">
+          <div class="work-title-full">SE DEBATE EL PRECIO DEL PASAJE</div>
+          <div class="work-date-full">22/08/2024</div>
+        </div>
+        <div class="work-gallery" data-layout="single">
+          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774964433/ChoferesPiden01_afbxwz.jpg" alt="Precio pasaje" loading="lazy">
+        </div>
+        <div class="tags"><span class="tag">Noticias</span></div>
       </div>
-      <div class="work-gallery" data-layout="single">
-        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774964433/ChoferesPiden01_afbxwz.jpg" alt="Precio pasaje" loading="lazy">
-      </div>
-      <div class="tags"><span class="tag">Noticias</span></div>
     </div>
 
     <div class="work-entry">
-      <div class="work-meta">
-        <div class="work-title">¿DIESEL DE MATERIAL RECICLADO?</div>
-        <div class="work-date">30/08/2024</div>
+      <button class="work-trigger" onclick="toggleWork(this)">
+        <span class="work-marker">›</span>
+        <span class="work-date-inline">30/08/2024</span>
+        <span class="work-sep">·</span>
+        <span class="work-title-inline">¿Diesel de material reciclado?</span>
+        <span class="work-fill"></span>
+        <span class="work-btn">[+]</span>
+      </button>
+      <div class="work-body">
+        <div class="work-meta-full">
+          <div class="work-title-full">¿DIESEL DE MATERIAL RECICLADO?</div>
+          <div class="work-date-full">30/08/2024</div>
+        </div>
+        <div class="work-gallery" data-layout="single">
+          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774964926/Diesel_reciclado_bwslbv.jpg" alt="Diesel reciclado" loading="lazy">
+        </div>
+        <div class="tags"><span class="tag">Noticias</span></div>
       </div>
-      <div class="work-gallery" data-layout="single">
-        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774964926/Diesel_reciclado_bwslbv.jpg" alt="Diesel reciclado" loading="lazy">
-      </div>
-      <div class="tags"><span class="tag">Noticias</span></div>
     </div>
 
     <div class="work-entry">
-      <div class="work-meta">
-        <div class="work-title">INCENDIOS EN EL ORIENTE BOLIVIANO</div>
-        <div class="work-date">03/09/2024</div>
+      <button class="work-trigger" onclick="toggleWork(this)">
+        <span class="work-marker">›</span>
+        <span class="work-date-inline">03/09/2024</span>
+        <span class="work-sep">·</span>
+        <span class="work-title-inline">Incendios en el oriente boliviano</span>
+        <span class="work-fill"></span>
+        <span class="work-btn">[+]</span>
+      </button>
+      <div class="work-body">
+        <div class="work-meta-full">
+          <div class="work-title-full">INCENDIOS EN EL ORIENTE BOLIVIANO</div>
+          <div class="work-date-full">03/09/2024</div>
+        </div>
+        <div class="work-gallery" data-layout="strip">
+          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774964970/Incendios01_xyu7dt.jpg" alt="Imagen 1" loading="lazy">
+          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774964973/Incendios02_vamujz.jpg" alt="Imagen 2" loading="lazy">
+          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774964971/Incendios03_d61nba.jpg" alt="Imagen 3" loading="lazy">
+          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774964971/Incendios04_ezdfry.jpg" alt="Imagen 4" loading="lazy">
+          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774964970/Incendios05_q5ffkl.jpg" alt="Imagen 5" loading="lazy">
+          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774964969/Incendios06-2.0_h9uvm9.jpg" alt="Imagen 6" loading="lazy">
+        </div>
+        <div class="tags"><span class="tag">Incendios en la Amazonía</span><span class="tag">Carrusel</span></div>
       </div>
-      <div class="work-gallery" data-layout="strip">
-        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774964970/Incendios01_xyu7dt.jpg" alt="Imagen 1" loading="lazy">
-        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774964973/Incendios02_vamujz.jpg" alt="Imagen 2" loading="lazy">
-        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774964971/Incendios03_d61nba.jpg" alt="Imagen 3" loading="lazy">
-        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774964971/Incendios04_ezdfry.jpg" alt="Imagen 4" loading="lazy">
-        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774964970/Incendios05_q5ffkl.jpg" alt="Imagen 5" loading="lazy">
-        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774964969/Incendios06-2.0_h9uvm9.jpg" alt="Imagen 6" loading="lazy">
-      </div>
-      <div class="tags"><span class="tag">Incendios en la Amazonía</span><span class="tag">Carrusel</span></div>
     </div>
 
     <div class="work-entry">
-      <div class="work-meta">
-        <div class="work-title">¿ALPHAVILLE, EN ORURO?</div>
-        <div class="work-date">05/09/2024</div>
+      <button class="work-trigger" onclick="toggleWork(this)">
+        <span class="work-marker">›</span>
+        <span class="work-date-inline">05/09/2024</span>
+        <span class="work-sep">·</span>
+        <span class="work-title-inline">¿Alphaville, en Oruro?</span>
+        <span class="work-fill"></span>
+        <span class="work-btn">[+]</span>
+      </button>
+      <div class="work-body">
+        <div class="work-meta-full">
+          <div class="work-title-full">¿ALPHAVILLE, EN ORURO?</div>
+          <div class="work-date-full">05/09/2024</div>
+        </div>
+        <div class="work-gallery" data-layout="single">
+          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774916521/Alphaville02_gcllkg.jpg" alt="Alphaville en Oruro" loading="lazy">
+        </div>
+        <div class="tags"><span class="tag">Noticias</span></div>
       </div>
-      <div class="work-gallery" data-layout="single">
-        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774916521/Alphaville02_gcllkg.jpg" alt="Alphaville en Oruro" loading="lazy">
-      </div>
-      <div class="tags"><span class="tag">Noticias</span></div>
     </div>
 
     <div class="work-entry">
-      <div class="work-meta">
-        <div class="work-title">BOLIVIA ACUSADA POR ISRAEL</div>
-        <div class="work-date">23/10/2024</div>
+      <button class="work-trigger" onclick="toggleWork(this)">
+        <span class="work-marker">›</span>
+        <span class="work-date-inline">23/10/2024</span>
+        <span class="work-sep">·</span>
+        <span class="work-title-inline">Bolivia acusada por Israel</span>
+        <span class="work-fill"></span>
+        <span class="work-btn">[+]</span>
+      </button>
+      <div class="work-body">
+        <div class="work-meta-full">
+          <div class="work-title-full">BOLIVIA ACUSADA POR ISRAEL</div>
+          <div class="work-date-full">23/10/2024</div>
+        </div>
+        <div class="work-gallery" data-layout="single">
+          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774964996/Israelacusa01_qrpkve.jpg" alt="Bolivia acusada" loading="lazy">
+        </div>
+        <div class="tags"><span class="tag">Noticias</span></div>
       </div>
-      <div class="work-gallery" data-layout="single">
-        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774964996/Israelacusa01_qrpkve.jpg" alt="Bolivia acusada" loading="lazy">
-      </div>
-      <div class="tags"><span class="tag">Noticias</span></div>
     </div>
 
     <div class="work-entry">
-      <div class="work-meta">
-        <div class="work-title">BLOQUEOS EVISTAS, DÍA 10</div>
-        <div class="work-date">23/10/2024</div>
+      <button class="work-trigger" onclick="toggleWork(this)">
+        <span class="work-marker">›</span>
+        <span class="work-date-inline">23/10/2024</span>
+        <span class="work-sep">·</span>
+        <span class="work-title-inline">Bloqueos evistas, día 10</span>
+        <span class="work-fill"></span>
+        <span class="work-btn">[+]</span>
+      </button>
+      <div class="work-body">
+        <div class="work-meta-full">
+          <div class="work-title-full">BLOQUEOS EVISTAS, DÍA 10</div>
+          <div class="work-date-full">23/10/2024</div>
+        </div>
+        <div class="work-gallery" data-layout="single">
+          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774964995/Bloquos10dias_zcnh6k.jpg" alt="Bloqueos día 10" loading="lazy">
+        </div>
+        <div class="tags"><span class="tag">Noticias</span></div>
       </div>
-      <div class="work-gallery" data-layout="single">
-        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774964995/Bloquos10dias_zcnh6k.jpg" alt="Bloqueos día 10" loading="lazy">
-      </div>
-      <div class="tags"><span class="tag">Noticias</span></div>
     </div>
 
     <div class="work-entry">
-      <div class="work-meta">
-        <div class="work-title">EXGUERRILLERO CHILENO EN BOLIVIA</div>
-        <div class="work-date">07/01/2025</div>
+      <button class="work-trigger" onclick="toggleWork(this)">
+        <span class="work-marker">›</span>
+        <span class="work-date-inline">07/01/2025</span>
+        <span class="work-sep">·</span>
+        <span class="work-title-inline">Exguerrillero chileno en Bolivia</span>
+        <span class="work-fill"></span>
+        <span class="work-btn">[+]</span>
+      </button>
+      <div class="work-body">
+        <div class="work-meta-full">
+          <div class="work-title-full">EXGUERRILLERO CHILENO EN BOLIVIA</div>
+          <div class="work-date-full">07/01/2025</div>
+        </div>
+        <div class="work-gallery" data-layout="single">
+          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775010111/exguerrillero_1_eoyiw4.jpg" alt="Exguerrillero chileno" loading="lazy">
+        </div>
+        <div class="tags"><span class="tag">Noticias</span></div>
       </div>
-      <div class="work-gallery" data-layout="single">
-        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775010111/exguerrillero_1_eoyiw4.jpg" alt="Exguerrillero chileno" loading="lazy">
-      </div>
-      <div class="tags"><span class="tag">Noticias</span></div>
     </div>
 
     <div class="work-entry">
-      <div class="work-meta">
-        <div class="work-title">EL PASAJE DEL TRUFI SUBE</div>
-        <div class="work-date">08/01/2025</div>
+      <button class="work-trigger" onclick="toggleWork(this)">
+        <span class="work-marker">›</span>
+        <span class="work-date-inline">08/01/2025</span>
+        <span class="work-sep">·</span>
+        <span class="work-title-inline">El pasaje del trufi sube</span>
+        <span class="work-fill"></span>
+        <span class="work-btn">[+]</span>
+      </button>
+      <div class="work-body">
+        <div class="work-meta-full">
+          <div class="work-title-full">EL PASAJE DEL TRUFI SUBE</div>
+          <div class="work-date-full">08/01/2025</div>
+        </div>
+        <div class="work-gallery" data-layout="single">
+          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774965035/Pasaje-_2_yzdjk0.jpg" alt="Pasaje trufi" loading="lazy">
+        </div>
+        <div class="tags"><span class="tag">Noticias</span></div>
       </div>
-      <div class="work-gallery" data-layout="single">
-        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774965035/Pasaje-_2_yzdjk0.jpg" alt="Pasaje trufi" loading="lazy">
-      </div>
-      <div class="tags"><span class="tag">Noticias</span></div>
     </div>
 
     <div class="work-entry">
-      <div class="work-meta">
-        <div class="work-title">INCENDIOS EN HOLLYWOOD</div>
-        <div class="work-date">11/02/2025</div>
+      <button class="work-trigger" onclick="toggleWork(this)">
+        <span class="work-marker">›</span>
+        <span class="work-date-inline">27/01/2025</span>
+        <span class="work-sep">·</span>
+        <span class="work-title-inline">Liberación de Auschwitz</span>
+        <span class="work-fill"></span>
+        <span class="work-btn">[+]</span>
+      </button>
+      <div class="work-body">
+        <div class="work-meta-full">
+          <div class="work-title-full">LIBERACIÓN DE AUSCHWITZ</div>
+          <div class="work-date-full">27/01/2025</div>
+        </div>
+        <div class="work-gallery" data-layout="strip">
+          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774916468/Ausch01_tjkzkv.jpg" alt="Imagen 1" loading="lazy">
+          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774916469/Ausch02_f8y27d.jpg" alt="Imagen 2" loading="lazy">
+          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774916479/Ausch03_cg91ph.jpg" alt="Imagen 3" loading="lazy">
+          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774916477/Ausch04_ib8jg4.jpg" alt="Imagen 4" loading="lazy">
+          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774916474/Ausch05_awsxsh.jpg" alt="Imagen 5" loading="lazy">
+          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774916472/Ausch06_ytlebt.jpg" alt="Imagen 6" loading="lazy">
+        </div>
+        <div class="tags"><span class="tag">80+ Años</span><span class="tag">Carrusel</span></div>
       </div>
-      <div class="work-gallery" data-layout="single">
-        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775052549/Hollywood-_2_kfdla3.jpg" alt="Incendios Hollywood" loading="lazy">
-      </div>
-      <div class="tags"><span class="tag">Noticias</span></div>
     </div>
 
     <div class="work-entry">
-      <div class="work-meta">
-        <div class="work-title">LIBERACIÓN DE AUSCHWITZ</div>
-        <div class="work-date">27/01/2025</div>
+      <button class="work-trigger" onclick="toggleWork(this)">
+        <span class="work-marker">›</span>
+        <span class="work-date-inline">30/01/2025</span>
+        <span class="work-sep">·</span>
+        <span class="work-title-inline">Accidente aéreo en Washington</span>
+        <span class="work-fill"></span>
+        <span class="work-btn">[+]</span>
+      </button>
+      <div class="work-body">
+        <div class="work-meta-full">
+          <div class="work-title-full">ACCIDENTE AÉREO EN WASHINGTON</div>
+          <div class="work-date-full">30/01/2025</div>
+        </div>
+        <div class="work-gallery" data-layout="strip">
+          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775052079/ChoqueAereo01_l30l4a.jpg" alt="Imagen 1" loading="lazy">
+          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775052079/ChoqueAereo02_mrcpes.jpg" alt="Imagen 2" loading="lazy">
+          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775052079/ChoqueAereo03_rfxbdo.jpg" alt="Imagen 3" loading="lazy">
+          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775052079/ChoqueAereo04_yfo9b2.jpg" alt="Imagen 4" loading="lazy">
+        </div>
+        <div class="tags"><span class="tag">Accidente</span><span class="tag">Carrusel</span></div>
       </div>
-      <div class="work-gallery" data-layout="strip">
-        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774916468/Ausch01_tjkzkv.jpg" alt="Imagen 1" loading="lazy">
-        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774916469/Ausch02_f8y27d.jpg" alt="Imagen 2" loading="lazy">
-        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774916479/Ausch03_cg91ph.jpg" alt="Imagen 3" loading="lazy">
-        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774916477/Ausch04_ib8jg4.jpg" alt="Imagen 4" loading="lazy">
-        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774916474/Ausch05_awsxsh.jpg" alt="Imagen 5" loading="lazy">
-        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774916472/Ausch06_ytlebt.jpg" alt="Imagen 6" loading="lazy">
-      </div>
-      <div class="tags"><span class="tag">80+ Años</span><span class="tag">Carrusel</span></div>
     </div>
 
     <div class="work-entry">
-      <div class="work-meta">
-        <div class="work-title">ACCIDENTE AÉREO EN WASHINGTON</div>
-        <div class="work-date">30/01/2025</div>
+      <button class="work-trigger" onclick="toggleWork(this)">
+        <span class="work-marker">›</span>
+        <span class="work-date-inline">04/02/2025</span>
+        <span class="work-sep">·</span>
+        <span class="work-title-inline">G***** contra el contrabando</span>
+        <span class="work-fill"></span>
+        <span class="work-btn">[+]</span>
+      </button>
+      <div class="work-body">
+        <div class="work-meta-full">
+          <div class="work-title-full">G***** CONTRA EL CONTRABANDO</div>
+          <div class="work-date-full">04/02/2025</div>
+        </div>
+        <div class="work-gallery" data-layout="strip">
+          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774906437/Contrabando01_b3atf3.jpg" alt="Imagen 1" loading="lazy">
+          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774906439/Contrabando02_qfqejb.jpg" alt="Imagen 2" loading="lazy">
+          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774906436/Contrabando03_01_aipinx.jpg" alt="Imagen 3" loading="lazy">
+          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774906435/Contrabando03_02_i4nmkx.jpg" alt="Imagen 4" loading="lazy">
+          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774906440/Contrabando04_ckuvr6.jpg" alt="Imagen 5" loading="lazy">
+        </div>
+        <div class="tags"><span class="tag">Contrabando</span><span class="tag">Carrusel</span></div>
       </div>
-      <div class="work-gallery" data-layout="strip">
-        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775052079/ChoqueAereo01_l30l4a.jpg" alt="Imagen 1" loading="lazy">
-        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775052079/ChoqueAereo02_mrcpes.jpg" alt="Imagen 2" loading="lazy">
-        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775052079/ChoqueAereo03_rfxbdo.jpg" alt="Imagen 3" loading="lazy">
-        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775052079/ChoqueAereo04_yfo9b2.jpg" alt="Imagen 4" loading="lazy">
-      </div>
-      <div class="tags"><span class="tag">Accidente</span><span class="tag">Carrusel</span></div>
     </div>
 
     <div class="work-entry">
-      <div class="work-meta">
-        <div class="work-title">G***** CONTRA EL CONTRABANDO</div>
-        <div class="work-date">04/02/2025</div>
+      <button class="work-trigger" onclick="toggleWork(this)">
+        <span class="work-marker">›</span>
+        <span class="work-date-inline">10/02/2025</span>
+        <span class="work-sep">·</span>
+        <span class="work-title-inline">Punk, no está muerto</span>
+        <span class="work-fill"></span>
+        <span class="work-btn">[+]</span>
+      </button>
+      <div class="work-body">
+        <div class="work-meta-full">
+          <div class="work-title-full">PUNK, NO ESTÁ MUERTO</div>
+          <div class="work-date-full">10/02/2025</div>
+        </div>
+        <div class="work-gallery" data-layout="single">
+          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775053486/Misfits01_z4uts6.jpg" alt="Punk no está muerto" loading="lazy">
+        </div>
+        <div class="tags"><span class="tag">Noticias</span></div>
       </div>
-      <div class="work-gallery" data-layout="strip">
-        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774906437/Contrabando01_b3atf3.jpg" alt="Imagen 1" loading="lazy">
-        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774906439/Contrabando02_qfqejb.jpg" alt="Imagen 2" loading="lazy">
-        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774906436/Contrabando03_01_aipinx.jpg" alt="Imagen 3" loading="lazy">
-        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774906435/Contrabando03_02_i4nmkx.jpg" alt="Imagen 4" loading="lazy">
-        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774906440/Contrabando04_ckuvr6.jpg" alt="Imagen 5" loading="lazy">
-      </div>
-      <div class="tags"><span class="tag">Contrabando</span><span class="tag">Carrusel</span></div>
     </div>
 
     <div class="work-entry">
-      <div class="work-meta">
-        <div class="work-title">PUNK, NO ESTÁ MUERTO</div>
-        <div class="work-date">10/02/2025</div>
+      <button class="work-trigger" onclick="toggleWork(this)">
+        <span class="work-marker">›</span>
+        <span class="work-date-inline">10/02/2025</span>
+        <span class="work-sep">·</span>
+        <span class="work-title-inline">Se busca:</span>
+        <span class="work-fill"></span>
+        <span class="work-btn">[+]</span>
+      </button>
+      <div class="work-body">
+        <div class="work-meta-full">
+          <div class="work-title-full">SE BUSCA:</div>
+          <div class="work-date-full">10/02/2025</div>
+        </div>
+        <div class="work-gallery" data-layout="single">
+          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775053486/Recompensa03_p2gyrp.jpg" alt="Se busca" loading="lazy">
+        </div>
+        <div class="tags"><span class="tag">Noticias</span></div>
       </div>
-      <div class="work-gallery" data-layout="single">
-        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775053486/Misfits01_z4uts6.jpg" alt="Punk no está muerto" loading="lazy">
-      </div>
-      <div class="tags"><span class="tag">Noticias</span></div>
     </div>
 
     <div class="work-entry">
-      <div class="work-meta">
-        <div class="work-title">SE BUSCA:</div>
-        <div class="work-date">10/02/2025</div>
+      <button class="work-trigger" onclick="toggleWork(this)">
+        <span class="work-marker">›</span>
+        <span class="work-date-inline">10/02/2025</span>
+        <span class="work-sep">·</span>
+        <span class="work-title-inline">Debate entre candidatos</span>
+        <span class="work-fill"></span>
+        <span class="work-btn">[+]</span>
+      </button>
+      <div class="work-body">
+        <div class="work-meta-full">
+          <div class="work-title-full">DEBATE ENTRE CANDIDATOS</div>
+          <div class="work-date-full">10/02/2025</div>
+        </div>
+        <div class="work-gallery" data-layout="single">
+          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775053485/DebatePres01_ggsmmz.jpg" alt="Debate candidatos" loading="lazy">
+        </div>
+        <div class="tags"><span class="tag">Noticias</span></div>
       </div>
-      <div class="work-gallery" data-layout="single">
-        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775053486/Recompensa03_p2gyrp.jpg" alt="Se busca" loading="lazy">
-      </div>
-      <div class="tags"><span class="tag">Noticias</span></div>
     </div>
 
     <div class="work-entry">
-      <div class="work-meta">
-        <div class="work-title">DEBATE ENTRE CANDIDATOS</div>
-        <div class="work-date">10/02/2025</div>
+      <button class="work-trigger" onclick="toggleWork(this)">
+        <span class="work-marker">›</span>
+        <span class="work-date-inline">11/02/2025</span>
+        <span class="work-sep">·</span>
+        <span class="work-title-inline">Gobierno aguarda</span>
+        <span class="work-fill"></span>
+        <span class="work-btn">[+]</span>
+      </button>
+      <div class="work-body">
+        <div class="work-meta-full">
+          <div class="work-title-full">GOBIERNO AGUARDA</div>
+          <div class="work-date-full">11/02/2025</div>
+        </div>
+        <div class="work-gallery" data-layout="single">
+          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774906381/HayOrden02_rijfqw.jpg" alt="Gobierno aguarda" loading="lazy">
+        </div>
+        <div class="tags"><span class="tag">Noticias</span></div>
       </div>
-      <div class="work-gallery" data-layout="single">
-        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775053485/DebatePres01_ggsmmz.jpg" alt="Debate candidatos" loading="lazy">
-      </div>
-      <div class="tags"><span class="tag">Noticias</span></div>
     </div>
 
     <div class="work-entry">
-      <div class="work-meta">
-        <div class="work-title">GOBIERNO AGUARDA</div>
-        <div class="work-date">11/02/2025</div>
+      <button class="work-trigger" onclick="toggleWork(this)">
+        <span class="work-marker">›</span>
+        <span class="work-date-inline">11/02/2025</span>
+        <span class="work-sep">·</span>
+        <span class="work-title-inline">Incendios en Hollywood</span>
+        <span class="work-fill"></span>
+        <span class="work-btn">[+]</span>
+      </button>
+      <div class="work-body">
+        <div class="work-meta-full">
+          <div class="work-title-full">INCENDIOS EN HOLLYWOOD</div>
+          <div class="work-date-full">11/02/2025</div>
+        </div>
+        <div class="work-gallery" data-layout="single">
+          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775052549/Hollywood-_2_kfdla3.jpg" alt="Incendios Hollywood" loading="lazy">
+        </div>
+        <div class="tags"><span class="tag">Noticias</span></div>
       </div>
-      <div class="work-gallery" data-layout="single">
-        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774906381/HayOrden02_rijfqw.jpg" alt="Gobierno aguarda" loading="lazy">
-      </div>
-      <div class="tags"><span class="tag">Noticias</span></div>
     </div>
 
     <div class="work-entry">
-      <div class="work-meta">
-        <div class="work-title">ROSALÍA X EUPHORIA</div>
-        <div class="work-date">18/02/2025</div>
+      <button class="work-trigger" onclick="toggleWork(this)">
+        <span class="work-marker">›</span>
+        <span class="work-date-inline">18/02/2025</span>
+        <span class="work-sep">·</span>
+        <span class="work-title-inline">Rosalía x Euphoria</span>
+        <span class="work-fill"></span>
+        <span class="work-btn">[+]</span>
+      </button>
+      <div class="work-body">
+        <div class="work-meta-full">
+          <div class="work-title-full">ROSALÍA X EUPHORIA</div>
+          <div class="work-date-full">18/02/2025</div>
+        </div>
+        <div class="work-gallery" data-layout="single">
+          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775053115/Rosa01_gfw6kg.jpg" alt="Rosalía x Euphoria" loading="lazy">
+        </div>
+        <div class="tags"><span class="tag">Farandula</span></div>
       </div>
-      <div class="work-gallery" data-layout="single">
-        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775053115/Rosa01_gfw6kg.jpg" alt="Rosalía x Euphoria" loading="lazy">
-      </div>
-      <div class="tags"><span class="tag">Farandula</span></div>
     </div>
 
     <div class="work-entry">
-      <div class="work-meta">
-        <div class="work-title">CINE POR LOS GATOS</div>
-        <div class="work-date">21/02/2025</div>
+      <button class="work-trigger" onclick="toggleWork(this)">
+        <span class="work-marker">›</span>
+        <span class="work-date-inline">21/02/2025</span>
+        <span class="work-sep">·</span>
+        <span class="work-title-inline">Cine por los gatos</span>
+        <span class="work-fill"></span>
+        <span class="work-btn">[+]</span>
+      </button>
+      <div class="work-body">
+        <div class="work-meta-full">
+          <div class="work-title-full">CINE POR LOS GATOS</div>
+          <div class="work-date-full">21/02/2025</div>
+        </div>
+        <div class="work-gallery" data-layout="strip">
+          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774905994/Gatos-Neko_01_x2o4z9.jpg" alt="Imagen 1 de 3" loading="lazy">
+          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775052990/Gatos-Neko_02_pqf4lk.jpg" alt="Imagen 2 de 3" loading="lazy">
+          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775052991/Gatos-Neko_03_tkqi2y.jpg" alt="Imagen 3 de 3" loading="lazy">
+        </div>
+        <div class="tags"><span class="tag">Gatitos</span><span class="tag">Carrusel</span></div>
       </div>
-      <div class="work-gallery" data-layout="strip">
-        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774905994/Gatos-Neko_01_x2o4z9.jpg" alt="Imagen 1 de 3" loading="lazy">
-        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775052990/Gatos-Neko_02_pqf4lk.jpg" alt="Imagen 2 de 3" loading="lazy">
-        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775052991/Gatos-Neko_03_tkqi2y.jpg" alt="Imagen 3 de 3" loading="lazy">
-      </div>
-      <div class="tags"><span class="tag">Gatitos</span><span class="tag">Carrusel</span></div>
     </div>
 
     <div class="work-entry">
-      <div class="work-meta">
-        <div class="work-title">CASO GOLPE</div>
-        <div class="work-date">26/03/2025</div>
+      <button class="work-trigger" onclick="toggleWork(this)">
+        <span class="work-marker">›</span>
+        <span class="work-date-inline">26/03/2025</span>
+        <span class="work-sep">·</span>
+        <span class="work-title-inline">Caso golpe</span>
+        <span class="work-fill"></span>
+        <span class="work-btn">[+]</span>
+      </button>
+      <div class="work-body">
+        <div class="work-meta-full">
+          <div class="work-title-full">CASO GOLPE</div>
+          <div class="work-date-full">26/03/2025</div>
+        </div>
+        <div class="work-gallery" data-layout="single">
+          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775053230/Golpe01_y7yncp.jpg" alt="Caso golpe" loading="lazy">
+        </div>
+        <div class="tags"><span class="tag">Noticias</span></div>
       </div>
-      <div class="work-gallery" data-layout="single">
-        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775053230/Golpe01_y7yncp.jpg" alt="Caso golpe" loading="lazy">
-      </div>
-      <div class="tags"><span class="tag">Noticias</span></div>
     </div>
 
     <div class="work-entry">
-      <div class="work-meta">
-        <div class="work-title">GUERRA DE LA BASURA, CBBA</div>
-        <div class="work-date">03/04/2025</div>
+      <button class="work-trigger" onclick="toggleWork(this)">
+        <span class="work-marker">›</span>
+        <span class="work-date-inline">03/04/2025</span>
+        <span class="work-sep">·</span>
+        <span class="work-title-inline">Guerra de la basura, Cbba</span>
+        <span class="work-fill"></span>
+        <span class="work-btn">[+]</span>
+      </button>
+      <div class="work-body">
+        <div class="work-meta-full">
+          <div class="work-title-full">GUERRA DE LA BASURA, CBBA</div>
+          <div class="work-date-full">03/04/2025</div>
+        </div>
+        <div class="work-gallery" data-layout="strip">
+          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774905968/Guerra-Basura_01_qsdgqo.jpg" alt="Imagen 1 de 2" loading="lazy">
+          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774905967/Guerra-Basura_02_eereii.jpg" alt="Imagen 2 de 2" loading="lazy">
+        </div>
+        <div class="tags"><span class="tag">Basura</span><span class="tag">Carrusel</span></div>
       </div>
-      <div class="work-gallery" data-layout="strip">
-        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774905968/Guerra-Basura_01_qsdgqo.jpg" alt="Imagen 1 de 2" loading="lazy">
-        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774905967/Guerra-Basura_02_eereii.jpg" alt="Imagen 2 de 2" loading="lazy">
-      </div>
-      <div class="tags"><span class="tag">Basura</span><span class="tag">Carrusel</span></div>
     </div>
 
     <div class="work-entry">
-      <div class="work-meta">
-        <div class="work-title">LAGUNA ALALAY, FAUNA</div>
-        <div class="work-date">03/04/2025</div>
+      <button class="work-trigger" onclick="toggleWork(this)">
+        <span class="work-marker">›</span>
+        <span class="work-date-inline">03/04/2025</span>
+        <span class="work-sep">·</span>
+        <span class="work-title-inline">Laguna Alalay, fauna</span>
+        <span class="work-fill"></span>
+        <span class="work-btn">[+]</span>
+      </button>
+      <div class="work-body">
+        <div class="work-meta-full">
+          <div class="work-title-full">LAGUNA ALALAY, FAUNA</div>
+          <div class="work-date-full">03/04/2025</div>
+        </div>
+        <div class="work-gallery" data-layout="strip">
+          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775052890/ALALAY-AVES_01_c53gez.jpg" alt="Imagen 1 de 4" loading="lazy">
+          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775052891/Alalay-Aves01_02_p7pbpi.jpg" alt="Imagen 2 de 4" loading="lazy">
+          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775052889/Alalay-Aves01_03_yrrydu.jpg" alt="Imagen 3 de 4" loading="lazy">
+          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775052891/Alalay-Aves01_04_rncnei.jpg" alt="Imagen 4 de 4" loading="lazy">
+        </div>
+        <div class="tags"><span class="tag">Fauna</span><span class="tag">Carrusel</span></div>
       </div>
-      <div class="work-gallery" data-layout="strip">
-        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775052890/ALALAY-AVES_01_c53gez.jpg" alt="Imagen 1 de 4" loading="lazy">
-        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775052891/Alalay-Aves01_02_p7pbpi.jpg" alt="Imagen 2 de 4" loading="lazy">
-        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775052889/Alalay-Aves01_03_yrrydu.jpg" alt="Imagen 3 de 4" loading="lazy">
-        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775052891/Alalay-Aves01_04_rncnei.jpg" alt="Imagen 4 de 4" loading="lazy">
-      </div>
-      <div class="tags"><span class="tag">Fauna</span><span class="tag">Carrusel</span></div>
     </div>
 
     <div class="work-entry">
-      <div class="work-meta">
-        <div class="work-title">CBBA, DÍA DEL PEATÓN CANCELADO</div>
-        <div class="work-date">04/04/2025</div>
+      <button class="work-trigger" onclick="toggleWork(this)">
+        <span class="work-marker">›</span>
+        <span class="work-date-inline">04/04/2025</span>
+        <span class="work-sep">·</span>
+        <span class="work-title-inline">Cbba, día del peatón cancelado</span>
+        <span class="work-fill"></span>
+        <span class="work-btn">[+]</span>
+      </button>
+      <div class="work-body">
+        <div class="work-meta-full">
+          <div class="work-title-full">CBBA, DÍA DEL PEATÓN CANCELADO</div>
+          <div class="work-date-full">04/04/2025</div>
+        </div>
+        <div class="work-gallery" data-layout="single">
+          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774906309/SuspendidoDi%CC%81aPeato%CC%81n03_m6vhou.jpg" alt="Día del peatón cancelado" loading="lazy">
+        </div>
+        <div class="tags"><span class="tag">Noticias</span></div>
       </div>
-      <div class="work-gallery" data-layout="single">
-        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774906309/SuspendidoDi%CC%81aPeato%CC%81n03_m6vhou.jpg" alt="Día del peatón cancelado" loading="lazy">
-      </div>
-      <div class="tags"><span class="tag">Noticias</span></div>
     </div>
 
     <div class="work-entry">
-      <div class="work-meta">
-        <div class="work-title">KENIA, ABEJAS PROTEGEN CULTIVOS</div>
-        <div class="work-date">08/05/2025</div>
+      <button class="work-trigger" onclick="toggleWork(this)">
+        <span class="work-marker">›</span>
+        <span class="work-date-inline">08/05/2025</span>
+        <span class="work-sep">·</span>
+        <span class="work-title-inline">Kenia, abejas protegen cultivos</span>
+        <span class="work-fill"></span>
+        <span class="work-btn">[+]</span>
+      </button>
+      <div class="work-body">
+        <div class="work-meta-full">
+          <div class="work-title-full">KENIA, ABEJAS PROTEGEN CULTIVOS</div>
+          <div class="work-date-full">08/05/2025</div>
+        </div>
+        <div class="work-gallery" data-layout="single">
+          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774906259/AbejasElefantes01_rdbsge.jpg" alt="Abejas Kenya" loading="lazy">
+        </div>
+        <div class="tags"><span class="tag">Noticias</span></div>
       </div>
-      <div class="work-gallery" data-layout="single">
-        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774906259/AbejasElefantes01_rdbsge.jpg" alt="Abejas Kenya" loading="lazy">
-      </div>
-      <div class="tags"><span class="tag">Noticias</span></div>
     </div>
 
     <div class="work-entry">
-      <div class="work-meta">
-        <div class="work-title">DESPUÉS DE 15 DÍAS, DÍA DEL PEATÓN</div>
-        <div class="work-date">14/05/2025</div>
+      <button class="work-trigger" onclick="toggleWork(this)">
+        <span class="work-marker">›</span>
+        <span class="work-date-inline">14/05/2025</span>
+        <span class="work-sep">·</span>
+        <span class="work-title-inline">Después de 15 días, día del peatón</span>
+        <span class="work-fill"></span>
+        <span class="work-btn">[+]</span>
+      </button>
+      <div class="work-body">
+        <div class="work-meta-full">
+          <div class="work-title-full">DESPUÉS DE 15 DÍAS, DÍA DEL PEATÓN</div>
+          <div class="work-date-full">14/05/2025</div>
+        </div>
+        <div class="work-gallery" data-layout="single">
+          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775056076/Di%CC%81aPeato%CC%81n18deMayo03_tia1z0.jpg" alt="Día del peatón" loading="lazy">
+        </div>
+        <div class="tags"><span class="tag">Noticias</span></div>
       </div>
-      <div class="work-gallery" data-layout="single">
-        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775056076/Di%CC%81aPeato%CC%81n18deMayo03_tia1z0.jpg" alt="Día del peatón" loading="lazy">
-      </div>
-      <div class="tags"><span class="tag">Noticias</span></div>
     </div>
 
     <div class="work-entry">
-      <div class="work-meta">
-        <div class="work-title">MARCHAS EN LA PAZ, RECLAMAN COMBUSTIBLE</div>
-        <div class="work-date">04/06/2025</div>
+      <button class="work-trigger" onclick="toggleWork(this)">
+        <span class="work-marker">›</span>
+        <span class="work-date-inline">04/06/2025</span>
+        <span class="work-sep">·</span>
+        <span class="work-title-inline">Marchas en La Paz, reclaman combustible</span>
+        <span class="work-fill"></span>
+        <span class="work-btn">[+]</span>
+      </button>
+      <div class="work-body">
+        <div class="work-meta-full">
+          <div class="work-title-full">MARCHAS EN LA PAZ, RECLAMAN COMBUSTIBLE</div>
+          <div class="work-date-full">04/06/2025</div>
+        </div>
+        <div class="work-gallery" data-layout="single">
+          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774906226/MasivaMovilizacio%CC%81n01_lhp2fg.jpg" alt="Marchas La Paz" loading="lazy">
+        </div>
+        <div class="tags"><span class="tag">Noticias</span></div>
       </div>
-      <div class="work-gallery" data-layout="single">
-        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774906226/MasivaMovilizacio%CC%81n01_lhp2fg.jpg" alt="Marchas La Paz" loading="lazy">
-      </div>
-      <div class="tags"><span class="tag">Noticias</span></div>
     </div>
 
     <div class="work-entry">
-      <div class="work-meta">
-        <div class="work-title">CONFLICTOS COBRAN VIDAS</div>
-        <div class="work-date">25/06/2025</div>
+      <button class="work-trigger" onclick="toggleWork(this)">
+        <span class="work-marker">›</span>
+        <span class="work-date-inline">25/06/2025</span>
+        <span class="work-sep">·</span>
+        <span class="work-title-inline">Conflictos cobran vidas</span>
+        <span class="work-fill"></span>
+        <span class="work-btn">[+]</span>
+      </button>
+      <div class="work-body">
+        <div class="work-meta-full">
+          <div class="work-title-full">CONFLICTOS COBRAN VIDAS</div>
+          <div class="work-date-full">25/06/2025</div>
+        </div>
+        <div class="work-gallery" data-layout="single">
+          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774906116/PresidenteAsesinatodePolici%CC%81as02_dm8jf0.jpg" alt="Conflictos" loading="lazy">
+        </div>
+        <div class="tags"><span class="tag">Noticias</span></div>
       </div>
-      <div class="work-gallery" data-layout="single">
-        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774906116/PresidenteAsesinatodePolici%CC%81as02_dm8jf0.jpg" alt="Conflictos" loading="lazy">
-      </div>
-      <div class="tags"><span class="tag">Noticias</span></div>
     </div>
 
     <div class="work-entry">
-      <div class="work-meta">
-        <div class="work-title">MASACRE DE LA CALLE HARRINGTON</div>
-        <div class="work-date">15/01/2026</div>
+      <button class="work-trigger" onclick="toggleWork(this)">
+        <span class="work-marker">›</span>
+        <span class="work-date-inline">15/01/2026</span>
+        <span class="work-sep">·</span>
+        <span class="work-title-inline">Masacre de la calle Harrington</span>
+        <span class="work-fill"></span>
+        <span class="work-btn">[+]</span>
+      </button>
+      <div class="work-body">
+        <div class="work-meta-full">
+          <div class="work-title-full">MASACRE DE LA CALLE HARRINGTON</div>
+          <div class="work-date-full">15/01/2026</div>
+        </div>
+        <div class="work-gallery" data-layout="strip">
+          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774905889/masacre-harrington_01_j7hqz5.jpg" alt="Imagen 1 de 3" loading="lazy">
+          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774905887/masacre-harrington_02_kp5fp2.jpg" alt="Imagen 2 de 3" loading="lazy">
+          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774905885/masacre-harrington_03_jaovaa.jpg" alt="Imagen 3 de 3" loading="lazy">
+        </div>
+        <div class="tags"><span class="tag">45 Años</span><span class="tag">Carrusel</span></div>
       </div>
-      <div class="work-gallery" data-layout="strip">
-        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774905889/masacre-harrington_01_j7hqz5.jpg" alt="Imagen 1 de 3" loading="lazy">
-        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774905887/masacre-harrington_02_kp5fp2.jpg" alt="Imagen 2 de 3" loading="lazy">
-        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774905885/masacre-harrington_03_jaovaa.jpg" alt="Imagen 3 de 3" loading="lazy">
-      </div>
-      <div class="tags"><span class="tag">45 Años</span><span class="tag">Carrusel</span></div>
     </div>
 
   </div><!-- /cat-periodismo -->
@@ -770,34 +1064,54 @@ img { max-width: 100%; height: auto; display: block; }
     </div>
 
     <div class="work-entry">
-      <div class="work-meta">
-        <div class="work-title">MANUAL DE MARCA GUIZA</div>
-        <div class="work-date">2023</div>
+      <button class="work-trigger" onclick="toggleWork(this)">
+        <span class="work-marker">›</span>
+        <span class="work-date-inline">2023</span>
+        <span class="work-sep">·</span>
+        <span class="work-title-inline">Manual de marca Guiza</span>
+        <span class="work-fill"></span>
+        <span class="work-btn">[+]</span>
+      </button>
+      <div class="work-body">
+        <div class="work-meta-full">
+          <div class="work-title-full">MANUAL DE MARCA GUIZA</div>
+          <div class="work-date-full">2023</div>
+        </div>
+        <div class="work-gallery" data-layout="4col">
+          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775597161/Manual_Oficial-Guiza_Mesa_de_trabajo_1_dpdwww.jpg" alt="Salon GUIZA - Primera página" loading="lazy">
+          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775597163/Manual_Oficial-Guiza-02_zlr2nk.jpg" alt="Tabla de contenidos" loading="lazy">
+          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775597159/Manual_Oficial-Guiza-04_mpruxc.jpg" alt="Misión y Visión" loading="lazy">
+          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775597182/Captura_de_pantalla_2026-04-07_a_la_s_5.19.22_p._m._ayssjg.png" alt="Componentes" loading="lazy">
+          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775597185/Captura_de_pantalla_2026-04-07_a_la_s_5.19.27_p._m._j6szzb.png" alt="Detalles 02" loading="lazy">
+          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775597181/Captura_de_pantalla_2026-04-07_a_la_s_5.19.35_p._m._s5wrey.png" alt="Construcción de marca" loading="lazy">
+          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775597179/Captura_de_pantalla_2026-04-07_a_la_s_5.19.39_p._m._tqkehj.png" alt="Composición de marca" loading="lazy">
+        </div>
+        <div class="tags"><span class="tag">Identidad</span><span class="tag">Branding</span><span class="tag">Salon de belleza masculino</span></div>
       </div>
-      <div class="work-gallery" data-layout="4col">
-        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775597161/Manual_Oficial-Guiza_Mesa_de_trabajo_1_dpdwww.jpg" alt="Salon GUIZA - Primera página" loading="lazy">
-        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775597163/Manual_Oficial-Guiza-02_zlr2nk.jpg" alt="Tabla de contenidos" loading="lazy">
-        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775597159/Manual_Oficial-Guiza-04_mpruxc.jpg" alt="Misión y Visión" loading="lazy">
-        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775597182/Captura_de_pantalla_2026-04-07_a_la_s_5.19.22_p._m._ayssjg.png" alt="Componentes" loading="lazy">
-        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775597185/Captura_de_pantalla_2026-04-07_a_la_s_5.19.27_p._m._j6szzb.png" alt="Detalles 02" loading="lazy">
-        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775597181/Captura_de_pantalla_2026-04-07_a_la_s_5.19.35_p._m._s5wrey.png" alt="Construcción de marca" loading="lazy">
-        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775597179/Captura_de_pantalla_2026-04-07_a_la_s_5.19.39_p._m._tqkehj.png" alt="Composición de marca" loading="lazy">
-      </div>
-      <div class="tags"><span class="tag">Identidad</span><span class="tag">Branding</span><span class="tag">Salon de belleza masculino</span></div>
     </div>
 
     <div class="work-entry">
-      <div class="work-meta">
-        <div class="work-title">"MMM LLAMA"</div>
-        <div class="work-date">2024</div>
+      <button class="work-trigger" onclick="toggleWork(this)">
+        <span class="work-marker">›</span>
+        <span class="work-date-inline">2024</span>
+        <span class="work-sep">·</span>
+        <span class="work-title-inline">"MMM LLAMA"</span>
+        <span class="work-fill"></span>
+        <span class="work-btn">[+]</span>
+      </button>
+      <div class="work-body">
+        <div class="work-meta-full">
+          <div class="work-title-full">"MMM LLAMA"</div>
+          <div class="work-date-full">2024</div>
+        </div>
+        <div class="work-gallery" data-layout="4col">
+          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775598494/Captura_de_pantalla_2026-04-07_a_la_s_5.46.04_p._m._hdbudq.png" alt="Conceptualización" loading="lazy">
+          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775598495/Captura_de_pantalla_2026-04-07_a_la_s_5.45.24_p._m._r7jfyq.png" alt="Señalización" loading="lazy">
+          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775598494/Captura_de_pantalla_2026-04-07_a_la_s_5.45.32_p._m._xjyvkn.png" alt="Señalización" loading="lazy">
+          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775598522/Menu%CC%81_LLAMA-02_hvxyvx.jpg" alt="Menú" loading="lazy">
+        </div>
+        <div class="tags"><span class="tag">Identidad</span><span class="tag">Branding</span><span class="tag">Restaurante</span></div>
       </div>
-      <div class="work-gallery" data-layout="4col">
-        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775598494/Captura_de_pantalla_2026-04-07_a_la_s_5.46.04_p._m._hdbudq.png" alt="Conceptualización" loading="lazy">
-        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775598495/Captura_de_pantalla_2026-04-07_a_la_s_5.45.24_p._m._r7jfyq.png" alt="Señalización" loading="lazy">
-        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775598494/Captura_de_pantalla_2026-04-07_a_la_s_5.45.32_p._m._xjyvkn.png" alt="Señalización" loading="lazy">
-        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775598522/Menu%CC%81_LLAMA-02_hvxyvx.jpg" alt="Menú" loading="lazy">
-      </div>
-      <div class="tags"><span class="tag">Identidad</span><span class="tag">Branding</span><span class="tag">Restaurante</span></div>
     </div>
   </div>
 
@@ -810,16 +1124,26 @@ img { max-width: 100%; height: auto; display: block; }
       <span class="sec-count">1 proyecto</span>
     </div>
     <div class="work-entry">
-      <div class="work-meta">
-        <div class="work-title">Calendario Empleados Opinión 2026</div>
-        <div class="work-date">2025</div>
+      <button class="work-trigger" onclick="toggleWork(this)">
+        <span class="work-marker">›</span>
+        <span class="work-date-inline">2025</span>
+        <span class="work-sep">·</span>
+        <span class="work-title-inline">Calendario Empleados Opinión 2026</span>
+        <span class="work-fill"></span>
+        <span class="work-btn">[+]</span>
+      </button>
+      <div class="work-body">
+        <div class="work-meta-full">
+          <div class="work-title-full">Calendario Empleados Opinión 2026</div>
+          <div class="work-date-full">2025</div>
+        </div>
+        <div class="work-gallery" data-layout="strip">
+          <img class="gimg" src="" alt="Calendario - portada" loading="lazy">
+          <img class="gimg" src="" alt="Calendario - interior" loading="lazy">
+          <img class="gimg" src="" alt="Calendario - detalle" loading="lazy">
+        </div>
+        <div class="tags"><span class="tag">Editorial</span><span class="tag">Calendario</span><span class="tag">Opinión</span></div>
       </div>
-      <div class="work-gallery" data-layout="strip">
-        <img class="gimg" src="" alt="Calendario - portada" loading="lazy">
-        <img class="gimg" src="" alt="Calendario - interior" loading="lazy">
-        <img class="gimg" src="" alt="Calendario - detalle" loading="lazy">
-      </div>
-      <div class="tags"><span class="tag">Editorial</span><span class="tag">Calendario</span><span class="tag">Opinión</span></div>
     </div>
   </div>
 
@@ -832,20 +1156,30 @@ img { max-width: 100%; height: auto; display: block; }
       <span class="sec-count">1 proyecto</span>
     </div>
     <div class="work-entry">
-      <div class="work-meta">
-        <div class="work-title">"Imposible" (ft. 300)</div>
-        <div class="work-date">2025</div>
+      <button class="work-trigger" onclick="toggleWork(this)">
+        <span class="work-marker">›</span>
+        <span class="work-date-inline">2025</span>
+        <span class="work-sep">·</span>
+        <span class="work-title-inline">"Imposible" (ft. 300)</span>
+        <span class="work-fill"></span>
+        <span class="work-btn">[+]</span>
+      </button>
+      <div class="work-body">
+        <div class="work-meta-full">
+          <div class="work-title-full">"Imposible" (ft. 300)</div>
+          <div class="work-date-full">2025</div>
+        </div>
+        <div class="work-gallery" data-layout="2col" style="margin-bottom:6px">
+          <img class="gimg" src="" alt="Imposible - vista general" loading="lazy">
+          <img class="gimg" src="" alt="Imposible - CANSADO" loading="lazy">
+        </div>
+        <div class="work-gallery" data-layout="3col">
+          <img class="gimg" src="" alt="Imposible - detalle 1" loading="lazy">
+          <img class="gimg" src="" alt="Imposible - detalle 2" loading="lazy">
+          <img class="gimg" src="" alt="Imposible - detalle 3" loading="lazy">
+        </div>
+        <div class="tags" style="margin-top:14px"><span class="tag">Instalación</span><span class="tag">Arte</span><span class="tag">Colaboración</span></div>
       </div>
-      <div class="work-gallery" data-layout="2col" style="margin-bottom:6px">
-        <img class="gimg" src="" alt="Imposible - vista general" loading="lazy">
-        <img class="gimg" src="" alt="Imposible - CANSADO" loading="lazy">
-      </div>
-      <div class="work-gallery" data-layout="3col">
-        <img class="gimg" src="" alt="Imposible - detalle 1" loading="lazy">
-        <img class="gimg" src="" alt="Imposible - detalle 2" loading="lazy">
-        <img class="gimg" src="" alt="Imposible - detalle 3" loading="lazy">
-      </div>
-      <div class="tags" style="margin-top:14px"><span class="tag">Instalación</span><span class="tag">Arte</span><span class="tag">Colaboración</span></div>
     </div>
   </div>
 
@@ -858,21 +1192,31 @@ img { max-width: 100%; height: auto; display: block; }
       <span class="sec-count">1 serie</span>
     </div>
     <div class="work-entry">
-      <div class="work-meta">
-        <div class="work-title">Serie de Posters ADRIP</div>
-        <div class="work-date">2022 → Presente</div>
+      <button class="work-trigger" onclick="toggleWork(this)">
+        <span class="work-marker">›</span>
+        <span class="work-date-inline">2022→</span>
+        <span class="work-sep">·</span>
+        <span class="work-title-inline">Serie de Posters ADRIP</span>
+        <span class="work-fill"></span>
+        <span class="work-btn">[+]</span>
+      </button>
+      <div class="work-body">
+        <div class="work-meta-full">
+          <div class="work-title-full">Serie de Posters ADRIP</div>
+          <div class="work-date-full">2022 → Presente</div>
+        </div>
+        <div class="work-gallery" data-layout="4col">
+          <img class="gimg" src="" alt="Poster 01" loading="lazy">
+          <img class="gimg" src="" alt="Poster 02" loading="lazy">
+          <img class="gimg" src="" alt="Poster 03" loading="lazy">
+          <img class="gimg" src="" alt="Poster 04" loading="lazy">
+          <img class="gimg" src="" alt="Poster 05" loading="lazy">
+          <img class="gimg" src="" alt="Poster 06" loading="lazy">
+          <img class="gimg" src="" alt="Poster 07" loading="lazy">
+          <img class="gimg" src="" alt="Poster 08" loading="lazy">
+        </div>
+        <div class="tags" style="margin-top:14px"><span class="tag">Poster</span><span class="tag">Diseño</span><span class="tag">Experimental</span></div>
       </div>
-      <div class="work-gallery" data-layout="4col">
-        <img class="gimg" src="" alt="Poster 01" loading="lazy">
-        <img class="gimg" src="" alt="Poster 02" loading="lazy">
-        <img class="gimg" src="" alt="Poster 03" loading="lazy">
-        <img class="gimg" src="" alt="Poster 04" loading="lazy">
-        <img class="gimg" src="" alt="Poster 05" loading="lazy">
-        <img class="gimg" src="" alt="Poster 06" loading="lazy">
-        <img class="gimg" src="" alt="Poster 07" loading="lazy">
-        <img class="gimg" src="" alt="Poster 08" loading="lazy">
-      </div>
-      <div class="tags" style="margin-top:14px"><span class="tag">Poster</span><span class="tag">Diseño</span><span class="tag">Experimental</span></div>
     </div>
   </div>
 
@@ -883,18 +1227,20 @@ img { max-width: 100%; height: auto; display: block; }
 
 </div><!-- /wrap -->
 
-<!-- LIGHTBOX -->
 <script>
-// ── TAB SWITCHING (shared between desktop tabs and mobile pills) ──
+// ── WORK TOGGLE ──
+function toggleWork(trigger) {
+  var body = trigger.nextElementSibling;
+  var btn  = trigger.querySelector('.work-btn');
+  var open = body.classList.toggle('open');
+  btn.textContent = open ? '[−]' : '[+]';
+}
+
+// ── TAB SWITCHING ──
 function switchCat(id, btn) {
-  // Deactivate all tabs/pills
   document.querySelectorAll('.cat-tab, .nav-pill').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.cat-section').forEach(s => s.classList.remove('active'));
-
-  // Activate matching section
   document.getElementById('cat-' + id).classList.add('active');
-
-  // Activate all buttons with the same cat id (desktop + mobile)
   document.querySelectorAll('[onclick*="' + id + '"]').forEach(t => t.classList.add('active'));
 }
 
@@ -940,7 +1286,6 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Escape') closeLightbox();
 });
 
-// Touch swipe
 let _tx = 0;
 lb.addEventListener('touchstart', e => { _tx = e.touches[0].clientX; }, { passive: true });
 lb.addEventListener('touchend', e => {
@@ -951,29 +1296,39 @@ lb.addEventListener('touchend', e => {
   }
 }, { passive: true });
 
-// ── INIT ──
-function init() {
-  document.querySelectorAll('.work-gallery').forEach(gallery => {
-    const layout = gallery.getAttribute('data-layout');
-    const allImgs = Array.from(gallery.querySelectorAll('.gimg'));
-    const realImgs = allImgs.filter(img => img.getAttribute('src') && img.getAttribute('src') !== '');
+// ── INIT: placeholders + lightbox bindings (only on expanded galleries) ──
+function initGallery(gallery) {
+  const layout  = gallery.getAttribute('data-layout');
+  const allImgs = Array.from(gallery.querySelectorAll('.gimg'));
+  const realImgs = allImgs.filter(img => img.src && img.src !== window.location.href);
 
-    allImgs.forEach(img => {
-      if (!img.getAttribute('src') || img.getAttribute('src') === '') {
-        const ph = document.createElement('div');
-        ph.className = layout === 'strip' ? 'gimg-placeholder-strip' : 'gimg-placeholder';
-        ph.innerHTML = '<span>sin imagen</span>';
-        img.replaceWith(ph);
-      }
-    });
+  allImgs.forEach(img => {
+    if (!img.src || img.src === window.location.href || img.getAttribute('src') === '') {
+      const ph = document.createElement('div');
+      ph.className = layout === 'strip' ? 'gimg-placeholder-strip' : 'gimg-placeholder';
+      ph.innerHTML = '<span>sin imagen</span>';
+      img.replaceWith(ph);
+    }
+  });
 
-    realImgs.forEach((img, i) => {
-      img.style.cursor = 'zoom-in';
-      img.addEventListener('click', () => openLightbox(realImgs, i));
-    });
+  realImgs.forEach((img, i) => {
+    img.style.cursor = 'zoom-in';
+    img.addEventListener('click', () => openLightbox(realImgs, i));
   });
 }
-init();
+
+// Init galleries lazily when work-body opens
+document.querySelectorAll('.work-trigger').forEach(trigger => {
+  trigger.addEventListener('click', function() {
+    const body = this.nextElementSibling;
+    if (body.classList.contains('open')) {
+      body.querySelectorAll('.work-gallery:not([data-init])').forEach(g => {
+        g.setAttribute('data-init', '1');
+        initGallery(g);
+      });
+    }
+  });
+});
 </script>
 </body>
 </html>
