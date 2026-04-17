@@ -5,143 +5,158 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Portafolio de Adriano Lenaz Zenteno — ADRIP Disruptive Media">
 <title>ADRIANO LENAZ — PORTAFOLIO</title>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,700;1,300&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #0e0e0c;
+  --bg: #0f0f0d;
   --paper: #141412;
-  --surface: #1c1c19;
-  --border: #2e2e28;
-  --border-bright: #4a4a42;
-  --ink: #e8e6de;
-  --ink-mid: #9a9890;
-  --ink-dim: #52524c;
+  --surface: #1a1a17;
+  --border: #252520;
+  --border-bright: #3e3e38;
+  --ink: #e2e0d8;
+  --ink-mid: #8a8880;
+  --ink-dim: #4a4a45;
   --accent: #48bed3;
   --accent2: #f06040;
-  --tag-bg: #1e1e1a;
+  --tag-bg: #1a1a17;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; font-size: 16px; }
 body {
   background: var(--bg);
   color: var(--ink);
   font-family: 'IBM Plex Mono', monospace;
   min-height: 100vh;
-  cursor: crosshair;
 }
-body::before {
-  content: '';
-  position: fixed; inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-  pointer-events: none; z-index: 1000; opacity: 0.4;
-}
-body::after {
-  content: '';
-  position: fixed; inset: 0;
-  background-image:
-    linear-gradient(var(--border) 1px, transparent 1px),
-    linear-gradient(90deg, var(--border) 1px, transparent 1px);
-  background-size: 40px 40px;
-  opacity: 0.3; pointer-events: none; z-index: 0;
-}
+img { max-width: 100%; height: auto; display: block; }
+
+/* ── LAYOUT ── */
 .wrap {
-  max-width: 900px;
+  max-width: 860px;
   margin: 0 auto;
-  padding: 0 24px 80px;
-  position: relative; z-index: 1;
+  padding: 0 20px 80px;
 }
 
-/* TOPBAR */
+/* ── TOPBAR ── */
 .topbar {
   border-bottom: 1px solid var(--border);
-  padding: 14px 0;
+  padding: 12px 0;
   display: flex; justify-content: space-between; align-items: center;
-  font-size: 10px; letter-spacing: 0.2em; color: var(--ink-dim);
+  font-size: 10px; letter-spacing: 0.18em; color: var(--ink-dim);
   text-transform: uppercase;
-  position: sticky; top: 0; background: var(--bg); z-index: 100;
+  position: sticky; top: 0; background: var(--bg); z-index: 200;
 }
 .topbar a { color: var(--ink-dim); text-decoration: none; transition: color 0.15s; }
 .topbar a:hover { color: var(--accent); }
 
-/* DOC HEADER */
+/* ── HEADER ── */
 .doc-header {
   border: 1px solid var(--border); border-top: none;
-  padding: 48px 40px 40px;
-  position: relative; overflow: hidden;
-}
-.doc-header::before {
-  content: 'PORT';
-  position: absolute; right: -20px; top: 50%;
-  transform: translateY(-50%) rotate(90deg);
-  font-size: 120px; font-weight: 700; color: var(--border);
-  letter-spacing: -0.05em; pointer-events: none; line-height: 1;
+  padding: 40px 32px 36px;
 }
 .doc-label {
-  font-size: 9px; letter-spacing: 0.35em; color: var(--ink-dim);
-  text-transform: uppercase; margin-bottom: 20px;
-  display: flex; align-items: center; gap: 12px;
+  font-size: 9px; letter-spacing: 0.32em; color: var(--ink-dim);
+  text-transform: uppercase; margin-bottom: 18px;
+  display: flex; align-items: center; gap: 10px;
 }
 .doc-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-.doc-number { color: var(--accent); font-size: 10px; letter-spacing: 0.2em; }
+.doc-number { color: var(--accent); font-size: 10px; letter-spacing: 0.15em; }
 .hero-name {
-  font-size: clamp(32px, 6vw, 56px); font-weight: 700;
-  letter-spacing: -0.03em; line-height: 0.95; margin-bottom: 6px;
+  font-size: clamp(28px, 6vw, 52px); font-weight: 700;
+  letter-spacing: -0.03em; line-height: 0.95; margin-bottom: 8px;
 }
 .hero-name span { color: var(--accent); }
 .hero-title {
-  font-size: 13px; color: var(--ink-mid); letter-spacing: 0.12em;
+  font-size: 12px; color: var(--ink-mid); letter-spacing: 0.1em;
   text-transform: uppercase; font-style: italic;
 }
 
-/* MAIN TABS */
+/* ── NAVIGATION TABS (desktop) ── */
 .cat-tabs {
   display: flex;
   border: 1px solid var(--border); border-top: none; border-bottom: none;
-  flex-wrap: wrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
 }
+.cat-tabs::-webkit-scrollbar { display: none; }
 .cat-tab {
-  flex: 1; padding: 14px 12px;
-  font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+  flex: 1; padding: 13px 10px;
+  font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
   color: var(--ink-dim); cursor: pointer;
   border-right: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
   border-top: none; border-left: none;
   background: transparent; font-family: 'IBM Plex Mono', monospace;
-  transition: all 0.15s; white-space: nowrap; min-width: 100px;
+  transition: all 0.15s; white-space: nowrap; min-width: 80px;
 }
 .cat-tab:last-child { border-right: none; }
 .cat-tab:hover { background: var(--surface); color: var(--ink); }
-.cat-tab.active { background: var(--surface); color: var(--accent); border-bottom-color: var(--surface); }
+.cat-tab.active {
+  background: var(--surface); color: var(--accent);
+  border-bottom-color: var(--surface);
+  position: relative;
+}
+.cat-tab.active::after {
+  content: '';
+  position: absolute; bottom: -1px; left: 0; right: 0;
+  height: 2px; background: var(--accent);
+}
 
-/* CAT SECTIONS */
+/* Mobile: pill navigation below header */
+.nav-pills {
+  display: none;
+  gap: 8px;
+  padding: 16px 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  border-bottom: 1px solid var(--border);
+}
+.nav-pills::-webkit-scrollbar { display: none; }
+.nav-pill {
+  flex-shrink: 0;
+  padding: 8px 16px;
+  font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--ink-dim); cursor: pointer;
+  border: 1px solid var(--border);
+  background: transparent; font-family: 'IBM Plex Mono', monospace;
+  border-radius: 2px;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.nav-pill:hover { background: var(--surface); color: var(--ink); border-color: var(--border-bright); }
+.nav-pill.active { background: var(--surface); color: var(--accent); border-color: var(--accent); }
+
+/* ── SECTIONS ── */
 .cat-section { display: none; border: 1px solid var(--border); border-top: none; }
-.cat-section.active { display: block; animation: fadeIn 0.3s ease; }
-@keyframes fadeIn { from{opacity:0;transform:translateY(4px)} to{opacity:1;transform:translateY(0)} }
+.cat-section.active { display: block; animation: fadeIn 0.25s ease; }
+@keyframes fadeIn { from{opacity:0;transform:translateY(3px)} to{opacity:1;transform:translateY(0)} }
 
 .sec-header {
-  padding: 20px 40px;
+  padding: 18px 32px;
   border-bottom: 1px solid var(--border);
   display: flex; justify-content: space-between; align-items: center;
 }
-.sec-title { font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--ink-dim); }
-.sec-count { font-size: 10px; color: var(--accent); letter-spacing: 0.1em; }
+.sec-title { font-size: 9px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--ink-dim); }
+.sec-count { font-size: 10px; color: var(--accent); letter-spacing: 0.08em; }
 
-/* SUBGROUP */
+/* ── SUBGROUP ── */
 .subgroup { border-bottom: 1px solid var(--border); }
 .subgroup:last-child { border-bottom: none; }
 .subgroup-header {
-  padding: 16px 40px;
+  padding: 14px 32px;
   border-bottom: 1px solid var(--border);
-  display: flex; align-items: center; gap: 16px;
+  display: flex; align-items: center; gap: 14px;
   background: var(--surface);
 }
-.subgroup-title { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--ink-mid); }
-.subgroup-count { font-size: 9px; color: var(--ink-dim); letter-spacing: 0.1em; }
+.subgroup-title { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-mid); }
+.subgroup-count { font-size: 9px; color: var(--ink-dim); }
 .subgroup-line { flex: 1; height: 1px; background: var(--border); }
 
-/* WORK ENTRY */
+/* ── WORK ENTRY ── */
 .work-entry {
-  padding: 28px 40px;
+  padding: 24px 32px;
   border-bottom: 1px solid var(--border);
 }
 .work-entry:last-child { border-bottom: none; }
@@ -149,41 +164,41 @@ body::after {
   display: flex; justify-content: space-between; align-items: flex-start;
   margin-bottom: 14px; gap: 16px;
 }
-.work-title { font-size: 13px; font-weight: 500; letter-spacing: -0.01em; line-height: 1.3; }
-.work-date { font-size: 9px; color: var(--ink-dim); letter-spacing: 0.15em; white-space: nowrap; padding-top: 2px; }
+.work-title { font-size: 13px; font-weight: 500; letter-spacing: -0.01em; line-height: 1.35; }
+.work-date { font-size: 9px; color: var(--ink-dim); letter-spacing: 0.12em; white-space: nowrap; padding-top: 2px; flex-shrink: 0; }
 
-/* ══════════════════════════════════════
-   IMAGE LAYOUTS — controla con data-layout
-   "single"  → 1 imagen grande
-   "2col"    → 2 columnas
-   "3col"    → 3 columnas (verticales)
-   "4col"    → 4 columnas
-   "strip"   → fila horizontal scrolleable (carrusel)
-   ══════════════════════════════════════ */
-.work-gallery { margin-bottom: 16px; }
+/* ── GALLERY LAYOUTS ── */
+.work-gallery { margin-bottom: 14px; }
 
-.work-gallery[data-layout="single"] { display: block; }
-.work-gallery[data-layout="single"] .gimg { max-height: 520px; width: auto; max-width: 100%; aspect-ratio: unset; object-fit: unset; }
+.work-gallery[data-layout="single"] .gimg {
+  max-height: 500px; width: auto; max-width: 100%;
+  aspect-ratio: unset; object-fit: unset;
+}
 
-.work-gallery[data-layout="2col"] { display: grid; grid-template-columns: repeat(2,1fr); gap: 8px; }
-.work-gallery[data-layout="3col"] { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; }
-.work-gallery[data-layout="4col"] { display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; }
+.work-gallery[data-layout="2col"] { display: grid; grid-template-columns: repeat(2,1fr); gap: 6px; }
+.work-gallery[data-layout="3col"] { display: grid; grid-template-columns: repeat(3,1fr); gap: 6px; }
+.work-gallery[data-layout="4col"] { display: grid; grid-template-columns: repeat(4,1fr); gap: 6px; }
+
+.work-gallery[data-layout="2col"] .gimg,
+.work-gallery[data-layout="3col"] .gimg,
+.work-gallery[data-layout="4col"] .gimg {
+  aspect-ratio: 3/4; object-fit: cover; width: 100%; height: auto;
+}
 
 .work-gallery[data-layout="strip"] {
-  display: flex; gap: 8px;
+  display: flex; gap: 6px;
   overflow-x: auto; padding-bottom: 8px;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
 }
-.work-gallery[data-layout="strip"]::-webkit-scrollbar { height: 3px; }
+.work-gallery[data-layout="strip"]::-webkit-scrollbar { height: 2px; }
 .work-gallery[data-layout="strip"]::-webkit-scrollbar-track { background: var(--surface); }
 .work-gallery[data-layout="strip"]::-webkit-scrollbar-thumb { background: var(--border-bright); }
 .work-gallery[data-layout="strip"] .gimg {
-  flex-shrink: 0; width: auto; max-height: 360px;
+  flex-shrink: 0; width: auto; max-height: 340px;
   aspect-ratio: unset; object-fit: unset; scroll-snap-align: start;
 }
 
-/* Base image */
 .gimg {
   display: block; width: 100%; height: auto;
   border: 1px solid var(--border); background: var(--surface);
@@ -191,14 +206,7 @@ body::after {
   transition: opacity 0.2s, border-color 0.2s;
   object-fit: cover;
 }
-.gimg:hover { opacity: 0.85; border-color: var(--border-bright); }
-
-/* Grid images: uniform aspect ratio */
-.work-gallery[data-layout="2col"] .gimg,
-.work-gallery[data-layout="3col"] .gimg,
-.work-gallery[data-layout="4col"] .gimg {
-  aspect-ratio: 3/4; object-fit: cover; width: 100%; height: auto;
-}
+.gimg:hover { opacity: 0.88; border-color: var(--border-bright); }
 
 /* Placeholder */
 .gimg-placeholder {
@@ -208,38 +216,39 @@ body::after {
   color: var(--ink-dim); font-size: 8px; letter-spacing: 0.2em;
   text-transform: uppercase; aspect-ratio: 3/4; cursor: default;
 }
-.gimg-placeholder::before { content: '+'; font-size: 20px; color: var(--border-bright); }
-
+.gimg-placeholder::before { content: '+'; font-size: 18px; color: var(--border-bright); }
 .gimg-placeholder-strip {
   display: flex; flex-direction: column;
   align-items: center; justify-content: center; gap: 6px;
   border: 1px dashed var(--border-bright); background: var(--surface);
   color: var(--ink-dim); font-size: 8px; letter-spacing: 0.2em;
-  text-transform: uppercase; width: 200px; height: 360px; flex-shrink: 0; cursor: default;
+  text-transform: uppercase; width: 180px; height: 320px; flex-shrink: 0; cursor: default;
 }
-.gimg-placeholder-strip::before { content: '+'; font-size: 20px; color: var(--border-bright); }
+.gimg-placeholder-strip::before { content: '+'; font-size: 18px; color: var(--border-bright); }
 
-/* Tags */
-.tags { display: flex; flex-wrap: wrap; gap: 6px; }
-.tag { font-size: 8px; letter-spacing: 0.18em; text-transform: uppercase; padding: 3px 9px; background: var(--tag-bg); border: 1px solid var(--border); color: var(--ink-dim); }
+/* ── TAGS ── */
+.tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 2px; }
+.tag {
+  font-size: 8px; letter-spacing: 0.15em; text-transform: uppercase;
+  padding: 3px 8px; background: var(--tag-bg);
+  border: 1px solid var(--border); color: var(--ink-dim);
+}
 
-/* ══════════════════════════════════════
-   LIGHTBOX
-   ══════════════════════════════════════ */
+/* ── LIGHTBOX ── */
 .lightbox {
   display: none; position: fixed; inset: 0; z-index: 9999;
-  background: rgba(10,10,8,0.97);
+  background: rgba(8,8,6,0.97);
   align-items: center; justify-content: center;
 }
 .lightbox.open { display: flex; }
 .lb-inner {
   position: relative; max-width: 92vw; max-height: 92vh;
-  display: flex; align-items: center; gap: 14px;
+  display: flex; align-items: center; gap: 12px;
 }
-.lb-img { max-width: 78vw; max-height: 86vh; object-fit: contain; border: 1px solid var(--border-bright); display: block; }
+.lb-img { max-width: 80vw; max-height: 86vh; object-fit: contain; border: 1px solid var(--border-bright); display: block; }
 .lb-btn {
   background: var(--surface); border: 1px solid var(--border-bright);
-  color: var(--ink); font-size: 20px; width: 44px; height: 44px;
+  color: var(--ink); font-size: 18px; width: 42px; height: 42px;
   cursor: pointer; font-family: 'IBM Plex Mono', monospace;
   flex-shrink: 0; transition: background 0.15s, color 0.15s;
   display: flex; align-items: center; justify-content: center;
@@ -247,8 +256,8 @@ body::after {
 .lb-btn:hover { background: var(--border-bright); color: var(--accent); }
 .lb-btn:disabled { opacity: 0.15; cursor: default; }
 .lb-top {
-  position: absolute; top: -40px; right: 0;
-  display: flex; gap: 12px; align-items: center;
+  position: absolute; top: -38px; right: 0;
+  display: flex; gap: 10px; align-items: center;
 }
 .lb-close {
   background: transparent; border: 1px solid var(--border-bright);
@@ -260,32 +269,55 @@ body::after {
 .lb-close:hover { color: var(--accent2); border-color: var(--accent2); }
 .lb-counter { font-size: 9px; color: var(--ink-dim); letter-spacing: 0.2em; }
 .lb-caption {
-  position: absolute; bottom: -28px; left: 0; right: 0;
+  position: absolute; bottom: -26px; left: 0; right: 0;
   font-size: 9px; color: var(--ink-dim); text-align: center;
   font-family: 'IBM Plex Sans', sans-serif; letter-spacing: 0.05em;
 }
 
-/* FOOTER */
+/* ── FOOTER ── */
 .doc-footer {
   border: 1px solid var(--border); border-top: none;
-  padding: 20px 40px;
+  padding: 18px 32px;
   display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 6px;
 }
-.footer-sig { font-size: 10px; color: var(--ink-dim); letter-spacing: 0.1em; }
-.footer-cc { font-size: 9px; color: var(--ink-dim); letter-spacing: 0.08em; }
+.footer-sig { font-size: 10px; color: var(--ink-dim); letter-spacing: 0.08em; }
+.footer-cc { font-size: 9px; color: var(--ink-dim); letter-spacing: 0.06em; }
 
-/* RESPONSIVE */
-@media (max-width: 620px) {
-  .doc-header { padding: 32px 24px 28px; }
-  .work-entry, .subgroup-header, .sec-header { padding-left: 24px; padding-right: 24px; }
-  .doc-footer { padding: 16px 24px; flex-direction: column; gap: 4px; }
-  .work-gallery[data-layout="3col"], .work-gallery[data-layout="4col"] { grid-template-columns: repeat(2,1fr); }
-  .cat-tab { font-size: 7px; padding: 12px 8px; min-width: 0; flex: 1 1 auto; }
-  .work-meta { flex-direction: column; gap: 4px; }
+/* ── RESPONSIVE ── */
+@media (max-width: 640px) {
+  .wrap { padding: 0 14px 60px; }
+
+  /* Hide tab bar, show pills */
+  .cat-tabs { display: none; }
+  .nav-pills { display: flex; }
+
+  .doc-header { padding: 28px 20px 24px; }
+  .sec-header,
+  .work-entry,
+  .subgroup-header { padding-left: 20px; padding-right: 20px; }
+  .doc-footer { padding: 14px 20px; }
+
+  /* Stack work meta */
+  .work-meta { flex-direction: column; gap: 3px; }
   .work-date { padding-top: 0; }
-  .lb-img { max-width: 94vw; max-height: 78vh; }
-  .lb-inner { gap: 6px; }
-  .lb-btn { width: 44px; height: 44px; font-size: 18px; }
+
+  /* Simpler grids on mobile */
+  .work-gallery[data-layout="3col"],
+  .work-gallery[data-layout="4col"] {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Strip images slightly smaller */
+  .work-gallery[data-layout="strip"] .gimg { max-height: 260px; }
+
+  /* Single images full-width on mobile */
+  .work-gallery[data-layout="single"] .gimg { max-height: 400px; width: 100%; }
+
+  /* Lightbox adjustments */
+  .lb-img { max-width: 94vw; max-height: 76vh; }
+  .lb-inner { gap: 4px; }
+  .lb-btn { width: 38px; height: 38px; font-size: 16px; }
 }
 </style>
 </head>
@@ -310,7 +342,7 @@ body::after {
 <div class="wrap">
 
   <div class="topbar">
-    <a href="index.html">← VOLVER / DOC-001</a>
+    <a href="index.html">← DOC-001</a>
     <span>DOC-PORT · ADRIP</span>
   </div>
 
@@ -323,6 +355,7 @@ body::after {
     <div class="hero-title">Selección de proyectos · Adriano Lenaz Zenteno</div>
   </div>
 
+  <!-- Desktop tabs -->
   <div class="cat-tabs">
     <button class="cat-tab active" onclick="switchCat('periodismo', this)">01 · Periodismo Gráf.</button>
     <button class="cat-tab" onclick="switchCat('branding', this)">02 · Branding</button>
@@ -331,8 +364,17 @@ body::after {
     <button class="cat-tab" onclick="switchCat('posters', this)">05 · Posters</button>
   </div>
 
+  <!-- Mobile pills -->
+  <div class="nav-pills">
+    <button class="nav-pill active" onclick="switchCat('periodismo', this)">01 · Periodismo</button>
+    <button class="nav-pill" onclick="switchCat('branding', this)">02 · Branding</button>
+    <button class="nav-pill" onclick="switchCat('editorial', this)">03 · Editorial</button>
+    <button class="nav-pill" onclick="switchCat('instalacion', this)">04 · Instalación</button>
+    <button class="nav-pill" onclick="switchCat('posters', this)">05 · Posters</button>
+  </div>
+
   <!-- ════════════════════════════════════════════
-       01 · PERIODISMO GRÁFICO — OPINIÓN
+       01 · PERIODISMO GRÁFICO
        ════════════════════════════════════════════ -->
   <div class="cat-section active" id="cat-periodismo">
     <div class="sec-header">
@@ -340,405 +382,380 @@ body::after {
       <span class="sec-count">28+ piezas</span>
     </div>
 
-    <!-- ────────────────────────────────
-    HOW TO ADD YOUR IMAGES:
-    1. Copy URL from Cloudinary (Media Library → image → Copy URL)
-    2. Paste it into src="" of the <img> tag
-    3. Change alt="" to describe the piece
-    4. Choose your layout with data-layout:
-       "single" → 1 image alone
-       "2col"   → 2 columns side by side
-       "3col"   → 3 columns grid (vertical images)
-       "4col"   → 4 columns grid
-       "strip"  → horizontal scrollable row (carousel)
-    5. Add or remove <img> tags as needed
-    6. Update subgroup-count with the real number
-    ──────────────────────────────────── -->
-
-    <!-- ── SUBGRUPO: AMBIENTAL ── -->
+    <!-- ── SUBGRUPO: NOTICIAS ── -->
     <div class="subgroup">
       <div class="subgroup-header">
         <span class="subgroup-title">Noticias</span>
         <span class="subgroup-count">— 0 registros</span>
         <span class="subgroup-line"></span>
       </div>
-
-      <!-- Trabajo individual (1 imagen) -->
-
-<div class="work-entry">
-        <div class="work-meta">
-          <div class="work-title">Vaticano y P++++++</div>
-          <div class="work-date">24/07/2024</div>
-        </div>
-        <div class="work-gallery" data-layout="single">
-          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774906357/Vaticano_iqc3t6.jpg" alt="Descripción" loading="lazy">
-        </div>
-        <div class="tags"><span class="tag">Noticias</span></div>
-      </div>
-
-      <div class="work-entry">
-        <div class="work-meta">
-          <div class="work-title">CRISIS DE COMBUSTIBLE, COCHABAMBA BLOQUEADA</div>
-          <div class="work-date">31/07/2024</div>
-        </div>
-        <div class="work-gallery" data-layout="single">
-          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774906356/Llajta_Bloqueada_tkdgyb.jpg" alt="Descripción" loading="lazy">
-        </div>
-        <div class="tags"><span class="tag">Noticias</span></div>
-      </div>
-
-      <div class="work-entry">
-        <div class="work-meta">
-          <div class="work-title">ESTRENO, ALIEN ROMMULUS</div>
-          <div class="work-date">15/08/2024</div>
-        </div>
-        <div class="work-gallery" data-layout="single">
-          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774916612/Alien02_qg9yib.jpg" alt="Descripción" loading="lazy">
-        </div>
-        <div class="tags"><span class="tag">Noticias</span></div>
-      </div>
-
-       <div class="work-entry">
-        <div class="work-meta">
-          <div class="work-title">AMOR POR INTERNET</div>
-          <div class="work-date">19/08/2024</div>
-        </div>
-        <div class="work-gallery" data-layout="single">
-          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774964410/internet02_w9rkx7.jpg" alt="Descripción" loading="lazy">
-        </div>
-        <div class="tags"><span class="tag">Noticias</span></div>
-      </div>
-     
-      <div class="work-entry">
-        <div class="work-meta">
-          <div class="work-title">SE DEBATE EL PRECIO DEL PASAJE</div>
-          <div class="work-date">22/08/2024</div>
-        </div>
-        <div class="work-gallery" data-layout="single">
-          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774964433/ChoferesPiden01_afbxwz.jpg" alt="Descripción" loading="lazy">
-        </div>
-        <div class="tags"><span class="tag">Noticias</span></div>
-      </div>
-
-      <div class="work-entry">
-        <div class="work-meta">
-          <div class="work-title">¿DIESEL DE MATERIAL RECICLADO?</div>
-          <div class="work-date">30/08/2024</div>
-        </div>
-        <div class="work-gallery" data-layout="single">
-          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774964926/Diesel_reciclado_bwslbv.jpg" alt="Descripción" loading="lazy">
-        </div>
-        <div class="tags"><span class="tag">Noticias</span></div>
-      </div>
-
-      <div class="work-entry">
-        <div class="work-meta">
-          <div class="work-title">INCENDIOS EN EL ORIENTE BOLIVIANO</div>
-          <div class="work-date">03/09/2024</div>
-        </div>
-        <div class="work-gallery" data-layout="strip">
-          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774964970/Incendios01_xyu7dt.jpg" alt="Imagen 1" loading="lazy">
-          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774964973/Incendios02_vamujz.jpg" alt="Imagen 2" loading="lazy">
-          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774964971/Incendios03_d61nba.jpg" alt="Imagen 3" loading="lazy">
-          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774964971/Incendios04_ezdfry.jpg" alt="Imagen 4" loading="lazy">
-          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774964970/Incendios05_q5ffkl.jpg" alt="Imagen 5" loading="lazy">
-          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774964969/Incendios06-2.0_h9uvm9.jpg" alt="Imagen 6" loading="lazy">
-
-        </div>
-        <div class="tags"><span class="tag">INCENDIOS EN LA AMAZONÍA</span><span class="tag">Carrusel</span></div>
-      </div>
-      
-        <div class="work-entry">
-        <div class="work-meta">
-          <div class="work-title">¿ALPHAVILLE, EN ORURO?</div>
-          <div class="work-date">05/09/2024</div>
-        </div>
-        <div class="work-gallery" data-layout="single">
-          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774916521/Alphaville02_gcllkg.jpg" alt="Descripción" loading="lazy">
-        </div>
-        <div class="tags"><span class="tag">Noticias</span></div>
-      </div>
-
-      <div class="work-entry">
-        <div class="work-meta">
-          <div class="work-title">BOLIVIA ACUSADA POR ISRAEL</div>
-          <div class="work-date">23/10/2024</div>
-        </div>
-        <div class="work-gallery" data-layout="single">
-          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774964996/Israelacusa01_qrpkve.jpg" alt="Descripción" loading="lazy">
-        </div>
-        <div class="tags"><span class="tag">Noticias</span></div>
-      </div>
-
-      <div class="work-entry">
-        <div class="work-meta">
-          <div class="work-title">BLOQUEOS EVISTAS, DÍA 10</div>
-          <div class="work-date">23/10/2024</div>
-        </div>
-        <div class="work-gallery" data-layout="single">
-          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774964995/Bloquos10dias_zcnh6k.jpg" alt="Descripción" loading="lazy">
-        </div>
-        <div class="tags"><span class="tag">Noticias</span></div>
-      </div>
-
-       <div class="work-entry">
-        <div class="work-meta">
-          <div class="work-title">EXGUERRILLERO CHILENO EN BOLIVIA</div>
-          <div class="work-date">07/01/2025</div>
-        </div>
-        <div class="work-gallery" data-layout="single">
-          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775010111/exguerrillero_1_eoyiw4.jpg" alt="Descripción" loading="lazy">
-        </div>
-        <div class="tags"><span class="tag">Noticias</span></div>
-      </div>
-
-       <div class="work-entry">
-        <div class="work-meta">
-          <div class="work-title">EL PASAJE DEL TRUFI SUBE</div>
-          <div class="work-date">08/01/2025</div>
-        </div>
-        <div class="work-gallery" data-layout="single">
-          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774965035/Pasaje-_2_yzdjk0.jpg" alt="Descripción" loading="lazy">
-        </div>
-        <div class="tags"><span class="tag">Noticias</span></div>
-      </div>
-
-            <div class="work-entry">
-        <div class="work-meta">
-          <div class="work-title">INCENDIOS EN HOLLYWOOD</div>
-          <div class="work-date">11/02/2025</div>
-        </div>
-        <div class="work-gallery" data-layout="single">
-          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775052549/Hollywood-_2_kfdla3.jpg" alt="Descripción" loading="lazy">
-        </div>
-        <div class="tags"><span class="tag">Noticias</span></div>
-      </div>
-      
-      <div class="work-entry">
-        <div class="work-meta">
-          <div class="work-title">LIBERACIÓN DE AUSCHWITZ</div>
-          <div class="work-date">27/01/2025</div>
-        </div>
-        <div class="work-gallery" data-layout="strip">
-          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774916468/Ausch01_tjkzkv.jpg" alt="Imagen 1" loading="lazy">
-          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774916469/Ausch02_f8y27d.jpg" alt="Imagen 2" loading="lazy">
-          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774916479/Ausch03_cg91ph.jpg" alt="Imagen 3" loading="lazy">
-          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774916477/Ausch04_ib8jg4.jpg" alt="Imagen 4" loading="lazy">
-          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774916474/Ausch05_awsxsh.jpg" alt="Imagen 5" loading="lazy">
-          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774916472/Ausch06_ytlebt.jpg" alt="Imagen 6" loading="lazy">
-
-        </div>
-        <div class="tags"><span class="tag">80+ AÑOS</span><span class="tag">Carrusel</span></div>
-      </div>
-
-      <div class="work-entry">
-        <div class="work-meta">
-          <div class="work-title">ACCIDENTE AEREO EN WASHIGTON</div>
-          <div class="work-date">30/01/2025</div>
-        </div>
-        <div class="work-gallery" data-layout="strip">
-          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775052079/ChoqueAereo01_l30l4a.jpg" alt="Imagen 1" loading="lazy">
-          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775052079/ChoqueAereo02_mrcpes.jpg" alt="Imagen 2" loading="lazy">
-          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775052079/ChoqueAereo03_rfxbdo.jpg" alt="Imagen 3" loading="lazy">
-          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775052079/ChoqueAereo04_yfo9b2.jpg" alt="Imagen 4" loading="lazy">
-    
-        </div>
-        <div class="tags"><span class="tag">ACCIDENTE</span><span class="tag">Carrusel</span></div>
-      </div>
-      
-       <div class="work-entry">
-        <div class="work-meta">
-          <div class="work-title">G***** CONTRA EL CONTRABANDO</div>
-          <div class="work-date">04/02/2025</div>
-        </div>
-        <div class="work-gallery" data-layout="strip">
-          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774906437/Contrabando01_b3atf3.jpg" alt="Imagen 1" loading="lazy">
-          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774906439/Contrabando02_qfqejb.jpg" alt="Imagen 2" loading="lazy">
-          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774906436/Contrabando03_01_aipinx.jpg" alt="Imagen 3" loading="lazy">
-          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774906435/Contrabando03_02_i4nmkx.jpg" alt="Imagen 4" loading="lazy">
-          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774906440/Contrabando04_ckuvr6.jpg" alt="Imagen 5" loading="lazy">
-          
-        </div>
-        <div class="tags"><span class="tag">CONTRABANDO</span><span class="tag">Carrusel</span></div>
-      </div>
-
-        <div class="work-entry">
-        <div class="work-meta">
-          <div class="work-title">PUNK, NO ESTÁ MUERTO</div>
-          <div class="work-date">10/02/2025</div>
-        </div>
-        <div class="work-gallery" data-layout="single">
-          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775053486/Misfits01_z4uts6.jpg" alt="Descripción" loading="lazy">
-        </div>
-        <div class="tags"><span class="tag">Noticias</span></div>
-      </div>
-
-        <div class="work-entry">
-        <div class="work-meta">
-          <div class="work-title">SE BUSCA:</div>
-          <div class="work-date">10/02/2025</div>
-        </div>
-        <div class="work-gallery" data-layout="single">
-          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775053486/Recompensa03_p2gyrp.jpg" alt="Descripción" loading="lazy">
-        </div>
-        <div class="tags"><span class="tag">Noticias</span></div>
-      </div>
-   
-      <div class="work-entry">
-        <div class="work-meta">
-          <div class="work-title">DEBATE ENTRE CANDIDATOS</div>
-          <div class="work-date">10/02/2025</div>
-        </div>
-        <div class="work-gallery" data-layout="single">
-          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775053485/DebatePres01_ggsmmz.jpg" alt="Descripción" loading="lazy">
-        </div>
-        <div class="tags"><span class="tag">Noticias</span></div>
-      </div>
-      
-      <div class="work-entry">
-        <div class="work-meta">
-          <div class="work-title">GOBIERNO AGUARDA</div>
-          <div class="work-date">11/02/2025</div>
-        </div>
-        <div class="work-gallery" data-layout="single">
-          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774906381/HayOrden02_rijfqw.jpg" alt="Descripción" loading="lazy">
-        </div>
-        <div class="tags"><span class="tag">Noticias</span></div>
-      </div>
-
-       <div class="work-entry">
-        <div class="work-meta">
-          <div class="work-title">ROSALÍA X EUPHORIA</div>
-          <div class="work-date">18/02/2025</div>
-        </div>
-        <div class="work-gallery" data-layout="single">
-          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775053115/Rosa01_gfw6kg.jpg"Descripción" loading="lazy">
-        </div>
-        <div class="tags"><span class="tag">Farandula</span></div>
-      </div>
-
-      <div class="work-entry">
-        <div class="work-meta">
-          <div class="work-title">CINE POR LOS GATOS</div>
-          <div class="work-date">21/02/2025</div>
-        </div>
-        <div class="work-gallery" data-layout="strip">
-          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774905994/Gatos-Neko_01_x2o4z9.jpg" alt="Imagen 1 de 3" loading="lazy">
-          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775052990/Gatos-Neko_02_pqf4lk.jpg" alt="Imagen 2 de 3" loading="lazy">
-          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775052991/Gatos-Neko_03_tkqi2y.jpg" alt="Imagen 3 de 3" loading="lazy">
-        </div>
-        <div class="tags"><span class="tag">Gatitos</span><span class="tag">Carrusel</span></div>
-      </div>
-
-           <div class="work-entry">
-        <div class="work-meta">
-          <div class="work-title">CASO GOLPE</div>
-          <div class="work-date">26/03/2025</div>
-        </div>
-        <div class="work-gallery" data-layout="single">
-          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775053230/Golpe01_y7yncp.jpg"Descripción" loading="lazy">
-        </div>
-        <div class="tags"><span class="tag">Noticias</span></div>
-      </div>
-
-      <div class="work-entry">
-        <div class="work-meta">
-          <div class="work-title">GUERRA DE LA BASURA, CBBA</div>
-          <div class="work-date">03/04/2025</div>
-        </div>
-        <div class="work-gallery" data-layout="strip">
-          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774905968/Guerra-Basura_01_qsdgqo.jpg" alt="Imagen 1 de 3" loading="lazy">
-          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774905967/Guerra-Basura_02_eereii.jpg" alt="Imagen 2 de 3" loading="lazy">
-        </div>
-        <div class="tags"><span class="tag">Basura</span><span class="tag">Carrusel</span></div>
-      </div>
-
-      <div class="work-entry">
-        <div class="work-meta">
-          <div class="work-title">LAGUNA ALALAY, FAUNA</div>
-          <div class="work-date">03/04/2025</div>
-        </div>
-        <div class="work-gallery" data-layout="strip">
-          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775052890/ALALAY-AVES_01_c53gez.jpg" alt="Imagen 1 de 3" loading="lazy">
-          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775052891/Alalay-Aves01_02_p7pbpi.jpg" alt="Imagen 2 de 4" loading="lazy">
-          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775052889/Alalay-Aves01_03_yrrydu.jpg" alt="Imagen 3 de 4" loading="lazy">
-          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775052891/Alalay-Aves01_04_rncnei.jpg" alt="Imagen 4 de 4" loading="lazy">
-        </div>
-        </div>
-        <div class="tags"><span class="tag">Fauna</span><span class="tag">Carrusel</span></div>
-      </div>
-    
-    <div class="work-entry">
-        <div class="work-meta">
-          <div class="work-title">CBBA, DÍA DEL PEATÓN CANCELADO</div>
-          <div class="work-date">04/04/2025</div>
-        </div>
-        <div class="work-gallery" data-layout="single">
-          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774906309/SuspendidoDi%CC%81aPeato%CC%81n03_m6vhou.jpg"Descripción" loading="lazy">
-        </div>
-        <div class="tags"><span class="tag">Noticias</span></div>
-      </div>
-      
-    <div class="work-entry">
-        <div class="work-meta">
-          <div class="work-title">DESPUÉS DE 15 DÍAS, DÍA DEL PEATÓN</div>
-          <div class="work-date">14/05/2025</div>
-        </div>
-        <div class="work-gallery" data-layout="single">
-          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775056076/Di%CC%81aPeato%CC%81n18deMayo03_tia1z0.jpg"Descripción" loading="lazy">
-        </div>
-        <div class="tags"><span class="tag">Noticias</span></div>
-      </div>
-
-     <div class="work-entry">
-        <div class="work-meta">
-          <div class="work-title">KENIA, ABEJAS PROTEGEN CULTIVOS</div>
-          <div class="work-date">08/05/2025</div>
-        </div>
-        <div class="work-gallery" data-layout="single">
-          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774906259/AbejasElefantes01_rdbsge.jpg"Descripción" loading="lazy">
-        </div>
-        <div class="tags"><span class="tag">Noticias</span></div>
-      </div>
-
-      <div class="work-entry">
-        <div class="work-meta">
-          <div class="work-title">MARCHAS EN LA PAZ, RECLAMAN COMBUSTIBLE</div>
-          <div class="work-date">04/06/2025</div>
-        </div>
-        <div class="work-gallery" data-layout="single">
-          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774906226/MasivaMovilizacio%CC%81n01_lhp2fg.jpg"Descripción" loading="lazy">
-        </div>
-        <div class="tags"><span class="tag">Noticias</span></div>
-      </div>
-
-    <div class="work-entry">
-        <div class="work-meta">
-          <div class="work-title">CONFLICTOS COBRAN VIDAS</div>
-          <div class="work-date">25/06/2025</div>
-        </div>
-        <div class="work-gallery" data-layout="single">
-          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774906116/PresidenteAsesinatodePolici%CC%81as02_dm8jf0.jpg"Descripción" loading="lazy">
-        </div>
-        <div class="tags"><span class="tag">Noticias</span></div>
-      </div>
-       
-      <!-- Carrusel: varias imágenes que forman una imagen más ancha -->
-      <div class="work-entry">
-        <div class="work-meta">
-          <div class="work-title">MASACRE DE LA CALLE HARRINGTON</div>
-          <div class="work-date">15/01/2026</div>
-        </div>
-        <div class="work-gallery" data-layout="strip">
-          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774905889/masacre-harrington_01_j7hqz5.jpg" alt="Imagen 1 de 3" loading="lazy">
-          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774905887/masacre-harrington_02_kp5fp2.jpg" alt="Imagen 2 de 3" loading="lazy">
-          <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774905885/masacre-harrington_03_jaovaa.jpg" alt="Imagen 3 de 3" loading="lazy">
-        </div>
-        <div class="tags"><span class="tag">45 AÑOS</span><span class="tag">Carrusel</span></div>
-      </div>
-
     </div>
 
+    <!-- Trabajos sin subgrupo -->
+    <div class="work-entry">
+      <div class="work-meta">
+        <div class="work-title">Vaticano y P++++++</div>
+        <div class="work-date">24/07/2024</div>
+      </div>
+      <div class="work-gallery" data-layout="single">
+        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774906357/Vaticano_iqc3t6.jpg" alt="Vaticano" loading="lazy">
+      </div>
+      <div class="tags"><span class="tag">Noticias</span></div>
+    </div>
+
+    <div class="work-entry">
+      <div class="work-meta">
+        <div class="work-title">CRISIS DE COMBUSTIBLE, COCHABAMBA BLOQUEADA</div>
+        <div class="work-date">31/07/2024</div>
+      </div>
+      <div class="work-gallery" data-layout="single">
+        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774906356/Llajta_Bloqueada_tkdgyb.jpg" alt="Cochabamba bloqueada" loading="lazy">
+      </div>
+      <div class="tags"><span class="tag">Noticias</span></div>
+    </div>
+
+    <div class="work-entry">
+      <div class="work-meta">
+        <div class="work-title">ESTRENO, ALIEN ROMULUS</div>
+        <div class="work-date">15/08/2024</div>
+      </div>
+      <div class="work-gallery" data-layout="single">
+        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774916612/Alien02_qg9yib.jpg" alt="Alien Romulus" loading="lazy">
+      </div>
+      <div class="tags"><span class="tag">Noticias</span></div>
+    </div>
+
+    <div class="work-entry">
+      <div class="work-meta">
+        <div class="work-title">AMOR POR INTERNET</div>
+        <div class="work-date">19/08/2024</div>
+      </div>
+      <div class="work-gallery" data-layout="single">
+        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774964410/internet02_w9rkx7.jpg" alt="Amor por internet" loading="lazy">
+      </div>
+      <div class="tags"><span class="tag">Noticias</span></div>
+    </div>
+
+    <div class="work-entry">
+      <div class="work-meta">
+        <div class="work-title">SE DEBATE EL PRECIO DEL PASAJE</div>
+        <div class="work-date">22/08/2024</div>
+      </div>
+      <div class="work-gallery" data-layout="single">
+        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774964433/ChoferesPiden01_afbxwz.jpg" alt="Precio pasaje" loading="lazy">
+      </div>
+      <div class="tags"><span class="tag">Noticias</span></div>
+    </div>
+
+    <div class="work-entry">
+      <div class="work-meta">
+        <div class="work-title">¿DIESEL DE MATERIAL RECICLADO?</div>
+        <div class="work-date">30/08/2024</div>
+      </div>
+      <div class="work-gallery" data-layout="single">
+        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774964926/Diesel_reciclado_bwslbv.jpg" alt="Diesel reciclado" loading="lazy">
+      </div>
+      <div class="tags"><span class="tag">Noticias</span></div>
+    </div>
+
+    <div class="work-entry">
+      <div class="work-meta">
+        <div class="work-title">INCENDIOS EN EL ORIENTE BOLIVIANO</div>
+        <div class="work-date">03/09/2024</div>
+      </div>
+      <div class="work-gallery" data-layout="strip">
+        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774964970/Incendios01_xyu7dt.jpg" alt="Imagen 1" loading="lazy">
+        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774964973/Incendios02_vamujz.jpg" alt="Imagen 2" loading="lazy">
+        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774964971/Incendios03_d61nba.jpg" alt="Imagen 3" loading="lazy">
+        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774964971/Incendios04_ezdfry.jpg" alt="Imagen 4" loading="lazy">
+        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774964970/Incendios05_q5ffkl.jpg" alt="Imagen 5" loading="lazy">
+        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774964969/Incendios06-2.0_h9uvm9.jpg" alt="Imagen 6" loading="lazy">
+      </div>
+      <div class="tags"><span class="tag">Incendios en la Amazonía</span><span class="tag">Carrusel</span></div>
+    </div>
+
+    <div class="work-entry">
+      <div class="work-meta">
+        <div class="work-title">¿ALPHAVILLE, EN ORURO?</div>
+        <div class="work-date">05/09/2024</div>
+      </div>
+      <div class="work-gallery" data-layout="single">
+        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774916521/Alphaville02_gcllkg.jpg" alt="Alphaville en Oruro" loading="lazy">
+      </div>
+      <div class="tags"><span class="tag">Noticias</span></div>
+    </div>
+
+    <div class="work-entry">
+      <div class="work-meta">
+        <div class="work-title">BOLIVIA ACUSADA POR ISRAEL</div>
+        <div class="work-date">23/10/2024</div>
+      </div>
+      <div class="work-gallery" data-layout="single">
+        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774964996/Israelacusa01_qrpkve.jpg" alt="Bolivia acusada" loading="lazy">
+      </div>
+      <div class="tags"><span class="tag">Noticias</span></div>
+    </div>
+
+    <div class="work-entry">
+      <div class="work-meta">
+        <div class="work-title">BLOQUEOS EVISTAS, DÍA 10</div>
+        <div class="work-date">23/10/2024</div>
+      </div>
+      <div class="work-gallery" data-layout="single">
+        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774964995/Bloquos10dias_zcnh6k.jpg" alt="Bloqueos día 10" loading="lazy">
+      </div>
+      <div class="tags"><span class="tag">Noticias</span></div>
+    </div>
+
+    <div class="work-entry">
+      <div class="work-meta">
+        <div class="work-title">EXGUERRILLERO CHILENO EN BOLIVIA</div>
+        <div class="work-date">07/01/2025</div>
+      </div>
+      <div class="work-gallery" data-layout="single">
+        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775010111/exguerrillero_1_eoyiw4.jpg" alt="Exguerrillero chileno" loading="lazy">
+      </div>
+      <div class="tags"><span class="tag">Noticias</span></div>
+    </div>
+
+    <div class="work-entry">
+      <div class="work-meta">
+        <div class="work-title">EL PASAJE DEL TRUFI SUBE</div>
+        <div class="work-date">08/01/2025</div>
+      </div>
+      <div class="work-gallery" data-layout="single">
+        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774965035/Pasaje-_2_yzdjk0.jpg" alt="Pasaje trufi" loading="lazy">
+      </div>
+      <div class="tags"><span class="tag">Noticias</span></div>
+    </div>
+
+    <div class="work-entry">
+      <div class="work-meta">
+        <div class="work-title">INCENDIOS EN HOLLYWOOD</div>
+        <div class="work-date">11/02/2025</div>
+      </div>
+      <div class="work-gallery" data-layout="single">
+        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775052549/Hollywood-_2_kfdla3.jpg" alt="Incendios Hollywood" loading="lazy">
+      </div>
+      <div class="tags"><span class="tag">Noticias</span></div>
+    </div>
+
+    <div class="work-entry">
+      <div class="work-meta">
+        <div class="work-title">LIBERACIÓN DE AUSCHWITZ</div>
+        <div class="work-date">27/01/2025</div>
+      </div>
+      <div class="work-gallery" data-layout="strip">
+        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774916468/Ausch01_tjkzkv.jpg" alt="Imagen 1" loading="lazy">
+        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774916469/Ausch02_f8y27d.jpg" alt="Imagen 2" loading="lazy">
+        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774916479/Ausch03_cg91ph.jpg" alt="Imagen 3" loading="lazy">
+        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774916477/Ausch04_ib8jg4.jpg" alt="Imagen 4" loading="lazy">
+        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774916474/Ausch05_awsxsh.jpg" alt="Imagen 5" loading="lazy">
+        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774916472/Ausch06_ytlebt.jpg" alt="Imagen 6" loading="lazy">
+      </div>
+      <div class="tags"><span class="tag">80+ Años</span><span class="tag">Carrusel</span></div>
+    </div>
+
+    <div class="work-entry">
+      <div class="work-meta">
+        <div class="work-title">ACCIDENTE AÉREO EN WASHINGTON</div>
+        <div class="work-date">30/01/2025</div>
+      </div>
+      <div class="work-gallery" data-layout="strip">
+        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775052079/ChoqueAereo01_l30l4a.jpg" alt="Imagen 1" loading="lazy">
+        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775052079/ChoqueAereo02_mrcpes.jpg" alt="Imagen 2" loading="lazy">
+        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775052079/ChoqueAereo03_rfxbdo.jpg" alt="Imagen 3" loading="lazy">
+        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775052079/ChoqueAereo04_yfo9b2.jpg" alt="Imagen 4" loading="lazy">
+      </div>
+      <div class="tags"><span class="tag">Accidente</span><span class="tag">Carrusel</span></div>
+    </div>
+
+    <div class="work-entry">
+      <div class="work-meta">
+        <div class="work-title">G***** CONTRA EL CONTRABANDO</div>
+        <div class="work-date">04/02/2025</div>
+      </div>
+      <div class="work-gallery" data-layout="strip">
+        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774906437/Contrabando01_b3atf3.jpg" alt="Imagen 1" loading="lazy">
+        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774906439/Contrabando02_qfqejb.jpg" alt="Imagen 2" loading="lazy">
+        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774906436/Contrabando03_01_aipinx.jpg" alt="Imagen 3" loading="lazy">
+        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774906435/Contrabando03_02_i4nmkx.jpg" alt="Imagen 4" loading="lazy">
+        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774906440/Contrabando04_ckuvr6.jpg" alt="Imagen 5" loading="lazy">
+      </div>
+      <div class="tags"><span class="tag">Contrabando</span><span class="tag">Carrusel</span></div>
+    </div>
+
+    <div class="work-entry">
+      <div class="work-meta">
+        <div class="work-title">PUNK, NO ESTÁ MUERTO</div>
+        <div class="work-date">10/02/2025</div>
+      </div>
+      <div class="work-gallery" data-layout="single">
+        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775053486/Misfits01_z4uts6.jpg" alt="Punk no está muerto" loading="lazy">
+      </div>
+      <div class="tags"><span class="tag">Noticias</span></div>
+    </div>
+
+    <div class="work-entry">
+      <div class="work-meta">
+        <div class="work-title">SE BUSCA:</div>
+        <div class="work-date">10/02/2025</div>
+      </div>
+      <div class="work-gallery" data-layout="single">
+        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775053486/Recompensa03_p2gyrp.jpg" alt="Se busca" loading="lazy">
+      </div>
+      <div class="tags"><span class="tag">Noticias</span></div>
+    </div>
+
+    <div class="work-entry">
+      <div class="work-meta">
+        <div class="work-title">DEBATE ENTRE CANDIDATOS</div>
+        <div class="work-date">10/02/2025</div>
+      </div>
+      <div class="work-gallery" data-layout="single">
+        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775053485/DebatePres01_ggsmmz.jpg" alt="Debate candidatos" loading="lazy">
+      </div>
+      <div class="tags"><span class="tag">Noticias</span></div>
+    </div>
+
+    <div class="work-entry">
+      <div class="work-meta">
+        <div class="work-title">GOBIERNO AGUARDA</div>
+        <div class="work-date">11/02/2025</div>
+      </div>
+      <div class="work-gallery" data-layout="single">
+        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774906381/HayOrden02_rijfqw.jpg" alt="Gobierno aguarda" loading="lazy">
+      </div>
+      <div class="tags"><span class="tag">Noticias</span></div>
+    </div>
+
+    <div class="work-entry">
+      <div class="work-meta">
+        <div class="work-title">ROSALÍA X EUPHORIA</div>
+        <div class="work-date">18/02/2025</div>
+      </div>
+      <div class="work-gallery" data-layout="single">
+        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775053115/Rosa01_gfw6kg.jpg" alt="Rosalía x Euphoria" loading="lazy">
+      </div>
+      <div class="tags"><span class="tag">Farandula</span></div>
+    </div>
+
+    <div class="work-entry">
+      <div class="work-meta">
+        <div class="work-title">CINE POR LOS GATOS</div>
+        <div class="work-date">21/02/2025</div>
+      </div>
+      <div class="work-gallery" data-layout="strip">
+        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774905994/Gatos-Neko_01_x2o4z9.jpg" alt="Imagen 1 de 3" loading="lazy">
+        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775052990/Gatos-Neko_02_pqf4lk.jpg" alt="Imagen 2 de 3" loading="lazy">
+        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775052991/Gatos-Neko_03_tkqi2y.jpg" alt="Imagen 3 de 3" loading="lazy">
+      </div>
+      <div class="tags"><span class="tag">Gatitos</span><span class="tag">Carrusel</span></div>
+    </div>
+
+    <div class="work-entry">
+      <div class="work-meta">
+        <div class="work-title">CASO GOLPE</div>
+        <div class="work-date">26/03/2025</div>
+      </div>
+      <div class="work-gallery" data-layout="single">
+        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775053230/Golpe01_y7yncp.jpg" alt="Caso golpe" loading="lazy">
+      </div>
+      <div class="tags"><span class="tag">Noticias</span></div>
+    </div>
+
+    <div class="work-entry">
+      <div class="work-meta">
+        <div class="work-title">GUERRA DE LA BASURA, CBBA</div>
+        <div class="work-date">03/04/2025</div>
+      </div>
+      <div class="work-gallery" data-layout="strip">
+        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774905968/Guerra-Basura_01_qsdgqo.jpg" alt="Imagen 1 de 2" loading="lazy">
+        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774905967/Guerra-Basura_02_eereii.jpg" alt="Imagen 2 de 2" loading="lazy">
+      </div>
+      <div class="tags"><span class="tag">Basura</span><span class="tag">Carrusel</span></div>
+    </div>
+
+    <div class="work-entry">
+      <div class="work-meta">
+        <div class="work-title">LAGUNA ALALAY, FAUNA</div>
+        <div class="work-date">03/04/2025</div>
+      </div>
+      <div class="work-gallery" data-layout="strip">
+        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775052890/ALALAY-AVES_01_c53gez.jpg" alt="Imagen 1 de 4" loading="lazy">
+        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775052891/Alalay-Aves01_02_p7pbpi.jpg" alt="Imagen 2 de 4" loading="lazy">
+        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775052889/Alalay-Aves01_03_yrrydu.jpg" alt="Imagen 3 de 4" loading="lazy">
+        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775052891/Alalay-Aves01_04_rncnei.jpg" alt="Imagen 4 de 4" loading="lazy">
+      </div>
+      <div class="tags"><span class="tag">Fauna</span><span class="tag">Carrusel</span></div>
+    </div>
+
+    <div class="work-entry">
+      <div class="work-meta">
+        <div class="work-title">CBBA, DÍA DEL PEATÓN CANCELADO</div>
+        <div class="work-date">04/04/2025</div>
+      </div>
+      <div class="work-gallery" data-layout="single">
+        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774906309/SuspendidoDi%CC%81aPeato%CC%81n03_m6vhou.jpg" alt="Día del peatón cancelado" loading="lazy">
+      </div>
+      <div class="tags"><span class="tag">Noticias</span></div>
+    </div>
+
+    <div class="work-entry">
+      <div class="work-meta">
+        <div class="work-title">KENIA, ABEJAS PROTEGEN CULTIVOS</div>
+        <div class="work-date">08/05/2025</div>
+      </div>
+      <div class="work-gallery" data-layout="single">
+        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774906259/AbejasElefantes01_rdbsge.jpg" alt="Abejas Kenya" loading="lazy">
+      </div>
+      <div class="tags"><span class="tag">Noticias</span></div>
+    </div>
+
+    <div class="work-entry">
+      <div class="work-meta">
+        <div class="work-title">DESPUÉS DE 15 DÍAS, DÍA DEL PEATÓN</div>
+        <div class="work-date">14/05/2025</div>
+      </div>
+      <div class="work-gallery" data-layout="single">
+        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775056076/Di%CC%81aPeato%CC%81n18deMayo03_tia1z0.jpg" alt="Día del peatón" loading="lazy">
+      </div>
+      <div class="tags"><span class="tag">Noticias</span></div>
+    </div>
+
+    <div class="work-entry">
+      <div class="work-meta">
+        <div class="work-title">MARCHAS EN LA PAZ, RECLAMAN COMBUSTIBLE</div>
+        <div class="work-date">04/06/2025</div>
+      </div>
+      <div class="work-gallery" data-layout="single">
+        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774906226/MasivaMovilizacio%CC%81n01_lhp2fg.jpg" alt="Marchas La Paz" loading="lazy">
+      </div>
+      <div class="tags"><span class="tag">Noticias</span></div>
+    </div>
+
+    <div class="work-entry">
+      <div class="work-meta">
+        <div class="work-title">CONFLICTOS COBRAN VIDAS</div>
+        <div class="work-date">25/06/2025</div>
+      </div>
+      <div class="work-gallery" data-layout="single">
+        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774906116/PresidenteAsesinatodePolici%CC%81as02_dm8jf0.jpg" alt="Conflictos" loading="lazy">
+      </div>
+      <div class="tags"><span class="tag">Noticias</span></div>
+    </div>
+
+    <div class="work-entry">
+      <div class="work-meta">
+        <div class="work-title">MASACRE DE LA CALLE HARRINGTON</div>
+        <div class="work-date">15/01/2026</div>
+      </div>
+      <div class="work-gallery" data-layout="strip">
+        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774905889/masacre-harrington_01_j7hqz5.jpg" alt="Imagen 1 de 3" loading="lazy">
+        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774905887/masacre-harrington_02_kp5fp2.jpg" alt="Imagen 2 de 3" loading="lazy">
+        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1774905885/masacre-harrington_03_jaovaa.jpg" alt="Imagen 3 de 3" loading="lazy">
+      </div>
+      <div class="tags"><span class="tag">45 Años</span><span class="tag">Carrusel</span></div>
     </div>
 
   </div><!-- /cat-periodismo -->
@@ -749,8 +766,9 @@ body::after {
   <div class="cat-section" id="cat-branding">
     <div class="sec-header">
       <span class="sec-title">Identidad · Branding</span>
-      <span class="sec-count">1 proyecto</span>
+      <span class="sec-count">2 proyectos</span>
     </div>
+
     <div class="work-entry">
       <div class="work-meta">
         <div class="work-title">MANUAL DE MARCA GUIZA</div>
@@ -761,12 +779,13 @@ body::after {
         <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775597163/Manual_Oficial-Guiza-02_zlr2nk.jpg" alt="Tabla de contenidos" loading="lazy">
         <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775597159/Manual_Oficial-Guiza-04_mpruxc.jpg" alt="Misión y Visión" loading="lazy">
         <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775597182/Captura_de_pantalla_2026-04-07_a_la_s_5.19.22_p._m._ayssjg.png" alt="Componentes" loading="lazy">
-        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775597185/Captura_de_pantalla_2026-04-07_a_la_s_5.19.27_p._m._j6szzb.png" alt="02" loading="lazy">
+        <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775597185/Captura_de_pantalla_2026-04-07_a_la_s_5.19.27_p._m._j6szzb.png" alt="Detalles 02" loading="lazy">
         <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775597181/Captura_de_pantalla_2026-04-07_a_la_s_5.19.35_p._m._s5wrey.png" alt="Construcción de marca" loading="lazy">
         <img class="gimg" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775597179/Captura_de_pantalla_2026-04-07_a_la_s_5.19.39_p._m._tqkehj.png" alt="Composición de marca" loading="lazy">
       </div>
       <div class="tags"><span class="tag">Identidad</span><span class="tag">Branding</span><span class="tag">Salon de belleza masculino</span></div>
     </div>
+
     <div class="work-entry">
       <div class="work-meta">
         <div class="work-title">"MMM LLAMA"</div>
@@ -817,7 +836,7 @@ body::after {
         <div class="work-title">"Imposible" (ft. 300)</div>
         <div class="work-date">2025</div>
       </div>
-      <div class="work-gallery" data-layout="2col" style="margin-bottom:8px">
+      <div class="work-gallery" data-layout="2col" style="margin-bottom:6px">
         <img class="gimg" src="" alt="Imposible - vista general" loading="lazy">
         <img class="gimg" src="" alt="Imposible - CANSADO" loading="lazy">
       </div>
@@ -826,7 +845,7 @@ body::after {
         <img class="gimg" src="" alt="Imposible - detalle 2" loading="lazy">
         <img class="gimg" src="" alt="Imposible - detalle 3" loading="lazy">
       </div>
-      <div class="tags" style="margin-top:16px"><span class="tag">Instalación</span><span class="tag">Arte</span><span class="tag">Colaboración</span></div>
+      <div class="tags" style="margin-top:14px"><span class="tag">Instalación</span><span class="tag">Arte</span><span class="tag">Colaboración</span></div>
     </div>
   </div>
 
@@ -853,7 +872,7 @@ body::after {
         <img class="gimg" src="" alt="Poster 07" loading="lazy">
         <img class="gimg" src="" alt="Poster 08" loading="lazy">
       </div>
-      <div class="tags" style="margin-top:16px"><span class="tag">Poster</span><span class="tag">Diseño</span><span class="tag">Experimental</span></div>
+      <div class="tags" style="margin-top:14px"><span class="tag">Poster</span><span class="tag">Diseño</span><span class="tag">Experimental</span></div>
     </div>
   </div>
 
@@ -862,18 +881,24 @@ body::after {
     <div class="footer-cc">DOC-PORT · COCHABAMBA, BOLIVIA</div>
   </div>
 
-</div>
+</div><!-- /wrap -->
 
+<!-- LIGHTBOX -->
 <script>
-// TAB SWITCHING
+// ── TAB SWITCHING (shared between desktop tabs and mobile pills) ──
 function switchCat(id, btn) {
-  document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+  // Deactivate all tabs/pills
+  document.querySelectorAll('.cat-tab, .nav-pill').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.cat-section').forEach(s => s.classList.remove('active'));
+
+  // Activate matching section
   document.getElementById('cat-' + id).classList.add('active');
-  btn.classList.add('active');
+
+  // Activate all buttons with the same cat id (desktop + mobile)
+  document.querySelectorAll('[onclick*="' + id + '"]').forEach(t => t.classList.add('active'));
 }
 
-// LIGHTBOX
+// ── LIGHTBOX ──
 const lb        = document.getElementById('lightbox');
 const lbImg     = document.getElementById('lb-img');
 const lbCounter = document.getElementById('lb-counter');
@@ -882,28 +907,22 @@ const lbPrev    = document.getElementById('lb-prev');
 const lbNext    = document.getElementById('lb-next');
 const lbClose   = document.getElementById('lb-close');
 
-let currentGroup = [];
-let currentIndex = 0;
+let currentGroup = [], currentIndex = 0;
 
 function openLightbox(imgs, index) {
-  currentGroup = imgs;
-  currentIndex = index;
+  currentGroup = imgs; currentIndex = index;
   updateLightbox();
   lb.classList.add('open');
   document.body.style.overflow = 'hidden';
 }
-
 function updateLightbox() {
   const img = currentGroup[currentIndex];
-  lbImg.src = img.src;
-  lbImg.alt = img.alt;
+  lbImg.src = img.src; lbImg.alt = img.alt;
   lbCaption.textContent = img.alt || '';
-  lbCounter.textContent = currentGroup.length > 1
-    ? (currentIndex + 1) + ' / ' + currentGroup.length : '';
+  lbCounter.textContent = currentGroup.length > 1 ? (currentIndex + 1) + ' / ' + currentGroup.length : '';
   lbPrev.disabled = currentIndex === 0;
   lbNext.disabled = currentIndex === currentGroup.length - 1;
 }
-
 function closeLightbox() {
   lb.classList.remove('open');
   document.body.style.overflow = '';
@@ -914,7 +933,6 @@ lbClose.addEventListener('click', closeLightbox);
 lb.addEventListener('click', e => { if (e.target === lb) closeLightbox(); });
 lbPrev.addEventListener('click', () => { if (currentIndex > 0) { currentIndex--; updateLightbox(); } });
 lbNext.addEventListener('click', () => { if (currentIndex < currentGroup.length - 1) { currentIndex++; updateLightbox(); } });
-
 document.addEventListener('keydown', e => {
   if (!lb.classList.contains('open')) return;
   if (e.key === 'ArrowLeft'  && currentIndex > 0) { currentIndex--; updateLightbox(); }
@@ -922,30 +940,26 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Escape') closeLightbox();
 });
 
-// Touch swipe for mobile lightbox navigation
-let _touchStartX = 0;
-lb.addEventListener('touchstart', e => { _touchStartX = e.touches[0].clientX; }, { passive: true });
+// Touch swipe
+let _tx = 0;
+lb.addEventListener('touchstart', e => { _tx = e.touches[0].clientX; }, { passive: true });
 lb.addEventListener('touchend', e => {
-  const dx = e.changedTouches[0].clientX - _touchStartX;
+  const dx = e.changedTouches[0].clientX - _tx;
   if (Math.abs(dx) > 50) {
     if (dx < 0 && currentIndex < currentGroup.length - 1) { currentIndex++; updateLightbox(); }
     if (dx > 0 && currentIndex > 0) { currentIndex--; updateLightbox(); }
   }
 }, { passive: true });
 
-// INIT: attach lightbox to real images, replace empty src with placeholder
+// ── INIT ──
 function init() {
   document.querySelectorAll('.work-gallery').forEach(gallery => {
     const layout = gallery.getAttribute('data-layout');
     const allImgs = Array.from(gallery.querySelectorAll('.gimg'));
-
-    // Separate real images (with src) from empty ones
     const realImgs = allImgs.filter(img => img.getAttribute('src') && img.getAttribute('src') !== '');
 
-    // Replace empty images with placeholders
     allImgs.forEach(img => {
-      const src = img.getAttribute('src');
-      if (!src || src === '') {
+      if (!img.getAttribute('src') || img.getAttribute('src') === '') {
         const ph = document.createElement('div');
         ph.className = layout === 'strip' ? 'gimg-placeholder-strip' : 'gimg-placeholder';
         ph.innerHTML = '<span>sin imagen</span>';
@@ -953,14 +967,12 @@ function init() {
       }
     });
 
-    // Attach lightbox click to real images (grouped per gallery)
     realImgs.forEach((img, i) => {
       img.style.cursor = 'zoom-in';
       img.addEventListener('click', () => openLightbox(realImgs, i));
     });
   });
 }
-
 init();
 </script>
 </body>
