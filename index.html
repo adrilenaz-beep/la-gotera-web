@@ -3,7 +3,59 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Adriano Lenaz Zenteno — Diseñador gráfico e investigador. ADRIP Disruptive Media, Cochabamba, Bolivia.">
+<meta property="og:title" content="ADRIANO LENAZ — DOC-001">
+<meta property="og:description" content="Diseñador gráfico e investigador. ADRIP Disruptive Media, Cochabamba, Bolivia.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://adrilenaz-beep.github.io/la-gotera-web/">
+<meta property="og:image" content="https://res.cloudinary.com/dmvmqykud/image/upload/v1775351852/1AdripSVG_oijqbk.svg">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ADRIANO LENAZ — DOC-001">
+<meta name="twitter:description" content="Diseñador gráfico e investigador. ADRIP Disruptive Media, Cochabamba, Bolivia.">
 <title>ADRIANO LENAZ — DOC-001</title>
+<link rel="canonical" href="https://adrilenaz-beep.github.io/la-gotera-web/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Adriano Lenaz Zenteno",
+  "jobTitle": "Diseñador Gráfico e Investigador",
+  "description": "Diseñador gráfico e investigador radicado en Cochabamba, Bolivia. Director creativo de ADRIP Disruptive Media.",
+  "url": "https://adrilenaz-beep.github.io/la-gotera-web/",
+  "image": "https://res.cloudinary.com/dmvmqykud/image/upload/v1775351852/1AdripSVG_oijqbk.svg",
+  "email": "adrip.disruptivemedia@gmail.com",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Cochabamba",
+    "addressCountry": "BO"
+  },
+  "brand": {
+    "@type": "Brand",
+    "name": "ADRIP Disruptive Media"
+  },
+  "sameAs": [
+    "https://www.instagram.com/adrip.lnz/",
+    "https://www.linkedin.com/in/adriano-lenaz-b13a52259/"
+  ],
+  "knowsAbout": [
+    "Diseño Gráfico", "Periodismo Gráfico", "Investigación en Diseño",
+    "Identidad Visual", "Semiótica", "Diseño Editorial", "Cultura Visual"
+  ],
+  "worksFor": {
+    "@type": "Organization",
+    "name": "ADRIP Disruptive Media",
+    "url": "https://adrilenaz-beep.github.io/la-gotera-web/"
+  },
+  "hasCredential": {
+    "@type": "EducationalOccupationalCredential",
+    "name": "Signos gráficos coloniales y descolonización visual en Bolivia",
+    "url": "https://doi.org/10.23881/idupbo.025.2-11e"
+  }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://res.cloudinary.com">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -76,14 +128,13 @@ body::after {
   padding: 36px 40px 28px;
   position: relative; overflow: hidden;
 }
-.doc-header::before {
-  content: 'ADRIP';
-  position: absolute; right: -20px; top: 50%;
-  transform: translateY(-50%) rotate(90deg);
-  font-size: 120px; font-weight: 700;
-  color: var(--border); letter-spacing: -0.05em;
-  pointer-events: none; line-height: 1;
+.adrip-logo {
+  height: 52px; width: auto; display: block;
+  margin-bottom: 28px; opacity: 0.9;
+  filter: brightness(0) invert(1);
 }
+.hero-char { display: inline; }
+.hero-char--accent { color: var(--accent); }
 .doc-label {
   font-size: 9px; letter-spacing: 0.35em; color: var(--ink-dim);
   text-transform: uppercase; margin-bottom: 20px;
@@ -344,6 +395,75 @@ body::after {
 }
 .bg-static { position: absolute; mix-blend-mode: screen; will-change: transform; }
 
+/* ── SPLASH ── */
+#splash {
+  position: fixed; inset: 0; z-index: 9999;
+  background: var(--bg);
+  display: flex; flex-direction: column;
+  align-items: flex-start; justify-content: center;
+  padding: clamp(28px, 6vw, 80px);
+}
+.splash-line {
+  font-size: 13px; color: var(--accent); letter-spacing: 0.12em;
+  margin-bottom: 10px; min-height: 22px;
+}
+.splash-cursor {
+  display: inline-block; width: 8px; height: 13px;
+  background: var(--accent); vertical-align: middle; margin-left: 2px;
+  animation: blink 1s steps(1) infinite;
+}
+#splash-btn {
+  margin-top: 36px; display: none;
+  background: transparent; border: 1px solid var(--accent);
+  color: var(--accent); font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase;
+  padding: 13px 32px; cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+#splash-btn:hover { background: var(--accent); color: var(--bg); }
+#splash-btn.visible { display: inline-block; animation: logOpen 0.35s ease; }
+.splash-loading { margin-top: 28px; }
+.splash-load-line {
+  font-size: 11px; color: var(--ink-dim); letter-spacing: 0.08em;
+  margin-bottom: 8px; opacity: 0; transition: opacity 0.25s;
+}
+.splash-load-line.show { opacity: 1; }
+.splash-load-line.ok { color: var(--accent); }
+#splash.fade-out { animation: splashFade 0.55s ease forwards; }
+@keyframes splashFade { to { opacity: 0; pointer-events: none; } }
+.wrap { opacity: 0; }
+.wrap.visible { opacity: 1; }
+
+/* ── POWER ON REVEAL ── */
+.reveal-block, .reveal-entry { opacity: 0; }
+
+.reveal-block.show, .reveal-entry.show {
+  animation: powerOn 0.7s ease forwards;
+}
+@keyframes powerOn {
+  0%   { opacity: 0;   filter: brightness(0); }
+  6%   { opacity: 1;   filter: brightness(7); }
+  18%  { filter: brightness(0.15); }
+  34%  { filter: brightness(3); }
+  50%  { filter: brightness(0.6); }
+  68%  { filter: brightness(1.4); }
+  84%  { filter: brightness(0.95); }
+  100% { filter: brightness(1); opacity: 1; }
+}
+
+/* ── SCAN LINE ── */
+#scan-line {
+  position: fixed; top: 0; left: 0; right: 0;
+  height: 1px; background: var(--accent);
+  opacity: 0; z-index: 5000; pointer-events: none;
+}
+#scan-line.scanning { animation: scanSweep 0.9s ease-in forwards; }
+@keyframes scanSweep {
+  0%   { top: 0;     opacity: 0.5; }
+  85%  { opacity: 0.25; }
+  100% { top: 100vh; opacity: 0; }
+}
+
 /* ── RESPONSIVE ── */
 @media (max-width: 620px) {
   .doc-header { padding: 32px 24px 28px; }
@@ -373,30 +493,40 @@ body::after {
 </style>
 </head>
 <body>
+<div id="splash">
+  <div id="splash-lines"></div>
+  <div class="splash-loading" id="splash-loading"></div>
+  <button id="splash-btn" onclick="ejecutar()">[EJECUTAR]</button>
+</div>
+
+<div id="scan-line"></div>
+
 <div class="wrap">
 
-  <div class="topbar">
+  <nav class="topbar reveal-block" aria-label="Navegación principal">
     <div class="topbar-left">
       <span><span class="status-dot"></span>DISPONIBLE</span>
-      <span>DOC-001 / REV.2024</span>
+      <span>DOC-001 / REV.2026</span>
     </div>
     <a href="portafolio.html">PORTAFOLIO →</a>
-  </div>
+  </nav>
 
-  <div class="doc-header">
+  <header class="doc-header reveal-block">
+    <img class="adrip-logo" src="https://res.cloudinary.com/dmvmqykud/image/upload/v1775351852/1AdripSVG_oijqbk.svg" alt="ADRIP">
     <div class="doc-label">
       Perfil profesional · Diseñador
       <span class="doc-number">REF: ALZ-CBB-001</span>
     </div>
-    <div class="hero-name">ADRIANO<br>LENAZ <span>ZENTENO</span></div>
+    <div class="hero-name" id="hero-name">ADRIANO<br>LENAZ <span>ZENTENO</span></div>
     <div class="hero-title">Diseñador · Investigador</div>
-  </div>
+  </header>
 
+  <main>
   <!-- ══ LOG PANEL ══ -->
-  <div class="log-panel">
+  <div class="log-panel reveal-block">
 
     <!-- [01] IDENTIDAD -->
-    <div class="log-entry">
+    <div class="log-entry reveal-entry">
       <button class="log-trigger" onclick="toggleLog(this)">
         <span class="log-idx">[01]</span>
         <span class="log-label">IDENTIDAD</span>
@@ -443,17 +573,12 @@ body::after {
         <div class="id-section">
           <div class="id-section-label">redes · contacto</div>
           <div class="id-links">
-            <a href="#" target="_blank" class="id-link">
+            <a href="https://www.instagram.com/adrip.lnz/" target="_blank" class="id-link">
               <span class="id-link-platform">Instagram</span>
-              <span class="id-link-handle">@adrip.disruptivemedia</span>
+              <span class="id-link-handle">@adrip.lnz</span>
               <span class="id-link-arrow">→</span>
             </a>
-            <a href="#" target="_blank" class="id-link">
-              <span class="id-link-platform">Behance</span>
-              <span class="id-link-handle">behance.net/adrianolz</span>
-              <span class="id-link-arrow">→</span>
-            </a>
-            <a href="#" target="_blank" class="id-link">
+<a href="https://www.linkedin.com/in/adriano-lenaz-b13a52259/" target="_blank" class="id-link">
               <span class="id-link-platform">LinkedIn</span>
               <span class="id-link-handle">Adriano Lenaz Zenteno</span>
               <span class="id-link-arrow">→</span>
@@ -470,7 +595,7 @@ body::after {
     </div>
 
     <!-- [02] ARCHIVO -->
-    <div class="log-entry">
+    <div class="log-entry reveal-entry">
       <button class="log-trigger" onclick="toggleLog(this)">
         <span class="log-idx">[02]</span>
         <span class="log-label">ARCHIVO</span>
@@ -526,7 +651,7 @@ body::after {
               <span class="item-btn">[+]</span>
             </button>
             <div class="item-body">
-              <p class="spec-item">Ilustración vectorial, producción multimedia, animación y contenido audiovisual.</p>
+              <p class="spec-item">Investigación académica en diseño, metodologías críticas, semiótica aplicada y análisis teórico-visual desde perspectivas decoloniales.</p>
             </div>
           </div>
 
@@ -735,7 +860,7 @@ body::after {
   </div><!-- /log-panel -->
 
   <!-- ACCESS -->
-  <div class="access-section">
+  <div class="access-section reveal-block">
     <div class="access-label">ACCESO · DOCUMENTOS</div>
     <div class="access-grid">
       <a href="cv.pdf" target="_blank" class="access-card">
@@ -753,10 +878,12 @@ body::after {
     </div>
   </div>
 
-  <div class="doc-footer">
-    <div class="footer-sig">© 2024 ADRIANO LENAZ ZENTENO · ADRIP DISRUPTIVE MEDIA</div>
+  </main>
+
+  <footer class="doc-footer reveal-block">
+    <div class="footer-sig">© 2026 ADRIANO LENAZ ZENTENO · ADRIP DISRUPTIVE MEDIA</div>
     <div class="footer-cc">DOC-001 · COCHABAMBA, BOLIVIA</div>
-  </div>
+  </footer>
 
 </div>
 
@@ -764,6 +891,83 @@ body::after {
 <div id="bg-canvas"></div>
 
 <script>
+// ── SPLASH ──
+(function () {
+  if (sessionStorage.getItem('adrip_visited')) {
+    document.getElementById('splash').style.display = 'none';
+    revealContent();
+    return;
+  }
+  var lines = [
+    '> SISTEMA ADRIP',
+    '> DOC-001 / REV.2026',
+    '> Cochabamba, Bolivia — ALZ',
+  ];
+  var container = document.getElementById('splash-lines');
+  var btn = document.getElementById('splash-btn');
+  var delay = 200;
+  lines.forEach(function (text, i) {
+    setTimeout(function () {
+      var el = document.createElement('div');
+      el.className = 'splash-line';
+      container.appendChild(el);
+      typewrite(el, text, 38, function () {
+        if (i === lines.length - 1) {
+          setTimeout(function () { btn.classList.add('visible'); }, 350);
+        }
+      });
+    }, delay);
+    delay += 520;
+  });
+})();
+
+function typewrite(el, text, speed, cb) {
+  var i = 0;
+  var cursor = document.createElement('span');
+  cursor.className = 'splash-cursor';
+  el.appendChild(cursor);
+  var iv = setInterval(function () {
+    if (i < text.length) {
+      el.insertBefore(document.createTextNode(text[i++]), cursor);
+    } else {
+      clearInterval(iv);
+      cursor.remove();
+      if (cb) cb();
+    }
+  }, speed);
+}
+
+function ejecutar() {
+  document.getElementById('splash-btn').style.display = 'none';
+  var loadEl = document.getElementById('splash-loading');
+  var steps = [
+    { text: '> cargando perfil...', ok: false },
+    { text: '> autenticando...', ok: false },
+    { text: '> acceso concedido.', ok: true },
+  ];
+  var d = 80;
+  steps.forEach(function (s, i) {
+    setTimeout(function () {
+      var line = document.createElement('div');
+      line.className = 'splash-load-line' + (s.ok ? ' ok' : '');
+      line.textContent = s.text;
+      loadEl.appendChild(line);
+      setTimeout(function () { line.classList.add('show'); }, 30);
+      if (i === steps.length - 1) {
+        setTimeout(function () {
+          sessionStorage.setItem('adrip_visited', 'true');
+          document.getElementById('splash').classList.add('fade-out');
+          setTimeout(function () {
+            document.getElementById('splash').style.display = 'none';
+            revealContent();
+          }, 560);
+        }, 700);
+      }
+    }, d);
+    d += 520;
+  });
+}
+
 function toggleLog(trigger) {
   var body = trigger.nextElementSibling;
   var btn  = trigger.querySelector('.log-btn');
@@ -783,6 +987,93 @@ function switchTab(id, btn) {
   document.querySelectorAll('.section').forEach(function(s){ s.classList.remove('active'); });
   document.getElementById('sec-' + id).classList.add('active');
   btn.classList.add('active');
+}
+
+function revealContent() {
+  var wrap = document.querySelector('.wrap');
+  wrap.style.transition = 'none';
+  wrap.classList.add('visible');
+
+  // Scan line sweep
+  var scanLine = document.getElementById('scan-line');
+  scanLine.classList.add('scanning');
+  setTimeout(function() { scanLine.classList.remove('scanning'); }, 950);
+
+  // Bloques principales (topbar, doc-header, log-panel, access, footer)
+  var blockDelays = [80, 240, 390, 700, 860];
+  document.querySelectorAll('.reveal-block').forEach(function(block, i) {
+    setTimeout(function() { block.classList.add('show'); }, blockDelays[i] || i * 160);
+  });
+
+  // Log entries se expanden después del panel
+  var entries = document.querySelectorAll('.reveal-entry');
+  setTimeout(function() { if (entries[0]) entries[0].classList.add('show'); }, 480);
+  setTimeout(function() { if (entries[1]) entries[1].classList.add('show'); }, 640);
+
+  // Hero glitch al aparecer el doc-header
+  setTimeout(initHeroGlitch, 520);
+}
+
+function initHeroGlitch() {
+  var el = document.getElementById('hero-name');
+  if (!el) return;
+  var GLYPHS = '!@#%&<>|▓░═─×±0123456789?/\\{}[]';
+  var charSpans = [];
+
+  // Rebuild content as individual char spans
+  var children = Array.from(el.childNodes);
+  el.innerHTML = '';
+  children.forEach(function(child) {
+    if (child.nodeType === 3) {
+      child.textContent.split('').forEach(function(ch) {
+        if (ch === ' ') { el.appendChild(document.createTextNode(' ')); }
+        else {
+          var s = document.createElement('span');
+          s.className = 'hero-char'; s.textContent = ch;
+          charSpans.push(s); el.appendChild(s);
+        }
+      });
+    } else if (child.nodeName === 'BR') {
+      el.appendChild(document.createElement('br'));
+    } else if (child.nodeName === 'SPAN') {
+      var wrap = document.createElement('span');
+      child.textContent.split('').forEach(function(ch) {
+        var s = document.createElement('span');
+        s.className = 'hero-char hero-char--accent'; s.textContent = ch;
+        charSpans.push(s); wrap.appendChild(s);
+      });
+      el.appendChild(wrap);
+    }
+  });
+
+  var originals = charSpans.map(function(s) { return s.textContent; });
+
+  function runGlitch() {
+    var shuffled = charSpans.slice().sort(function() { return Math.random() - 0.5; });
+    charSpans.forEach(function(s) { s._done = false; });
+
+    var iv = setInterval(function() {
+      charSpans.forEach(function(s) {
+        if (!s._done) s.textContent = GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
+      });
+    }, 50);
+
+    shuffled.forEach(function(span, i) {
+      var idx = charSpans.indexOf(span);
+      setTimeout(function() {
+        span._done = true;
+        span.textContent = originals[idx];
+      }, 60 + Math.random() * 1000);
+    });
+
+    setTimeout(function() {
+      clearInterval(iv);
+      charSpans.forEach(function(s, i) { s._done = true; s.textContent = originals[i]; });
+    }, 1300);
+  }
+
+  setTimeout(runGlitch, 400);
+  setInterval(runGlitch, 10000);
 }
 
 document.addEventListener('DOMContentLoaded', function() {
