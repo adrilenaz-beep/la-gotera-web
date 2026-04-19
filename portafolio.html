@@ -4,21 +4,61 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Portafolio de Adriano Lenaz Zenteno — ADRIP Disruptive Media">
+<meta property="og:title" content="ADRIANO LENAZ — PORTAFOLIO">
+<meta property="og:description" content="Selección de proyectos de diseño gráfico, periodismo visual e investigación. ADRIP Disruptive Media.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://adrilenaz-beep.github.io/la-gotera-web/portafolio.html">
+<meta property="og:image" content="https://res.cloudinary.com/dmvmqykud/image/upload/v1775351852/1AdripSVG_oijqbk.svg">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ADRIANO LENAZ — PORTAFOLIO">
+<meta name="twitter:description" content="Selección de proyectos de diseño gráfico, periodismo visual e investigación. ADRIP Disruptive Media.">
 <title>ADRIANO LENAZ — PORTAFOLIO</title>
+<link rel="canonical" href="https://adrilenaz-beep.github.io/la-gotera-web/portafolio.html">
+<link rel="icon" type="image/svg+xml" href="https://res.cloudinary.com/dmvmqykud/image/upload/v1775351852/1AdripSVG_oijqbk.svg">
+<meta name="robots" content="index, follow">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "name": "Portafolio — Adriano Lenaz Zenteno",
+  "url": "https://adrilenaz-beep.github.io/la-gotera-web/portafolio.html",
+  "about": {
+    "@type": "Person",
+    "name": "Adriano Lenaz Zenteno",
+    "jobTitle": "Diseñador Gráfico e Investigador",
+    "brand": { "@type": "Brand", "name": "ADRIP Disruptive Media" }
+  },
+  "mainEntity": {
+    "@type": "ItemList",
+    "name": "Portafolio ADRIP",
+    "itemListElement": [
+      { "@type": "CreativeWork", "position": 1, "name": "Periodismo Gráfico — Periódico Opinión", "description": "28+ piezas de periodismo gráfico e investigativo para Periódico Opinión, Cochabamba.", "dateCreated": "2023" },
+      { "@type": "CreativeWork", "position": 2, "name": "Manual de marca Guiza", "description": "Identidad visual y branding para salón de belleza masculino.", "dateCreated": "2023" },
+      { "@type": "CreativeWork", "position": 3, "name": "MMM LLAMA", "description": "Identidad visual y branding para restaurante.", "dateCreated": "2024" },
+      { "@type": "CreativeWork", "position": 4, "name": "Calendario Empleados Opinión 2026", "description": "Diseño editorial, calendario institucional.", "dateCreated": "2025" },
+      { "@type": "CreativeWork", "position": 5, "name": "Imposible (ft. 300)", "description": "Intervención gráfica e instalación artística.", "dateCreated": "2025" },
+      { "@type": "CreativeWork", "position": 6, "name": "Serie de Posters ADRIP", "description": "Serie de posters experimentales de diseño disruptivo.", "dateCreated": "2022" }
+    ]
+  }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://res.cloudinary.com">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,700;1,300&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #0f0f0d;
+  --bg: #0e0e0c;
   --paper: #141412;
-  --surface: #1a1a17;
-  --border: #252520;
-  --border-bright: #3e3e38;
-  --ink: #e2e0d8;
-  --ink-mid: #8a8880;
-  --ink-dim: #4a4a45;
+  --surface: #1c1c19;
+  --border: #2e2e28;
+  --border-bright: #4a4a42;
+  --ink: #e8e6de;
+  --ink-mid: #9a9890;
+  --ink-dim: #52524c;
   --accent: #48bed3;
   --accent2: #f06040;
-  --tag-bg: #1a1a17;
+  --tag-bg: #1e1e1a;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; font-size: 16px; }
@@ -275,6 +315,35 @@ img { max-width: 100%; height: auto; display: block; }
   font-family: 'IBM Plex Sans', sans-serif; letter-spacing: 0.05em;
 }
 
+/* ── BG CANVAS ── */
+#bg-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+.bg-floater { position: absolute; opacity: 0; animation: floatDrift var(--dur,18s) ease-in-out var(--delay,0s) infinite; will-change: transform, opacity; mix-blend-mode: screen; }
+@keyframes floatDrift {
+  0%   { opacity:0; transform:translate(0,0) rotate(var(--rot0,0deg)); }
+  10%  { opacity:var(--op,0.07); }
+  50%  { transform:translate(var(--dx,40px),var(--dy,-30px)) rotate(var(--rot1,5deg)); }
+  90%  { opacity:var(--op,0.07); }
+  100% { opacity:0; transform:translate(var(--dx2,10px),var(--dy2,20px)) rotate(var(--rot2,-3deg)); }
+}
+.bg-blinker { position: absolute; opacity: 0; animation: blinkAppear var(--dur,6s) steps(1) var(--delay,0s) infinite; will-change: opacity; mix-blend-mode: screen; }
+@keyframes blinkAppear {
+  0%  { opacity:0; } 8%  { opacity:var(--op,0.12); } 9%  { opacity:var(--op,0.12); clip-path:inset(30% 0 20% 0); }
+  10% { opacity:var(--op,0.12); clip-path:inset(0 0 0 0); } 11% { opacity:0; } 12% { opacity:var(--op,0.12); }
+  30% { opacity:var(--op,0.12); } 31% { opacity:0; } 100% { opacity:0; }
+}
+
+/* ── SCROLL TO TOP ── */
+#back-to-top {
+  position: fixed; bottom: 28px; right: 28px; z-index: 500;
+  background: var(--surface); border: 1px solid var(--border-bright);
+  color: var(--accent); font-family: 'IBM Plex Mono', monospace;
+  font-size: 14px; width: 38px; height: 38px;
+  cursor: pointer; opacity: 0; transition: opacity 0.3s, background 0.15s;
+  pointer-events: none; display: flex; align-items: center; justify-content: center;
+}
+#back-to-top.visible { opacity: 1; pointer-events: auto; }
+#back-to-top:hover { background: var(--border); }
+
 /* ── FOOTER ── */
 .doc-footer {
   border: 1px solid var(--border); border-top: none;
@@ -285,6 +354,98 @@ img { max-width: 100%; height: auto; display: block; }
 .footer-sig { font-size: 10px; color: var(--ink-dim); letter-spacing: 0.08em; }
 .footer-cc { font-size: 9px; color: var(--ink-dim); letter-spacing: 0.06em; }
 
+/* ── SPLASH ── */
+#splash {
+  position: fixed; inset: 0; z-index: 9999;
+  background: var(--bg);
+  display: flex; flex-direction: column;
+  align-items: flex-start; justify-content: center;
+  padding: clamp(28px, 6vw, 80px);
+}
+.splash-line { font-size: 13px; color: var(--accent); letter-spacing: 0.12em; margin-bottom: 10px; min-height: 22px; }
+.splash-cursor { display: inline-block; width: 8px; height: 13px; background: var(--accent); vertical-align: middle; margin-left: 2px; animation: blink 1s steps(1) infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+#splash-btn { margin-top: 36px; display: none; background: transparent; border: 1px solid var(--accent); color: var(--accent); font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; padding: 13px 32px; cursor: pointer; transition: background 0.15s, color 0.15s; }
+#splash-btn:hover { background: var(--accent); color: var(--bg); }
+#splash-btn.visible { display: inline-block; animation: fadeUp 0.35s ease; }
+@keyframes fadeUp { from{opacity:0;transform:translateY(4px)} to{opacity:1;transform:translateY(0)} }
+.splash-loading { margin-top: 28px; }
+.splash-load-line { font-size: 11px; color: var(--ink-dim); letter-spacing: 0.08em; margin-bottom: 8px; opacity: 0; transition: opacity 0.25s; }
+.splash-load-line.show { opacity: 1; }
+.splash-load-line.ok { color: var(--accent); }
+#splash.fade-out { animation: splashFade 0.55s ease forwards; }
+@keyframes splashFade { to { opacity: 0; pointer-events: none; } }
+
+/* ── POWER ON REVEAL ── */
+.wrap { opacity: 0; }
+.wrap.visible { opacity: 1; }
+.reveal-block, .reveal-entry { opacity: 0; }
+.reveal-block.show, .reveal-entry.show { animation: powerOn 0.7s ease forwards; }
+@keyframes powerOn {
+  0%   { opacity: 0;   filter: brightness(0); }
+  6%   { opacity: 1;   filter: brightness(7); }
+  18%  { filter: brightness(0.15); }
+  34%  { filter: brightness(3); }
+  50%  { filter: brightness(0.6); }
+  68%  { filter: brightness(1.4); }
+  84%  { filter: brightness(0.95); }
+  100% { filter: brightness(1); opacity: 1; }
+}
+.cat-section.power { animation: powerOn 0.55s ease forwards; }
+
+/* ── SCAN LINE ── */
+#scan-line { position: fixed; top: 0; left: 0; right: 0; height: 1px; background: var(--accent); opacity: 0; z-index: 5000; pointer-events: none; }
+#scan-line.scanning { animation: scanSweep 0.9s ease-in forwards; }
+@keyframes scanSweep { 0%{top:0;opacity:0.5} 85%{opacity:0.25} 100%{top:100vh;opacity:0} }
+
+/* ── VIEW TOGGLE ── */
+.view-toggle { display: flex; }
+.view-btn {
+  background: transparent; border: 1px solid var(--border);
+  color: var(--ink-dim); font-family: 'IBM Plex Mono', monospace;
+  font-size: 8px; letter-spacing: 0.2em; text-transform: uppercase;
+  padding: 5px 12px; cursor: pointer; transition: all 0.15s;
+}
+.view-btn:first-child { border-right: none; }
+.view-btn:hover { color: var(--ink); background: var(--surface); }
+.view-btn.active { color: var(--accent); background: var(--surface); border-color: var(--accent); }
+
+/* ── FILTER BAR ── */
+.filter-bar {
+  display: none; padding: 12px 32px; gap: 6px; flex-wrap: wrap;
+  border-bottom: 1px solid var(--border);
+}
+.filter-pill {
+  background: transparent; border: 1px solid var(--border);
+  color: var(--ink-dim); font-family: 'IBM Plex Mono', monospace;
+  font-size: 8px; letter-spacing: 0.15em; text-transform: uppercase;
+  padding: 4px 10px; cursor: pointer; transition: all 0.15s;
+}
+.filter-pill:hover { color: var(--ink); border-color: var(--border-bright); }
+.filter-pill.active { color: var(--accent); border-color: var(--accent); background: rgba(72,190,211,0.06); }
+
+/* ── GALLERY GRID ── */
+.gallery-grid {
+  display: none; grid-template-columns: repeat(3, 1fr);
+  gap: 4px; padding: 16px 32px;
+}
+.gallery-item {
+  position: relative; overflow: hidden; cursor: zoom-in;
+  aspect-ratio: 3/4; background: var(--surface);
+}
+.gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s ease, opacity 0.2s; }
+.gallery-item:hover img { transform: scale(1.04); opacity: 0.85; }
+.gallery-item-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(8,8,6,0.92) 0%, rgba(8,8,6,0.2) 55%, transparent 100%);
+  opacity: 0; transition: opacity 0.2s;
+  display: flex; flex-direction: column; justify-content: flex-end; padding: 14px;
+}
+.gallery-item:hover .gallery-item-overlay { opacity: 1; }
+.gallery-item-date { font-size: 9px; color: var(--accent); letter-spacing: 0.1em; margin-bottom: 3px; }
+.gallery-item-title { font-size: 10px; color: var(--ink); letter-spacing: 0.04em; line-height: 1.3; }
+.gallery-item-count { font-size: 8px; color: var(--ink-dim); letter-spacing: 0.12em; margin-top: 4px; }
+
 /* ── RESPONSIVE ── */
 @media (max-width: 640px) {
   .wrap { padding: 0 14px 60px; }
@@ -294,6 +455,8 @@ img { max-width: 100%; height: auto; display: block; }
   .sec-header, .subgroup-header { padding-left: 20px; padding-right: 20px; }
   .work-trigger { padding: 12px 20px; }
   .work-title-inline { max-width: 180px; }
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); padding: 12px 14px; }
+  .filter-bar { padding: 10px 14px; }
   .work-body { padding: 20px 20px; }
   .doc-footer { padding: 14px 20px; }
   .work-meta-full { flex-direction: column; gap: 3px; }
@@ -325,24 +488,31 @@ img { max-width: 100%; height: auto; display: block; }
   </div>
 </div>
 
+<div id="splash">
+  <div id="splash-lines"></div>
+</div>
+
+<div id="scan-line"></div>
+
 <div class="wrap">
 
-  <div class="topbar">
+  <nav class="topbar reveal-block" aria-label="Navegación principal">
     <a href="index.html">← DOC-001</a>
     <span>DOC-PORT · ADRIP</span>
-  </div>
+  </nav>
 
-  <div class="doc-header">
+  <header class="doc-header reveal-block">
     <div class="doc-label">
       Portafolio · Trabajo visual
       <span class="doc-number">REF: ALZ-PORT-001</span>
     </div>
     <div class="hero-name">PORTAFOLIO<br><span>ADRIP</span></div>
     <div class="hero-title">Selección de proyectos · Adriano Lenaz Zenteno</div>
-  </div>
+  </header>
 
+  <main>
   <!-- Desktop tabs -->
-  <div class="cat-tabs">
+  <div class="cat-tabs reveal-block">
     <button class="cat-tab active" onclick="switchCat('periodismo', this)">01 · Periodismo Gráf.</button>
     <button class="cat-tab" onclick="switchCat('branding', this)">02 · Branding</button>
     <button class="cat-tab" onclick="switchCat('editorial', this)">03 · Editorial</button>
@@ -365,13 +535,20 @@ img { max-width: 100%; height: auto; display: block; }
   <div class="cat-section active" id="cat-periodismo">
     <div class="sec-header">
       <span class="sec-title">Periodismo Gráfico · Opinión</span>
-      <span class="sec-count">28+ piezas</span>
+      <div class="view-toggle">
+        <button class="view-btn active" onclick="switchView('list', this)">LISTA</button>
+        <button class="view-btn" onclick="switchView('gallery', this)">GALERÍA</button>
+      </div>
     </div>
 
+    <div class="filter-bar" id="periodismo-filters"></div>
+    <div class="gallery-grid" id="periodismo-gallery"></div>
+
+    <div id="periodismo-list">
     <div class="subgroup">
       <div class="subgroup-header">
         <span class="subgroup-title">Noticias</span>
-        <span class="subgroup-count">— 0 registros</span>
+        <span class="subgroup-count">— 28+ registros</span>
         <span class="subgroup-line"></span>
       </div>
     </div>
@@ -1052,6 +1229,7 @@ img { max-width: 100%; height: auto; display: block; }
       </div>
     </div>
 
+    </div><!-- /periodismo-list -->
   </div><!-- /cat-periodismo -->
 
   <!-- ════════════════════════════════════════════
@@ -1220,14 +1398,80 @@ img { max-width: 100%; height: auto; display: block; }
     </div>
   </div>
 
-  <div class="doc-footer">
-    <div class="footer-sig">© 2024 ADRIANO LENAZ ZENTENO · ADRIP DISRUPTIVE MEDIA</div>
+  </main>
+
+  <footer class="doc-footer reveal-block">
+    <div class="footer-sig">© 2026 ADRIANO LENAZ ZENTENO · ADRIP DISRUPTIVE MEDIA</div>
     <div class="footer-cc">DOC-PORT · COCHABAMBA, BOLIVIA</div>
-  </div>
+  </footer>
 
 </div><!-- /wrap -->
 
+<button id="back-to-top" aria-label="Volver arriba">↑</button>
+<div id="bg-canvas"></div>
+
 <script>
+// ── SPLASH ──
+(function () {
+  if (sessionStorage.getItem('adrip_visited')) {
+    document.getElementById('splash').style.display = 'none';
+    revealContent();
+    return;
+  }
+  var lines = ['> DOC-PORT · PORTAFOLIO', '> cargando...'];
+  var container = document.getElementById('splash-lines');
+  var delay = 100;
+  lines.forEach(function (text, i) {
+    setTimeout(function () {
+      var el = document.createElement('div');
+      el.className = 'splash-line';
+      container.appendChild(el);
+      typewrite(el, text, 28, function () {
+        if (i === lines.length - 1) {
+          setTimeout(function () {
+            sessionStorage.setItem('adrip_visited', 'true');
+            document.getElementById('splash').classList.add('fade-out');
+            setTimeout(function () {
+              document.getElementById('splash').style.display = 'none';
+              revealContent();
+            }, 560);
+          }, 300);
+        }
+      });
+    }, delay);
+    delay += 420;
+  });
+})();
+
+function typewrite(el, text, speed, cb) {
+  var i = 0;
+  var cursor = document.createElement('span');
+  cursor.className = 'splash-cursor';
+  el.appendChild(cursor);
+  var iv = setInterval(function () {
+    if (i < text.length) { el.insertBefore(document.createTextNode(text[i++]), cursor); }
+    else { clearInterval(iv); cursor.remove(); if (cb) cb(); }
+  }, speed);
+}
+
+function revealContent() {
+  var wrap = document.querySelector('.wrap');
+  wrap.style.transition = 'none';
+  wrap.classList.add('visible');
+  var scanLine = document.getElementById('scan-line');
+  scanLine.classList.add('scanning');
+  setTimeout(function () { scanLine.classList.remove('scanning'); }, 950);
+  var blockDelays = [80, 240, 390, 620];
+  document.querySelectorAll('.reveal-block').forEach(function (block, i) {
+    setTimeout(function () { block.classList.add('show'); }, blockDelays[i] || i * 160);
+  });
+  // Power-on en la sección activa
+  setTimeout(function () {
+    var active = document.querySelector('.cat-section.active');
+    if (active) { active.classList.add('power'); }
+  }, 500);
+}
+
 // ── WORK TOGGLE ──
 function toggleWork(trigger) {
   var body = trigger.nextElementSibling;
@@ -1236,12 +1480,107 @@ function toggleWork(trigger) {
   btn.textContent = open ? '[−]' : '[+]';
 }
 
+// ── GALLERY MODE ──
+var galleryBuilt = false;
+
+function switchView(mode, btn) {
+  document.querySelectorAll('.view-btn').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  var list    = document.getElementById('periodismo-list');
+  var gallery = document.getElementById('periodismo-gallery');
+  var filters = document.getElementById('periodismo-filters');
+  if (mode === 'gallery') {
+    list.style.display    = 'none';
+    gallery.style.display = 'grid';
+    filters.style.display = 'flex';
+    if (!galleryBuilt) buildGallery();
+  } else {
+    list.style.display    = 'block';
+    gallery.style.display = 'none';
+    filters.style.display = 'none';
+  }
+}
+
+function buildGallery() {
+  var grid    = document.getElementById('periodismo-gallery');
+  var filters = document.getElementById('periodismo-filters');
+  var entries = document.querySelectorAll('#periodismo-list .work-entry');
+  var tagCount = {};
+  var items = [];
+
+  entries.forEach(function(entry) {
+    var title = (entry.querySelector('.work-title-inline') || {}).textContent || '';
+    var date  = (entry.querySelector('.work-date-inline')  || {}).textContent || '';
+    var tags  = Array.from(entry.querySelectorAll('.tag')).map(function(t) { return t.textContent.trim(); });
+    var srcs  = Array.from(entry.querySelectorAll('.gimg'))
+      .map(function(img) { return img.getAttribute('src'); })
+      .filter(function(s) { return s && s.length > 0; });
+    if (!srcs.length) return;
+    tags.forEach(function(t) { tagCount[t] = (tagCount[t] || 0) + 1; });
+    items.push({ title: title, date: date, tags: tags, srcs: srcs });
+  });
+
+  // Filter pills
+  var todosBtn = document.createElement('button');
+  todosBtn.className = 'filter-pill active';
+  todosBtn.textContent = 'TODOS';
+  todosBtn.onclick = function() { filterGallery('TODOS', this); };
+  filters.appendChild(todosBtn);
+  Object.keys(tagCount).sort().forEach(function(tag) {
+    var pill = document.createElement('button');
+    pill.className = 'filter-pill';
+    pill.textContent = tag.toUpperCase();
+    pill.onclick = function() { filterGallery(tag, this); };
+    filters.appendChild(pill);
+  });
+
+  // Gallery items
+  items.forEach(function(item) {
+    var lbImgs = item.srcs.map(function(src, i) {
+      return { src: src, alt: item.title + (item.srcs.length > 1 ? ' · ' + (i+1) + '/' + item.srcs.length : '') };
+    });
+    var el = document.createElement('div');
+    el.className = 'gallery-item';
+    el.dataset.tags = JSON.stringify(item.tags);
+    var img = document.createElement('img');
+    img.src = item.srcs[0]; img.alt = item.title; img.loading = 'lazy';
+    el.appendChild(img);
+    var overlay = document.createElement('div');
+    overlay.className = 'gallery-item-overlay';
+    overlay.innerHTML =
+      '<span class="gallery-item-date">' + item.date + '</span>' +
+      '<span class="gallery-item-title">' + item.title + '</span>' +
+      (item.srcs.length > 1 ? '<span class="gallery-item-count">+ ' + (item.srcs.length - 1) + ' imágenes</span>' : '');
+    el.appendChild(overlay);
+    el.addEventListener('click', function() { openLightbox(lbImgs, 0); });
+    grid.appendChild(el);
+  });
+
+  galleryBuilt = true;
+}
+
+function filterGallery(tag, btn) {
+  document.querySelectorAll('.filter-pill').forEach(function(p) { p.classList.remove('active'); });
+  btn.classList.add('active');
+  document.querySelectorAll('.gallery-item').forEach(function(item) {
+    if (tag === 'TODOS') { item.style.display = ''; return; }
+    var tags = JSON.parse(item.dataset.tags || '[]');
+    item.style.display = tags.some(function(t) { return t.toLowerCase() === tag.toLowerCase(); }) ? '' : 'none';
+  });
+}
+
 // ── TAB SWITCHING ──
 function switchCat(id, btn) {
   document.querySelectorAll('.cat-tab, .nav-pill').forEach(t => t.classList.remove('active'));
-  document.querySelectorAll('.cat-section').forEach(s => s.classList.remove('active'));
-  document.getElementById('cat-' + id).classList.add('active');
+  document.querySelectorAll('.cat-section').forEach(s => { s.classList.remove('active'); s.classList.remove('power'); });
+  var target = document.getElementById('cat-' + id);
+  target.classList.add('active');
+  // Power-on al cambiar tab
+  requestAnimationFrame(function () { target.classList.add('power'); });
   document.querySelectorAll('[onclick*="' + id + '"]').forEach(t => t.classList.add('active'));
+  // Scroll al inicio del contenido
+  var tabs = document.querySelector('.cat-tabs') || document.querySelector('.nav-pills');
+  if (tabs) tabs.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 // ── LIGHTBOX ──
@@ -1295,6 +1634,49 @@ lb.addEventListener('touchend', e => {
     if (dx > 0 && currentIndex > 0) { currentIndex--; updateLightbox(); }
   }
 }, { passive: true });
+
+// ── SCROLL TO TOP ──
+window.addEventListener('scroll', function() {
+  var btn = document.getElementById('back-to-top');
+  if (btn) btn.classList.toggle('visible', window.scrollY > 400);
+});
+document.getElementById('back-to-top').addEventListener('click', function() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+// ── BG CANVAS ──
+(function() {
+  var LOGO = 'https://res.cloudinary.com/dmvmqykud/image/upload/v1775351852/1AdripSVG_oijqbk.svg';
+  var canvas = document.getElementById('bg-canvas');
+  if (!canvas) return;
+  function rand(a,b){ return Math.random()*(b-a)+a; }
+  function ri(a,b){ return Math.floor(rand(a,b)); }
+  for(var i=0;i<5;i++){
+    var el=document.createElement('img');
+    el.className='bg-floater'; el.src=LOGO;
+    var sz=ri(80,180);
+    el.style.cssText=[
+      'left:'+ri(0,88)+'vw','top:'+ri(0,88)+'vh','width:'+sz+'px',
+      '--dur:'+ri(16,28)+'s','--delay:-'+ri(0,20)+'s',
+      '--op:'+rand(0.03,0.08).toFixed(2),
+      '--dx:'+ri(-60,60)+'px','--dy:'+ri(-40,40)+'px',
+      '--dx2:'+ri(-20,20)+'px','--dy2:'+ri(-30,30)+'px',
+      '--rot0:'+ri(-20,20)+'deg','--rot1:'+ri(-12,22)+'deg','--rot2:'+ri(-8,8)+'deg',
+    ].join(';');
+    canvas.appendChild(el);
+  }
+  for(var j=0;j<3;j++){
+    var el2=document.createElement('img');
+    el2.className='bg-blinker'; el2.src=LOGO;
+    var sz2=ri(60,140);
+    el2.style.cssText=[
+      'left:'+ri(2,90)+'vw','top:'+ri(2,90)+'vh','width:'+sz2+'px',
+      '--dur:'+ri(4,12)+'s','--delay:-'+ri(0,12)+'s',
+      '--op:'+rand(0.06,0.12).toFixed(2),
+    ].join(';');
+    canvas.appendChild(el2);
+  }
+})();
 
 // ── INIT: placeholders + lightbox bindings (only on expanded galleries) ──
 function initGallery(gallery) {

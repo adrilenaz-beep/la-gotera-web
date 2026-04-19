@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://adrilenaz-beep.github.io/la-gotera-web/sitemap.xml
