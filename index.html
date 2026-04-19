@@ -14,6 +14,8 @@
 <meta name="twitter:description" content="Diseñador gráfico e investigador. ADRIP Disruptive Media, Cochabamba, Bolivia.">
 <title>ADRIANO LENAZ — DOC-001</title>
 <link rel="canonical" href="https://adrilenaz-beep.github.io/la-gotera-web/">
+<link rel="icon" type="image/svg+xml" href="https://res.cloudinary.com/dmvmqykud/image/upload/v1775351852/1AdripSVG_oijqbk.svg">
+<meta name="robots" content="index, follow">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -362,6 +364,18 @@ body::after {
 }
 .footer-sig { font-size: 10px; color: var(--ink-dim); letter-spacing: 0.1em; }
 .footer-cc { font-size: 9px; color: var(--ink-dim); letter-spacing: 0.08em; }
+
+/* ── SCROLL TO TOP ── */
+#back-to-top {
+  position: fixed; bottom: 28px; right: 28px; z-index: 500;
+  background: var(--surface); border: 1px solid var(--border-bright);
+  color: var(--accent); font-family: 'IBM Plex Mono', monospace;
+  font-size: 14px; width: 38px; height: 38px;
+  cursor: pointer; opacity: 0; transition: opacity 0.3s, background 0.15s;
+  pointer-events: none; display: flex; align-items: center; justify-content: center;
+}
+#back-to-top.visible { opacity: 1; pointer-events: auto; }
+#back-to-top:hover { background: var(--border); }
 
 /* ── BACKGROUND LAYER SYSTEM ── */
 #bg-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
@@ -863,11 +877,11 @@ body::after {
   <div class="access-section reveal-block">
     <div class="access-label">ACCESO · DOCUMENTOS</div>
     <div class="access-grid">
-      <a href="cv.pdf" target="_blank" class="access-card">
-        <div class="access-icon">↓</div>
+      <a class="access-card" style="opacity:0.45;cursor:default;" title="Próximamente">
+        <div class="access-icon" style="color:var(--ink-dim)">↓</div>
         <div class="access-card-title">Curriculum Vitae</div>
-        <div class="access-card-sub">Descargar documento PDF</div>
-        <div class="access-card-ref">DOC-CV · ALZ-001</div>
+        <div class="access-card-sub">Documento en preparación</div>
+        <div class="access-card-ref">DOC-CV · PRÓXIMAMENTE</div>
       </a>
       <a href="portafolio.html" class="access-card access-card--accent">
         <div class="access-icon">→</div>
@@ -886,6 +900,8 @@ body::after {
   </footer>
 
 </div>
+
+<button id="back-to-top" aria-label="Volver arriba">↑</button>
 
 <!-- BG CANVAS -->
 <div id="bg-canvas"></div>
@@ -1076,6 +1092,15 @@ function initHeroGlitch() {
   setInterval(runGlitch, 10000);
 }
 
+// ── SCROLL TO TOP ──
+window.addEventListener('scroll', function() {
+  var btn = document.getElementById('back-to-top');
+  if (btn) btn.classList.toggle('visible', window.scrollY > 400);
+});
+document.getElementById('back-to-top').addEventListener('click', function() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
 document.addEventListener('DOMContentLoaded', function() {
   function rand(a,b){ return Math.random()*(b-a)+a; }
   function ri(a,b){ return Math.floor(rand(a,b)); }
@@ -1098,28 +1123,16 @@ document.addEventListener('DOMContentLoaded', function() {
     canvas.appendChild(el);
   }
 
-  for(var j=0;j<7;j++){
+  for(var j=0;j<4;j++){
     var el2=document.createElement('img');
     el2.className='bg-blinker'; el2.src=LOGO;
     var sz2=ri(60,160);
     el2.style.cssText=[
       'left:'+ri(2,90)+'vw','top:'+ri(2,90)+'vh','width:'+sz2+'px',
       '--dur:'+ri(4,12)+'s','--delay:-'+ri(0,12)+'s',
-      '--op:'+rand(0.08,0.18).toFixed(2),
+      '--op:'+rand(0.08,0.15).toFixed(2),
     ].join(';');
     canvas.appendChild(el2);
-  }
-
-  for(var k=0;k<10;k++){
-    var el3=document.createElement('img');
-    el3.className='bg-static'; el3.src=LOGO;
-    var sz3=ri(40,120);
-    el3.style.cssText=[
-      'left:'+ri(0,92)+'vw','top:'+ri(0,92)+'vh','width:'+sz3+'px',
-      'opacity:'+rand(0.03,0.07).toFixed(2),
-      'transform:rotate('+ri(-30,30)+'deg)',
-    ].join(';');
-    canvas.appendChild(el3);
   }
 });
 </script>
